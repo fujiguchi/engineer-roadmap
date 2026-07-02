@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ3: 実務に近い経験を積む - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; margin: 16px 0; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Work list (numbered cards) */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .footer-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .footer-nav a { font-size: 14px; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .footer-nav a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ3: 実務に近い経験を積む</h1>
+  </header>
+  <main>
+    <p class="lead">Month 3–4。ポートフォリオと実務の間には「一人で好きに作った」と「他人の要望・他人のコードの中で作業した」の大きなギャップがある。このフェーズでそれを埋める。目標は「仕事として納品した」「他人のコードベースで作業した」という実績を作ること。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">次の5つがすべて終わったらフェーズ3は完了。チェックリストのフェーズ3の項目と同じもの。</p>
+
+      <table class="data-table">
+        <thead><tr><th>完了条件</th><th>目安</th><th>ポイント</th></tr></thead>
+        <tbody>
+          <tr><td>「自分の課題を解決する」アプリをもう1本作る</td><td class="money">2–3週間</td><td>家計簿・学習記録・シフト管理など。企画から自分でやった経験が面接で最も語れる</td></tr>
+          <tr><td>OSSにプルリクエストを1件出す</td><td class="money">数日</td><td>ドキュメント修正やtypo修正でOK。「他人のコードベースで作業した」実績になる</td></tr>
+          <tr><td>実在の相手がいる制作を1件引き受ける</td><td class="money">2–4週間</td><td>知人の店のサイト、サークルのページなど。要望を聞いて納品するプロセスが実務経験に近い</td></tr>
+          <tr><td>他人からコードレビューを受ける</td><td class="money">1回以上</td><td>コミュニティ・メンターサービス・SNS。指摘されて直す経験が実務との最大のギャップを埋める</td></tr>
+          <tr><td>技術記事を3本公開する</td><td class="money">各2–3時間</td><td>Zenn / Qiita。つまずいた点と解決法でいい。言語化できる人は面接で強い</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>順番は自由、並行でOK：</strong>アプリ開発を進めながら、詰まったところを記事にして、区切りのいいタイミングでレビューを受ける──という回し方が最も効率がいい。5つは独立したタスクではなく、互いに材料を供給し合う。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: OSSコントリビュート
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">OSS</span>
+      <h2>OSSコントリビュートの始め方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">「OSSに貢献」と聞くと大げさに感じるが、入口は驚くほど低い。次の5ステップで進める。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">普段使うライブラリのGitHubを見る</div>
+          <div class="desc">ReactでもRailsでも、自分が毎日触っているものが一番良い。使っているからこそ、ドキュメントの分かりにくさや誤りに気づける。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">「good first issue」ラベルを探す</div>
+          <div class="desc">多くのリポジトリには初心者向けのIssueにこのラベルが付いている。Issues画面でラベル検索すれば、着手しやすい課題の一覧が出てくる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">ドキュメントのtypo修正・翻訳から入る</div>
+          <div class="desc">最初のPRはコードでなくていい。誤字修正、リンク切れ修正、日本語ドキュメントの翻訳。ハードルが低く、mergeされやすい。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">CONTRIBUTING.mdを読んでPR作法に従う</div>
+          <div class="desc">ブランチの命名、コミットメッセージの形式、PRテンプレートなど、リポジトリごとのルールがある。読まずに出すと作法違反で差し戻される。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">5</span>
+          <div class="title">レビュー指摘には全部返信して直す</div>
+          <div class="desc">指摘されたら放置せず、すべてに返信して修正する。このやり取り自体が実務のコードレビューとまったく同じ訓練になる。</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>1行でも実績になる：</strong>typo修正1行のPRでも、「他人のコードベースを読み、リポジトリの作法に従ってPRを出し、mergeされた」という事実は変わらない。面接で「OSSにコントリビュートした経験があります」と言える。完璧なコード改善を狙って何も出さないより、小さく1件出すほうが圧倒的に価値がある。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 実在クライアント案件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REAL CLIENT</span>
+      <h2>実在クライアント案件の取り方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">いきなりクラウドソーシングで戦う必要はない。知人の店、所属しているサークル、家族の職場──身近な相手で「本物の要望を持った他人」がいれば十分。無償でも構わない。ただし条件が一つある。</p>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">① 要件を聞く</div>
+          <div class="desc">「何が欲しいですか」ではなく「何に困っていますか」から聞く。相手は「ホームページが欲しい」としか言えないことが多い。困りごとを機能に翻訳するのが仕事。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">② 見積もる</div>
+          <div class="desc">無償でも「この内容なら○日かかります」と工数を見積もって伝える。作業を金額・日数に換算する感覚は、実務に出る前にここで練習しておく。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">③ 納期を切る</div>
+          <div class="desc">「できたら渡します」は禁止。「○月○日までに納品します」と自分で期限を宣言する。納期があるだけで作業の質と段取りが一変する。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">④ 納品する</div>
+          <div class="desc">デプロイして相手が使える状態にし、更新方法を説明して引き渡す。「動くものを見せた」ではなく「相手が使い始めた」までがゴール。</div>
+        </div>
+      </div>
+
+      <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">この「要件を聞く → 見積もる → 納期を切る → 納品する」の全工程を自分でやることが条件。どれか一つでも飛ばすと、それはただの趣味の制作であって実務経験の代わりにはならない。</p>
+
+      <div class="warning-box">
+        <strong>無償案件の線引きに注意：</strong>無償・低単価の案件で最も多い失敗は「無限対応」。納品後に「ここも直して」「ついでにこれも」が延々と続く。着手前に「修正は○回まで」「対応範囲はこのページのみ、それ以外は別途相談」と、修正回数と範囲を必ず最初に合意しておくこと。これ自体が実務で必須の契約感覚の練習になる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: コードレビュー
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REVIEW</span>
+      <h2>コードレビューを受ける方法</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">独学の最大の弱点は「自分のコードの悪い癖に気づけない」こと。実務では毎日レビューで指摘される。<strong style="color:var(--navy);">指摘され慣れること</strong>が、実務に入る前にできる最大の準備。</p>
+
+      <table class="data-table">
+        <thead><tr><th>手段</th><th>費用</th><th>特徴</th><th>向いている人</th></tr></thead>
+        <tbody>
+          <tr><td>MENTA等のメンターサービス</td><td class="money">月3,000円〜</td><td>現役エンジニアと契約して継続的にレビューしてもらえる。質が安定</td><td>確実にフィードバックが欲しい人</td></tr>
+          <tr><td>コミュニティ・もくもく会</td><td class="money">無料</td><td>connpass等で探せる勉強会。その場で画面を見せて聞ける。人脈もできる</td><td>対面で質問したい人</td></tr>
+          <tr><td>SNSでレビュー募集</td><td class="money">無料</td><td>GitHubのURLを添えて募集。反応は運次第だが、思わぬ視点がもらえる</td><td>公開に抵抗がない人</td></tr>
+          <tr><td>スクールの単発レビュー</td><td class="money">数千円〜/回</td><td>単発のコードレビューサービスやスポット相談。1回で網羅的に見てもらえる</td><td>ポートフォリオを仕上げたい人</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>指摘は多いほど得：</strong>最初のレビューで10個も20個も指摘されるのが普通。凹む必要はない。指摘1件 = 実務前に潰せた癖1件。「なぜそう直すのか」を毎回聞いて、次のコードに反映するサイクルを回す。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 技術記事
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">WRITING</span>
+      <h2>技術記事の書き方 — 3本公開する</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">投稿先はZennかQiita。ネタ探しに悩む必要はない。<strong style="color:var(--navy);">「自分がつまずいて調べたこと」で十分。</strong>同じ場所でつまずく人は必ずいる。</p>
+
+      <table class="data-table">
+        <thead><tr><th>テンプレの流れ</th><th>書く内容</th></tr></thead>
+        <tbody>
+          <tr><td class="money">① 何をしようとしたか</td><td>「Reactでログイン機能を作ろうとした」など、前提と目的を1–2行で</td></tr>
+          <tr><td class="money">② 何が起きたか</td><td>エラーメッセージや期待と違った挙動をそのまま貼る。検索で辿り着く人の入口になる</td></tr>
+          <tr><td class="money">③ 原因</td><td>調べて分かった原因。参考にした公式ドキュメントや記事のリンクも添える</td></tr>
+          <tr><td class="money">④ 解決法</td><td>実際に直したコードと手順。同じ状況の人がコピーして解決できるレベルで具体的に</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>完璧主義にならない：</strong>目標は3本で十分。バズる必要も、網羅的な解説である必要もない。「エラーと解決法を筋道立てて言語化できる」ことを示すのが目的で、これは面接での技術説明力の証明にそのままなる。1本2–3時間で書き切って公開する。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>フェーズ3の目的は「一人で作った」から「他人の要望・他人のコードの中で作業した」への転換。この実績が未経験者の中で頭一つ抜ける材料になる。</li>
+        <li>OSSはtypo修正1行から。「good first issue」を探し、CONTRIBUTING.mdの作法に従い、指摘には全部返信して直す。mergeされた事実がそのまま実績。</li>
+        <li>実在クライアント案件は身近な相手で十分。無償でもOKだが「要件を聞く→見積もる→納期を切る→納品する」の全工程をやること。修正回数と範囲は最初に合意する。</li>
+        <li>コードレビューは指摘され慣れるのが目的。メンターサービス・もくもく会・SNS、どの手段でもいいので必ず一度は他人の目を通す。</li>
+        <li>技術記事は「つまずき→原因→解決法」のテンプレで3本。完璧主義にならず、書き切って公開することを優先する。</li>
+      </ol>
+    </section>
+
+    <div class="footer-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ3: 実務に近い経験を積む（Month 3–4）</p>
+  </main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ4: 就職活動・案件獲得 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .plus { color: #1a8a5a; font-weight: 700; }
+    .data-table .minus { color: #b5432f; font-weight: 700; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+    .warning-box ul { margin: 6px 0 0 18px; }
+    .warning-box li { margin-bottom: 4px; }
+
+    /* Work list */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Pros / Cons */
+    .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+    .proscons-col { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid rgba(30,39,97,0.08); }
+    .proscons-col h4 { font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+    .proscons-col h4.pro { color: #1a8a5a; }
+    .proscons-col h4.con { color: #b5432f; }
+    .proscons-col ul { list-style: none; padding: 0; }
+    .proscons-col li { font-size: 13px; color: #555; padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+    .proscons-col li::before { position: absolute; left: 0; font-size: 11px; font-weight: 800; }
+    .proscons-col.pros li::before { content: '+'; color: #1a8a5a; }
+    .proscons-col.cons li::before { content: '−'; color: #b5432f; }
+
+    /* Stat box */
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 18px 22px; text-align: center; margin-bottom: 14px; }
+    .stat-box .num { font-size: 34px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 13px; margin-top: 4px; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 14px; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(30,39,97,0.1); }
+    .page-nav a { font-size: 14px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .proscons { grid-template-columns: 1fr; }
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ4: 就職活動・案件獲得 — 最初の収入</h1>
+  </header>
+  <main>
+    <p class="lead">Month 4–6。ここから初めて「稼ぐ」フェーズに入る。動かすルートは2つ — 就職（正社員/SES）と案件獲得（副業/フリーランス）。どちらか一方に絞らず並行で動かす。このフェーズの目的は金額ではなく「エンジニアとして対価を得た」という実績を作ること。1円でも稼げばゴールライン通過。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">チェックリストのフェーズ4は次の6項目。すべて埋まればこのロードマップのゴール地点に到達する。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">職務経歴書・スキルシートを作る</div>
+          <div class="desc">学習経緯・制作物・使用技術をA4で1–2枚に。前職の経験も「課題解決の実績」として書く。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">GitHubとポートフォリオを応募用に磨き込む</div>
+          <div class="desc">ピン留めリポジトリの整理・READMEの充実・デモURLの動作確認。採用担当は最初の30秒で判断する。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">応募チャネルに登録する</div>
+          <div class="desc">転職: Green / Wantedly / Findy。案件: クラウドワークス / ランサーズ / ココナラ。両側とも登録する。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">20社に応募する or 5件提案する</div>
+          <div class="desc">数を打つのが前提の設計。落ちても消耗しない。応募数が足りないのが最も多い停滞原因。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">5</span>
+          <div class="title">面接・商談ごとに振り返りメモを書く</div>
+          <div class="desc">聞かれた質問・答えに詰まった点を記録して次に反映。面接は才能ではなく回数で上手くなる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">6</span>
+          <div class="title">エンジニアとして最初の収入を得る</div>
+          <div class="desc">内定 or 案件の納品。金額は問わない。ここがこのロードマップのゴール地点。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 2ルートの比較
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">TWO ROUTES</span>
+      <h2>2ルートの比較 — 就職 vs 案件獲得</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">どちらを選ぶかで悩む時間がもったいない。性質が違うだけで、優劣はない。</p>
+
+      <table class="data-table">
+        <thead><tr><th>比較軸</th><th>就職ルート（正社員 / SES）</th><th>案件ルート（副業 / フリーランス）</th></tr></thead>
+        <tbody>
+          <tr><td><strong>収入の安定性</strong></td><td class="plus">高い（月給固定 + 社保）</td><td class="minus">低い（案件ごと・納品ベース）</td></tr>
+          <tr><td><strong>学べる量</strong></td><td class="plus">多い（レビュー文化・チーム開発）</td><td>案件次第（納品して終わりも多い）</td></tr>
+          <tr><td><strong>始めやすさ</strong></td><td>選考に1–2ヶ月かかる</td><td class="plus">今日提案して来週受注もあり得る</td></tr>
+          <tr><td><strong>向いている人</strong></td><td>腰を据えて実務経験を積みたい人</td><td>現職を続けながら実績を作りたい人</td></tr>
+        </tbody>
+      </table>
+
+      <div class="proscons">
+        <div class="proscons-col pros">
+          <h4 class="pro">並行で動かすメリット</h4>
+          <ul>
+            <li>選考の待ち時間を提案に使える</li>
+            <li>納品実績が職務経歴書の武器になる</li>
+            <li>面接で「稼働中の案件」を語れる</li>
+            <li>片方が全滅しても心が折れにくい</li>
+          </ul>
+        </div>
+        <div class="proscons-col cons">
+          <h4 class="con">並行運用の注意点</h4>
+          <ul>
+            <li>時間管理が甘いと両方中途半端になる</li>
+            <li>案件の納期と面接日程の衝突に注意</li>
+            <li>週の時間配分を先に決めておく必要がある</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>結論：両方同時に動かすのが最適。</strong>就職ルートは結果が出るまで時間がかかるので、待ち時間に案件提案を回す。小さくても納品実績ができれば職務経歴書に書けて、面接でも語れる。片方の進捗がもう片方の武器になる構造。
+      </div>
+
+      <p style="font-size:14px; color:#555; margin:20px 0 12px;"><strong style="color:var(--navy);">主な応募チャネル：</strong>登録は初日にまとめて済ませる。</p>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">転職サイト</div>
+          <div class="desc">Green / Wantedly / Findy。未経験可の求人が多く、カジュアル面談から入れる。GitHub連携があるFindyはポートフォリオが直接効く。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">クラウドソーシング</div>
+          <div class="desc">クラウドワークス / ランサーズ / ココナラ。単価は低いが実績ゼロから受注できる唯一の場所。最初の1件の評価が資産になる。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">知人経由</div>
+          <div class="desc">前職のつながり・友人の店のサイト制作など。競争がなく単価も高くなりやすい。「エンジニアになった」と周囲に宣言しておく。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 職務経歴書の書き方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">RESUME</span>
+      <h2>職務経歴書の書き方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">未経験者の職務経歴書は「学習をどう仕事の言葉に翻訳するか」で決まる。ポイントは4つ。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">学習経緯は「期間 × 内容 × 成果物」で数値化</div>
+          <div class="desc">「独学で勉強しました」ではなく「6ヶ月・約500時間でJavaScript/Reactを学習し、Webアプリを2つ公開」。数字が入ると一気に具体性が出る。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">制作物はURL + 技術 + 工夫を1行ずつ</div>
+          <div class="desc">「タスク管理アプリ（React/Firebase）— デモURL / リアルタイム同期を実装」のように、見る側が10秒で把握できる形式にする。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">前職の経験は「課題解決の実績」として翻訳</div>
+          <div class="desc">営業なら「顧客の課題をヒアリングして提案した経験」、事務なら「Excel業務を自動化して工数を削減した経験」。異業種の経験は掛け算の武器になる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">A4で1–2枚に収める</div>
+          <div class="desc">長い経歴書は読まれない。書きたいことを全部書くのではなく、相手が知りたいことだけを残す。ここでも「要約力」が見られている。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 企業の見分け方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">COMPANY CHECK</span>
+      <h2>企業の見分け方 — 自社開発 / 受託 / SES</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">同じ「エンジニア募集」でも事業形態で働き方が大きく違う。応募前に必ず見分ける。</p>
+
+      <table class="data-table">
+        <thead><tr><th>形態</th><th>仕事の内容</th><th>未経験の入りやすさ</th><th>注意点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>自社開発</strong></td><td>自社のサービス・プロダクトを開発</td><td class="minus">狭き門（倍率高）</td><td>選考でポートフォリオの質を厳しく見られる</td></tr>
+          <tr><td><strong>受託開発</strong></td><td>他社から開発を請け負う</td><td>中</td><td>納期駆動。多様な案件で経験の幅は広がる</td></tr>
+          <tr><td><strong>SES（客先常駐）</strong></td><td>クライアント企業に常駐して働く</td><td class="plus">最も入りやすい</td><td>現場ガチャあり。良い現場ならモダンな経験が積める</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>SESは踏み台として割り切ればアリ。</strong>未経験の最速の入口であることは事実。悪い現場だとExcelとテストだけで技術が伸びないリスクがあるので、面接で「どんな現場に配属されるか」「配属先の技術スタック」を必ず質問する。1年経験を積んだら自社開発への転職を目指すのが定石。
+      </div>
+
+      <div class="warning-box">
+        <strong>避けるべきシグナル — 1つでも当てはまったら慎重に：</strong>
+        <ul>
+          <li>「未経験歓迎・大量採用・研修1週間で現場」— 人を仕入れて売るビジネスモデルの可能性大</li>
+          <li>面接でコードの話が一切出ない — 技術力を評価する気がない＝入った後も評価されない</li>
+          <li>求人票に具体的な技術名がない（「最新技術に触れられる」だけ等）— 実態はレガシー保守のことが多い</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 応募の数値目安
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">NUMBERS</span>
+      <h2>応募の数値目安 — 落ちるのが前提の設計</h2>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="num">1–2割</div>
+          <div class="label">未経験の書類通過率</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">2–3割</div>
+          <div class="label">面接の通過率</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">20–30社</div>
+          <div class="label">内定1件に必要な応募数</div>
+        </div>
+      </div>
+
+      <p style="font-size:14px; color:#555; line-height:1.7;">書類通過率1–2割 × 面接通過率2–3割を掛け算すると、内定1件を取るには20–30社への応募が「標準」になる。5社落ちて凹むのは設計を知らないだけ。10社落ちてようやく折り返し地点、くらいの感覚で淡々と数を打つ。</p>
+
+      <div class="callout">
+        <strong>案件ルートの目安：</strong>クラウドソーシングは提案5件で返信1件程度が普通。実績ゼロの間は返信率がさらに下がるので、最初の1件を取るまでは10–15件提案するつもりで。1件納品して評価がつくと、返信率が目に見えて上がる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 提案文の書き方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PROPOSAL</span>
+      <h2>提案文の書き方（案件ルート）</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">発注者は何十件もの提案を斜め読みしている。長い自己紹介は読まれない。テンプレ構成はこの4ブロック。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">挨拶は1行だけ</div>
+          <div class="desc">「はじめまして。Web制作を行っている◯◯です」。経歴の長語りは不要。すぐ本題へ。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">できること + 実績URL</div>
+          <div class="desc">「同様のLP制作の実績があります（URL）」。口で説明するより動くものを見せる。ポートフォリオがここで効く。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">納期と進め方を具体的に</div>
+          <div class="desc">「着手から5営業日で初稿、修正2回込みで10日で納品します」。段取りを示せる人は実績が少なくても信頼される。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">質問を1つ添える</div>
+          <div class="desc">「参考にされたいデザインはありますか？」等。質問は返信のきっかけになり、要件を読み込んだ証拠にもなる。</div>
+        </div>
+      </div>
+
+      <div class="warning-box" style="margin-top:16px;">
+        <strong>単価を安売りしすぎない：</strong>実績作りのための値引きは相場の7割まで。「無料でやります」「相場の半額以下」は誠意ではなく、値段でしか選ばれない客層と、対等に扱われない関係を引き寄せる。安くする場合も「今回は実績作りのため特別価格です」と理由を明示して、次回から通常価格に戻せる形にしておく。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+      <ol class="summary-list">
+        <li>就職ルートと案件ルートは並行で動かす。片方の進捗がもう片方の武器になる。</li>
+        <li>職務経歴書は「期間 × 内容 × 成果物」で数値化。前職の経験は課題解決の実績として翻訳する。</li>
+        <li>企業は自社開発 / 受託 / SESを見分けて応募する。「大量採用・コードの話ゼロ・技術名なし」は危険シグナル。</li>
+        <li>内定1件 = 20–30社応募が標準。落ちるのが前提の設計なので、1社ごとに凹まず振り返って次に反映する。</li>
+        <li>このフェーズのゴールは金額ではなく実績。1円でも稼げば「エンジニアとして稼いだ人」になり、次のフェーズが始まる。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ フェーズ4 ／ 数字は日本国内市場の目安。個人の経験・市場環境により変動します。</p>
+  </main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ5: 実務経験とキャリアの分岐点 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: rgba(30,39,97,0.12); }
+    .tl-item { position: relative; padding-bottom: 24px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ''; position: absolute; left: -24px; top: 7px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+    .tl-item.done::before { background: var(--accent); }
+    .tl-period { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+    .tl-title { font-size: 15px; font-weight: 700; color: var(--navy); margin: 2px 0; }
+    .tl-desc { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* Numbered work cards */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+    .role-card .fit { font-size: 12px; font-weight: 700; color: var(--accent); margin-top: 10px; line-height: 1.5; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+    .page-nav a { display: inline-block; background: #fff; border: 1px solid rgba(30,39,97,0.15); border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ5: 実務経験とキャリアの分岐点</h1>
+  </header>
+  <main>
+    <p class="lead">Month 6–24。就職または案件で稼ぎ始めたあとのフェーズ。最初の半年〜1年は修行期間で、給与は低くても「実務n年」の看板を作ることが最大のリターンになる。実務1年を超えると転職・副業・フリーランスの全選択肢が開く。このページでは、修行期間の過ごし方と、2年目にどの道を選ぶかの判断材料を整理する。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">フェーズ5の完了条件は5つ。チェックリストのフェーズ5の項目と同じなので、終わったものからチェックを付けていく。ここまでのフェーズと違い、期間が長い分「気づいたら1年何も決めずに過ぎていた」が起きやすい。項目で区切って進める。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">チーム開発のフローを一通り経験する</div><div class="desc">ブランチ運用・プルリクエスト・レビュー・リリース。実務6ヶ月の最重要テーマ</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">「得意」と言える領域を1つ作る</div><div class="desc">フロント・API・インフラ・テストなど。チーム内で「これは○○さん」と言われる状態</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">自分の市場価値を測定する</div><div class="desc">転職ドラフト・Findyの年収予測・エージェント面談。現年収とのギャップを把握する</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">副業の受け入れ態勢を作る</div><div class="desc">就業規則の確認・開業届の検討・副業プラットフォーム登録。実務1年から現実的になる</div></div>
+        <div class="work-item"><span class="num">5</span><div class="title">2年目の進路を意思決定する</div><div class="desc">転職で年収アップ / 副業で複線化 / フリーランス転向。数字を見て自分で決める</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>判断基準はシンプル：</strong>5項目すべてにチェックが付いたら、このシリーズは卒業。あとは選んだ進路のPDCAを回すだけ。「現状維持」も進路の一つだが、それは測定と比較をした上での意思決定であること。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 実務6ヶ月の過ごし方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">FIRST 6 MONTHS</span>
+      <h2>実務6ヶ月の過ごし方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">最初の半年で評価と信頼の土台ができる。焦って成果を出そうとするより、段階ごとにテーマを絞るほうが結果的に速い。</p>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">1–2ヶ月目</div>
+          <div class="tl-title">環境とコードベースの理解・質問の仕方を覚える</div>
+          <div class="tl-desc">開発環境の構築、コードベースの全体像、チームの用語とルールを掴む時期。この段階の評価は「アウトプット量」ではなく「立ち上がりの速さ」。15分調べて分からなければ、試したことを添えて質問する。質問の仕方が上手い新人は例外なく伸びる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">3–4ヶ月目</div>
+          <div class="tl-title">小さいタスクを完遂し、レビュー指摘を減らす</div>
+          <div class="tl-desc">バグ修正や小機能を「自分の担当」として最後までやり切る時期。目標はレビューの指摘数を毎回減らすこと。同じ指摘を二度受けないよう、指摘はメモして自分のチェックリストにする。「任せて大丈夫な人」の評価はここで決まる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">5–6ヶ月目</div>
+          <div class="tl-title">見積もりと設計に参加し、得意領域の種を見つける</div>
+          <div class="tl-desc">タスクをこなすだけでなく、工数見積もりや設計の議論に加わる時期。あわせて「これは人より速い・詳しい」と感じる領域を1つ見つける。フロントの実装速度でも、テストの丁寧さでも、SQLでもいい。それがフェーズ5の完了条件2の種になる。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 市場価値の測り方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MARKET VALUE</span>
+      <h2>市場価値の測り方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「自分がいくらで評価されるか」は感覚ではなく、実際に市場に出して測る。実務1年前後から数字が返ってくるようになる。</p>
+
+      <table class="data-table">
+        <thead><tr><th>測定手段</th><th>分かること</th><th>使い方</th></tr></thead>
+        <tbody>
+          <tr><td class="money">転職ドラフト</td><td>企業からの提示年収（競争入札）</td><td>職務経歴を登録すると、企業が年収付きで指名する。実際の提示額が見えるため、市場価値の測定手段として最も直接的</td></tr>
+          <tr><td class="money">Findy</td><td>GitHub連携の年収予測</td><td>GitHubのアクティビティからスキル偏差値と年収予測が出る。登録するだけで測れるので最初の一歩に向く</td></tr>
+          <tr><td class="money">エージェント面談</td><td>非公開求人の相場感</td><td>レバテック等のエージェントに経歴を見せると、今の経歴で狙える求人と年収帯を教えてくれる。無料で相場観が手に入る</td></tr>
+          <tr><td class="money">カジュアル面談</td><td>企業側から見た自分の評価</td><td>選考ではない気軽な面談。興味のある企業と話すと、何が足りないか・何が刺さるかが具体的に分かる</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>転職する気がなくても年1回測るのが定石。</strong>市場価値の測定は転職活動ではなく健康診断。現年収とのギャップが分かって初めて、「今の会社に残る」も「動く」も根拠のある判断になる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 2年目の3つの分岐
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">THE FORK</span>
+      <h2>2年目の3つの分岐</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">実務1年を超えたら、次の一手は大きく3つ。どれが正解かは状況次第で、併用もできる（転職してから副業を始める等）。</p>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">転職で年収アップ</div>
+          <div class="desc">実務経験を武器に、より条件の良い企業へ移る。同じ会社に居続けるより、2–3年周期の転職で+50–150万円が現実的。SESから自社開発への移動は年収以上にスキル環境の改善が大きい。</div>
+          <div class="fit">向いている人：現職の学びが頭打ちで、市場価値と現年収の差が大きい人。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">副業で複線化</div>
+          <div class="desc">本業の安定収入を維持したまま、週1–2稼働の案件で月+10–40万円を上乗せする。実務1年から現実的になる。収入だけでなく「社外で通用するか」の実地テストにもなる。</div>
+          <div class="fit">向いている人：現職に大きな不満はなく、リスクを抑えて収入と経験の幅を広げたい人。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">フリーランス転向</div>
+          <div class="desc">業務委託で独立する。実務2年以上が推奨ライン。額面は上がるが、社保・税金・経費を引くと手取り差は額面差ほど大きくない。契約切れリスクも自分で持つことになる。</div>
+          <div class="fit">向いている人：貯金に余裕があり、案件・技術・働く場所を自分で選びたい人。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 分岐の判断基準
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">DECISION</span>
+      <h2>分岐の判断基準</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「なんとなく独立」「なんとなく現状維持」を避けるために、判断の目安を3つだけ持っておく。</p>
+
+      <div class="warning-box">
+        <strong>貯金が生活費6ヶ月分ないなら、フリーランス転向は待つ。</strong>独立直後は入金サイクルの遅れや契約の空白が普通に起きる。資金の余裕がないと、単価の安い案件を焦って受ける悪循環に入る。
+      </div>
+
+      <div class="callout">
+        <strong>現職で学びが続いているなら、急いで動かない。</strong>レビューで鍛えられ、任される範囲が広がっている間は、その環境自体が報酬の一部。学びが止まった・頭打ちだと感じた時が動くサイン。
+      </div>
+
+      <div class="callout">
+        <strong>市場価値と現年収の差が100万円を超えたら、転職を検討する。</strong>測定の結果ギャップが100万円超なら、市場は今の会社より高く評価している。交渉材料にして現職の昇給を狙うか、実際に動くかを選ぶ。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>最初の半年〜1年は修行期間。給与の低さより「実務n年」の看板作りを優先する。実務1年で全選択肢が開く。</li>
+        <li>実務6ヶ月は段階で進める：1–2ヶ月目 理解と質問、3–4ヶ月目 タスク完遂とレビュー指摘減、5–6ヶ月目 見積もり・設計参加と得意領域の種。</li>
+        <li>市場価値は転職ドラフト・Findy・エージェント面談で測る。転職する気がなくても年1回が定石。</li>
+        <li>2年目の分岐は3つ：転職（2–3年周期で+50–150万）、副業（週1–2案件で月+10–40万）、フリーランス転向（実務2年推奨、手取り差は額面差より小さい）。</li>
+        <li>判断基準は「貯金6ヶ月分」「現職の学びが続いているか」「市場価値と現年収の差100万円」。数字で決めて、チェックリストの5項目を埋めたら卒業。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="income-guide.html">稼ぎ方 完全ガイドで各ルートの数字を見る →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ5: 実務経験とキャリアの分岐点（Month 6–24）</p>
+  </main>
+</body>
+</html>
+
+# エンジニア育成シリーズ
+
+未経験からエンジニアとして稼げるようになるまでの学習コンテンツ一式。静的HTMLのみで動作し、ビルド不要・外部依存なし。
+
+## コンテンツ
+
+| ページ | 内容 |
+|---|---|
+| [index.html](index.html) | シリーズ目次 |
+| [income-guide.html](income-guide.html) | エンジニアの稼ぎ方 完全ガイド（年収レンジ・必要投資・技術分野別単価） |
+| [roadmap-checklist.html](roadmap-checklist.html) | 5フェーズ30タスクの進捗チェックリスト（ブラウザ保存） |
+| [thirty-day-plan.html](thirty-day-plan.html) | 1日30分×30日スタータープラン |
+| [app/](app/) | **30×30アプリ** — 30分タイマー付き進捗トラッカー |
+| phase1〜5 | フェーズ別詳細ガイド（基礎学習〜キャリア分岐） |
+
+## 30×30 アプリ
+
+1日30分×30日プランの単体アプリ（`app/index.html`、依存ゼロの単一ファイルSPA）。
+
+- 今日のタスク自動表示（順序ベース — 遅れてもプランが崩れない）
+- 30分カウントダウンタイマー
+- 進捗リング・連続日数・30日マップ・日別メモ
+- データはブラウザのlocalStorageに保存（端末ごと）
+
+スマホでの利用推奨。ブラウザで開いて「ホーム画面に追加」するとアプリ感覚で使える。
+
+## GitHub Pagesでの公開
+
+Settings → Pages → Branch: `main` / root を選択して保存。数分後に
+`https://<ユーザー名>.github.io/<リポジトリ名>/` で公開される。
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ロードマップ進捗チェックリスト - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 20px; }
+    section.block { margin-bottom: 36px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 6px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Overall progress (sticky) */
+    .progress-panel {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper); padding: 14px 0 12px;
+      border-bottom: 1px solid rgba(30,39,97,0.1); margin-bottom: 28px;
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .progress-head .label { font-size: 12px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; }
+    .progress-head .pct { font-size: 20px; font-weight: 800; color: var(--navy); }
+    .progress-track { height: 10px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--navy2), var(--accent)); border-radius: 6px; transition: width 0.3s ease; }
+
+    /* Phase header row */
+    .phase-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .phase-meta { font-size: 12px; color: #6b7aa5; }
+    .phase-progress { display: flex; align-items: center; gap: 8px; min-width: 160px; }
+    .phase-track { flex: 1; height: 6px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 4px; overflow: hidden; min-width: 100px; }
+    .phase-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 4px; transition: width 0.3s ease; }
+    .phase-count { font-size: 12px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .phase-link { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .phase-link:hover { text-decoration: underline; }
+
+    /* Task items */
+    .task-list { display: flex; flex-direction: column; gap: 8px; }
+    .task {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1px solid rgba(30,39,97,0.08); border-radius: 10px;
+      padding: 12px 16px; cursor: pointer; user-select: none;
+      transition: border-color 0.15s ease;
+    }
+    .task:hover { border-color: rgba(24,197,212,0.45); }
+    .task input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+      border: 2px solid rgba(30,39,97,0.25); border-radius: 6px;
+      background: #fff; cursor: pointer; position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .task input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+    .task input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; left: 5px; top: 1px;
+      width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .task input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .task .t { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+    .task .d { font-size: 12px; color: #6b7aa5; margin-top: 2px; line-height: 1.6; }
+    .task.done .t { color: #9aa3bd; text-decoration: line-through; }
+    .task.done .d { color: #b6bdd1; }
+
+    /* Reset row */
+    .reset-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .reset-btn {
+      font-family: inherit; font-size: 12px; font-weight: 700; color: #b5432f;
+      background: none; border: 1px solid rgba(220,53,69,0.3); border-radius: 6px;
+      padding: 6px 14px; cursor: pointer;
+    }
+    .reset-btn:hover { background: rgba(220,53,69,0.06); }
+
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--ink); line-height: 1.7; margin-bottom: 20px; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+      .phase-progress { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>ロードマップ進捗チェックリスト</h1>
+  </header>
+  <main>
+    <p class="lead">未経験からエンジニアとして最初の収入を得るまでの全タスク。チェックはこのブラウザに自動保存される。各フェーズの詳しい進め方はリンク先の詳細ガイドへ。</p>
+
+    <div class="callout">進捗はこの端末のブラウザ（localStorage）にのみ保存されます。別の端末には引き継がれません。</div>
+
+    <div class="progress-panel">
+      <div class="progress-head">
+        <span class="label">全体進捗</span>
+        <span class="pct" id="overall-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="overall-fill"></div></div>
+    </div>
+
+    <!-- Phase 1 -->
+    <section class="block" data-phase="p1">
+      <span class="eyebrow">PHASE 1 / MONTH 0–1</span>
+      <div class="phase-head">
+        <h2>基礎学習</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/7</span>
+          <a class="phase-link" href="phase1-basics.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p1-env"><span><span class="t">開発環境を整える</span><span class="d" style="display:block;">VS Code・Chrome・Gitをインストール。ターミナルの基本操作（cd / ls / mkdir）に慣れる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-htmlcss"><span><span class="t">HTML/CSSの基礎を完走する</span><span class="d" style="display:block;">Progate HTML&CSS（初級〜上級）または freeCodeCamp Responsive Web Design。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-js"><span><span class="t">JavaScriptの基礎を完走する</span><span class="d" style="display:block;">変数・関数・配列・オブジェクト・DOM操作まで。ProgateのJavaScriptコースが目安。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-layout"><span><span class="t">Flexbox / Grid でレイアウトを組めるようになる</span><span class="d" style="display:block;">MDNのガイドを読み、実在するサイトのファーストビューを1枚模写する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-page"><span><span class="t">Webページを自力で1枚作る</span><span class="d" style="display:block;">自己紹介ページや架空店舗のLPなど。教材を見ずにゼロから書き切る。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-git"><span><span class="t">Git / GitHub の基本操作を身につける</span><span class="d" style="display:block;">init / add / commit / push / branch。作ったページをGitHubにpushする。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-habit"><span><span class="t">毎日2時間以上の学習を2週間続ける</span><span class="d" style="display:block;">時間帯を固定して習慣化する。挫折の最大要因は「学習が途切れること」。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 2 -->
+    <section class="block" data-phase="p2">
+      <span class="eyebrow">PHASE 2 / MONTH 2–3</span>
+      <div class="phase-head">
+        <h2>フレームワーク + ポートフォリオ</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/7</span>
+          <a class="phase-link" href="phase2-portfolio.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p2-es6"><span><span class="t">モダンJavaScript文法を習得する</span><span class="d" style="display:block;">アロー関数・分割代入・map/filter・async/await・モジュール。Reactの前提知識。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-react"><span><span class="t">React公式チュートリアルを完走する</span><span class="d" style="display:block;">コンポーネント・props・state・イベント処理までを理解する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-todo"><span><span class="t">Todoアプリを自力で作る</span><span class="d" style="display:block;">追加・削除・完了切替・絞り込み。チュートリアルを見ずに書き切るのが条件。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-api"><span><span class="t">外部APIと連携するアプリを1本作る</span><span class="d" style="display:block;">天気・映画・GitHub APIなど。fetch・ローディング・エラー処理を経験する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-deploy"><span><span class="t">作ったアプリをデプロイして公開する</span><span class="d" style="display:block;">Vercel / Netlify / Cloudflare Pages。URLを人に送れる状態にする。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-readme"><span><span class="t">各リポジトリにREADMEを書く</span><span class="d" style="display:block;">概要・スクリーンショット・使用技術・工夫した点。採用担当が最初に見る場所。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-portfolio"><span><span class="t">ポートフォリオサイトを公開する</span><span class="d" style="display:block;">自己紹介 + 制作物2–3点 + 連絡先。これ自体も制作物の一つになる。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 3 -->
+    <section class="block" data-phase="p3">
+      <span class="eyebrow">PHASE 3 / MONTH 3–4</span>
+      <div class="phase-head">
+        <h2>実務に近い経験を積む</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/5</span>
+          <a class="phase-link" href="phase3-experience.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p3-app"><span><span class="t">「自分の課題を解決する」アプリをもう1本作る</span><span class="d" style="display:block;">家計簿・学習記録・シフト管理など。企画から自分でやった経験が面接で最も語れる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-oss"><span><span class="t">OSSにプルリクエストを1件出す</span><span class="d" style="display:block;">ドキュメント修正やtypo修正でOK。「他人のコードベースで作業した」実績になる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-client"><span><span class="t">実在の相手がいる制作を1件引き受ける</span><span class="d" style="display:block;">知人の店のサイト、サークルのページなど。要望を聞いて納品するプロセスが実務経験に近い。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-review"><span><span class="t">他人からコードレビューを受ける</span><span class="d" style="display:block;">コミュニティ・メンターサービス・SNS。指摘されて直す経験が実務との最大のギャップを埋める。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-articles"><span><span class="t">技術記事を3本公開する</span><span class="d" style="display:block;">Zenn / Qiita。つまずいた点と解決法でいい。言語化できる人は面接で強い。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 4 -->
+    <section class="block" data-phase="p4">
+      <span class="eyebrow">PHASE 4 / MONTH 4–6</span>
+      <div class="phase-head">
+        <h2>就職活動・案件獲得 — 最初の収入</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/6</span>
+          <a class="phase-link" href="phase4-first-income.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p4-resume"><span><span class="t">職務経歴書・スキルシートを作る</span><span class="d" style="display:block;">学習経緯・制作物・使用技術を1–2枚に。前職の経験も「課題解決の実績」として書く。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-github"><span><span class="t">GitHubとポートフォリオを応募用に磨き込む</span><span class="d" style="display:block;">ピン留めリポジトリの整理・READMEの充実・デモURLの動作確認。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-register"><span><span class="t">応募チャネルに登録する</span><span class="d" style="display:block;">転職: Green / Wantedly / Findy。案件: クラウドワークス / ランサーズ / ココナラ。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-apply"><span><span class="t">20社に応募する or 5件提案する</span><span class="d" style="display:block;">未経験の書類通過率は1–2割が普通。数を打つのが前提。落ちても消耗しない。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-retro"><span><span class="t">面接・商談ごとに振り返りメモを書く</span><span class="d" style="display:block;">聞かれた質問・答えに詰まった点を記録して次に反映。面接は回数で上手くなる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-income"><span><span class="t">エンジニアとして最初の収入を得る</span><span class="d" style="display:block;">内定 or 案件の納品。金額は問わない。ここがこのロードマップのゴール地点。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 5 -->
+    <section class="block" data-phase="p5">
+      <span class="eyebrow">PHASE 5 / MONTH 6–24</span>
+      <div class="phase-head">
+        <h2>実務経験とキャリアの分岐点</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/5</span>
+          <a class="phase-link" href="phase5-growth.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p5-team"><span><span class="t">チーム開発のフローを一通り経験する</span><span class="d" style="display:block;">ブランチ運用・プルリクエスト・レビュー・リリース。実務6ヶ月の最重要テーマ。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-strength"><span><span class="t">「得意」と言える領域を1つ作る</span><span class="d" style="display:block;">フロント・API・インフラ・テストなど。チーム内で「これは○○さん」と言われる状態。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-market"><span><span class="t">自分の市場価値を測定する</span><span class="d" style="display:block;">転職ドラフト・Findyの年収予測・エージェント面談。現年収とのギャップを把握する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-side"><span><span class="t">副業の受け入れ態勢を作る</span><span class="d" style="display:block;">就業規則の確認・開業届の検討・副業プラットフォーム登録。実務1年から現実的になる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-decide"><span><span class="t">2年目の進路を意思決定する</span><span class="d" style="display:block;">転職で年収アップ / 副業で複線化 / フリーランス転向。「稼ぎ方 完全ガイド」の比較表で判断。</span></span></label>
+      </div>
+    </section>
+
+    <div class="reset-row">
+      <button class="reset-btn" id="reset-btn" type="button">進捗をリセット</button>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'engineer-roadmap-progress';
+
+      function load() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+      function save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      var state = load();
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('.task input[type="checkbox"]'));
+
+      function render() {
+        boxes.forEach(function (box) {
+          var checked = !!state[box.dataset.id];
+          box.checked = checked;
+          box.closest('.task').classList.toggle('done', checked);
+        });
+
+        var total = boxes.length;
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        document.getElementById('overall-pct').textContent = pct + '%';
+        document.getElementById('overall-fill').style.width = pct + '%';
+
+        document.querySelectorAll('section[data-phase]').forEach(function (section) {
+          var phaseBoxes = Array.prototype.slice.call(section.querySelectorAll('input[type="checkbox"]'));
+          var phaseDone = phaseBoxes.filter(function (b) { return b.checked; }).length;
+          var phasePct = phaseBoxes.length ? (phaseDone / phaseBoxes.length) * 100 : 0;
+          section.querySelector('.phase-fill').style.width = phasePct + '%';
+          section.querySelector('.phase-count').textContent = phaseDone + '/' + phaseBoxes.length;
+        });
+      }
+
+      boxes.forEach(function (box) {
+        box.addEventListener('change', function () {
+          state[box.dataset.id] = box.checked;
+          save(state);
+          render();
+        });
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        if (!confirm('すべてのチェックを外してリセットします。よろしいですか？')) return;
+        state = {};
+        save(state);
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
+
+/* Visual design tokens adapted from dx-consul-decks (shared/style.css) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0f1729;
+  --navy: #1e2761;
+  --navy2: #2c3a86;
+  --paper: #f7f8fc;
+  --accent: #18c5d4;
+  --accent-soft: #5fe0ea;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+header.page-header {
+  background: linear-gradient(135deg, #0b1226 0%, #1a2360 60%, #101d4a 100%);
+  color: #fff;
+  padding: 32px 48px;
+}
+
+header.page-header .badge {
+  display: inline-block;
+  background: rgba(24, 197, 212, 0.12);
+  border: 1px solid rgba(24, 197, 212, 0.45);
+  color: var(--accent-soft);
+  font-size: 12px;
+  letter-spacing: 4px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+header.page-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+main {
+  padding: 32px 48px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 22px;
+  border: 1px solid rgba(30, 39, 97, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card:hover {
+  border-color: rgba(24, 197, 212, 0.45);
+}
+
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7aa5;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.card-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(30, 39, 97, 0.2);
+  color: var(--navy);
+}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>1日30分×30日プラン - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 20px; }
+    section.block { margin-bottom: 36px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 12px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 14px 0; }
+    .callout strong { color: var(--navy); }
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; margin: 14px 0; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 16px 0; }
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 16px 20px; text-align: center; }
+    .stat-box .num { font-size: 28px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 12px; margin-top: 4px; }
+
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Progress panel */
+    .progress-panel {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper); padding: 14px 0 12px;
+      border-bottom: 1px solid rgba(30,39,97,0.1); margin-bottom: 28px;
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .progress-head .label { font-size: 12px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; }
+    .progress-head .pct { font-size: 20px; font-weight: 800; color: var(--navy); }
+    .progress-track { height: 10px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--navy2), var(--accent)); border-radius: 6px; transition: width 0.3s ease; }
+
+    /* Week block */
+    .week-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .week-count { font-size: 12px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+    /* Day items */
+    .day-list { display: flex; flex-direction: column; gap: 6px; }
+    .day {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1px solid rgba(30,39,97,0.08); border-radius: 10px;
+      padding: 10px 14px; cursor: pointer; user-select: none;
+      transition: border-color 0.15s ease;
+    }
+    .day:hover { border-color: rgba(24,197,212,0.45); }
+    .day .daynum {
+      flex-shrink: 0; width: 44px; font-size: 11px; font-weight: 800; color: var(--accent);
+      letter-spacing: 0.5px; margin-top: 3px;
+    }
+    .day input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+      border: 2px solid rgba(30,39,97,0.25); border-radius: 6px;
+      background: #fff; cursor: pointer; position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .day input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+    .day input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; left: 5px; top: 1px;
+      width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .day input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .day .t { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+    .day .d { font-size: 12px; color: #6b7aa5; margin-top: 1px; line-height: 1.6; }
+    .day.done .t { color: #9aa3bd; text-decoration: line-through; }
+    .day.done .d { color: #b6bdd1; }
+
+    .reset-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .reset-btn {
+      font-family: inherit; font-size: 12px; font-weight: 700; color: #b5432f;
+      background: none; border: 1px solid rgba(220,53,69,0.3); border-radius: 6px;
+      padding: 6px 14px; cursor: pointer;
+    }
+    .reset-btn:hover { background: rgba(220,53,69,0.06); }
+
+    .nav-links { margin-top: 32px; font-size: 13px; }
+    .nav-links a { color: var(--accent); font-weight: 700; text-decoration: none; margin-right: 20px; }
+    .nav-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+      .day .daynum { width: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>1日30分×30日プラン</h1>
+  </header>
+  <main>
+    <p class="lead">忙しくても続けられる最小単位のプラン。1日30分・30日で「HTML/CSSの基礎 + 自分のページを1枚公開 + JavaScriptの味見」まで到達する。エンジニア適性の確認と学習習慣づくりを最小コストで行う設計。</p>
+
+    <section class="block">
+      <span class="eyebrow">HONEST MATH</span>
+      <h2>まず正直な話 — 30分×30日で何ができるか</h2>
+      <div class="stat-row">
+        <div class="stat-box"><div class="num">15時間</div><div class="label">合計投資時間（30分×30日）</div></div>
+        <div class="stat-box"><div class="num">約1,500円</div><div class="label">必要な費用（Progate 1ヶ月分）</div></div>
+        <div class="stat-box"><div class="num">1枚</div><div class="label">公開できる自分のWebページ</div></div>
+      </div>
+      <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">15時間は、ロードマップのフェーズ1完了（目安100–150時間）の約1割。つまりこの30日で「稼げるレベル」には到達しない。到達するのは次の3つ。</p>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">① 基礎の土台</div>
+          <div class="desc">HTML/CSSで簡単なページが書けて、JavaScriptが何かを説明できる状態。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">② 公開実績</div>
+          <div class="desc">自分で作ったページがURL付きでインターネット上に存在する状態。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">③ 適性の判定材料</div>
+          <div class="desc">「これを仕事にしたいか」を15時間の実体験ベースで判断できる状態。</div>
+        </div>
+      </div>
+      <div class="callout"><strong>このプランの設計意図：</strong>撤退コストを最小にすること。合わないと分かっても失うのは15時間と1,500円だけ。逆に「向いている」と分かればフェーズ1に自信を持って投資できる。いきなりスクールに80万円払うより、まずこの30日。</div>
+    </section>
+
+    <div class="callout" style="border-color: rgba(24,197,212,0.5);"><strong>アプリ版があります：</strong>30分タイマー・連続日数・今日のタスク表示つきの<a href="app/" style="color:var(--accent); font-weight:700;">30×30 アプリ</a>で進めるのがおすすめ。スマホのホーム画面に追加すると毎日開きやすい。</div>
+
+    <div class="progress-panel">
+      <div class="progress-head">
+        <span class="label">30日の進捗</span>
+        <span class="pct" id="overall-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="overall-fill"></div></div>
+    </div>
+
+    <!-- Week 1 -->
+    <section class="block" data-week="w1">
+      <span class="eyebrow">WEEK 1 / DAY 1–7</span>
+      <div class="week-head">
+        <h2>HTMLに触れる</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 1</span><input type="checkbox" data-id="d01"><span><span class="t">Progateに登録して、HTML &amp; CSS 初級編を始める</span><span class="d" style="display:block;">見出し・段落・リンクまで。今日はアカウント作成と最初のレッスンだけでOK。</span></span></label>
+        <label class="day"><span class="daynum">DAY 2</span><input type="checkbox" data-id="d02"><span><span class="t">画像・リストのタグを学ぶ</span><span class="d" style="display:block;">img・ul/ol/li。Progateの続きを30分進める。</span></span></label>
+        <label class="day"><span class="daynum">DAY 3</span><input type="checkbox" data-id="d03"><span><span class="t">フォームとボタンのタグを学ぶ</span><span class="d" style="display:block;">input・button・form。「見たことある部品」がタグで書けることを実感する。</span></span></label>
+        <label class="day"><span class="daynum">DAY 4</span><input type="checkbox" data-id="d04"><span><span class="t">HTML &amp; CSS 初級編のHTMLパートを終える</span><span class="d" style="display:block;">終わらなければ翌日に持ち越してOK。進捗より継続が優先。</span></span></label>
+        <label class="day"><span class="daynum">DAY 5</span><input type="checkbox" data-id="d05"><span><span class="t">VS CodeとChromeを準備して、hello.htmlを作る</span><span class="d" style="display:block;">ローカルにファイルを作り、ブラウザで開く。教材の外で動かす最初の一歩。</span></span></label>
+        <label class="day"><span class="daynum">DAY 6</span><input type="checkbox" data-id="d06"><span><span class="t">自己紹介ページの骨組みをHTMLだけで書く</span><span class="d" style="display:block;">名前・趣味・好きなもの3つ。見た目は気にしない。構造だけ。</span></span></label>
+        <label class="day"><span class="daynum">DAY 7</span><input type="checkbox" data-id="d07"><span><span class="t">週の復習 — わからなかったタグをMDNで3つ調べる</span><span class="d" style="display:block;">「調べて解決する」練習。エンジニアの仕事の半分はこれ。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 2 -->
+    <section class="block" data-week="w2">
+      <span class="eyebrow">WEEK 2 / DAY 8–14</span>
+      <div class="week-head">
+        <h2>CSSで見た目を作る</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 8</span><input type="checkbox" data-id="d08"><span><span class="t">CSSの基本 — セレクタ・色・フォント</span><span class="d" style="display:block;">ProgateのCSSパートへ。HTMLに色がつく瞬間を体験する。</span></span></label>
+        <label class="day"><span class="daynum">DAY 9</span><input type="checkbox" data-id="d09"><span><span class="t">ボックスモデルを理解する</span><span class="d" style="display:block;">margin・padding・border。CSSで最初につまずく場所なので30分まるごと使う。</span></span></label>
+        <label class="day"><span class="daynum">DAY 10</span><input type="checkbox" data-id="d10"><span><span class="t">Flexboxで横並びを作る</span><span class="d" style="display:block;">display: flex。現代のレイアウトの主役。</span></span></label>
+        <label class="day"><span class="daynum">DAY 11</span><input type="checkbox" data-id="d11"><span><span class="t">Flexbox Froggyで遊びながら定着させる</span><span class="d" style="display:block;">無料のブラウザゲーム。24面クリアを目指す（終わらなくてOK）。</span></span></label>
+        <label class="day"><span class="daynum">DAY 12</span><input type="checkbox" data-id="d12"><span><span class="t">自己紹介ページにCSSを当てる</span><span class="d" style="display:block;">背景色・文字色・余白。DAY 6の骨組みに見た目をつける。</span></span></label>
+        <label class="day"><span class="daynum">DAY 13</span><input type="checkbox" data-id="d13"><span><span class="t">ヘッダーとカード風レイアウトを作る</span><span class="d" style="display:block;">上部にタイトルバー、コンテンツを白いカードに。Flexboxを実戦投入。</span></span></label>
+        <label class="day"><span class="daynum">DAY 14</span><input type="checkbox" data-id="d14"><span><span class="t">週の復習 — 好きなサイトを観察して1ブロック真似る</span><span class="d" style="display:block;">「このボタンはどう作られている？」と右クリック→検証で覗いてみる。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 3 -->
+    <section class="block" data-week="w3">
+      <span class="eyebrow">WEEK 3 / DAY 15–21</span>
+      <div class="week-head">
+        <h2>ページを完成させて公開する</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 15</span><input type="checkbox" data-id="d15"><span><span class="t">フォントと配色を決めて適用する</span><span class="d" style="display:block;">Google Fontsから1書体、色は3色まで（背景・文字・アクセント）。</span></span></label>
+        <label class="day"><span class="daynum">DAY 16</span><input type="checkbox" data-id="d16"><span><span class="t">メディアクエリの基本を学ぶ</span><span class="d" style="display:block;">@media (max-width: 600px)。画面幅で見た目を変える仕組み。</span></span></label>
+        <label class="day"><span class="daynum">DAY 17</span><input type="checkbox" data-id="d17"><span><span class="t">自己紹介ページをスマホ対応にする</span><span class="d" style="display:block;">Chromeの検証モードでスマホ表示を確認しながら調整。</span></span></label>
+        <label class="day"><span class="daynum">DAY 18</span><input type="checkbox" data-id="d18"><span><span class="t">GitHubアカウントとリポジトリを作る</span><span class="d" style="display:block;">アカウント作成 → 「my-profile」リポジトリ作成 → ファイルをアップロード。</span></span></label>
+        <label class="day"><span class="daynum">DAY 19</span><input type="checkbox" data-id="d19"><span><span class="t">GitHub Pagesで公開する</span><span class="d" style="display:block;">Settings → Pages → 公開。自分のページがURL付きでネット上に存在する日。</span></span></label>
+        <label class="day"><span class="daynum">DAY 20</span><input type="checkbox" data-id="d20"><span><span class="t">公開ページをスマホの実機で見て微調整する</span><span class="d" style="display:block;">文字が小さい・はみ出す等を直して再アップロード。</span></span></label>
+        <label class="day"><span class="daynum">DAY 21</span><input type="checkbox" data-id="d21"><span><span class="t">週の復習 — 公開URLを1人に見せて感想を1つもらう</span><span class="d" style="display:block;">「人に見せる」心理的ハードルを最小サイズで越えておく。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 4 -->
+    <section class="block" data-week="w4">
+      <span class="eyebrow">WEEK 4 / DAY 22–30</span>
+      <div class="week-head">
+        <h2>JavaScriptの味見と、次の一手</h2>
+        <span class="week-count">0/9</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 22</span><input type="checkbox" data-id="d22"><span><span class="t">JavaScript初級を始める — 変数と計算</span><span class="d" style="display:block;">ProgateのJavaScriptコースへ。「動きを作る言語」の最初の一歩。</span></span></label>
+        <label class="day"><span class="daynum">DAY 23</span><input type="checkbox" data-id="d23"><span><span class="t">条件分岐（if / else）</span><span class="d" style="display:block;">「もし〜なら」をコードで書く。プログラミングの本体に触れる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 24</span><input type="checkbox" data-id="d24"><span><span class="t">関数</span><span class="d" style="display:block;">処理に名前をつけて使い回す仕組み。</span></span></label>
+        <label class="day"><span class="daynum">DAY 25</span><input type="checkbox" data-id="d25"><span><span class="t">配列とループ</span><span class="d" style="display:block;">複数のデータをまとめて処理する。ここまでがJSの基礎4点セット。</span></span></label>
+        <label class="day"><span class="daynum">DAY 26</span><input type="checkbox" data-id="d26"><span><span class="t">DOM操作の初歩 — ボタンで文字を変える</span><span class="d" style="display:block;">HTMLの要素をJSから書き換える。Webページが「動く」原理。</span></span></label>
+        <label class="day"><span class="daynum">DAY 27</span><input type="checkbox" data-id="d27"><span><span class="t">自己紹介ページに「動く要素」を1つ足す</span><span class="d" style="display:block;">ボタンで挨拶が切り替わる、ダークモード切替など。小さくてOK。</span></span></label>
+        <label class="day"><span class="daynum">DAY 28</span><input type="checkbox" data-id="d28"><span><span class="t">総復習 — できたこと・わからないことを書き出す</span><span class="d" style="display:block;">箇条書きでOK。この記録が次の計画の材料になる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 29</span><input type="checkbox" data-id="d29"><span><span class="t">「稼ぎ方 完全ガイド」を読んで目標ルートを決める</span><span class="d" style="display:block;">正社員・副業・フリーランス。どこを目指すかで次の学習内容が変わる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 30</span><input type="checkbox" data-id="d30"><span><span class="t">次の30日の計画を立てる</span><span class="d" style="display:block;">下の「30日後の3つの選択肢」から選ぶ。ここまで来たら適性は十分ある。</span></span></label>
+      </div>
+    </section>
+
+    <div class="reset-row">
+      <button class="reset-btn" id="reset-btn" type="button">進捗をリセット</button>
+    </div>
+
+    <section class="block" style="margin-top:36px;">
+      <span class="eyebrow">KEEP GOING</span>
+      <h2>続けるコツ</h2>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">時間帯を固定する</div>
+          <div class="desc">「朝のコーヒーの後」「寝る前」など既存の習慣に接続する。意思決定をなくすのが継続のコツ。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">30分で強制終了する</div>
+          <div class="desc">乗ってきても止める。「続きが気になる状態」で終えると翌日の再開が楽になる。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">2日連続で休まない</div>
+          <div class="desc">1日の穴は誤差、2日は断絶。休んだ翌日は5分だけでもいいので触る。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">遅れてもプランを詰めない</div>
+          <div class="desc">DAY表記は目安。40日かかっても完走すれば同じ場所に着く。詰め込みは挫折のもと。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <span class="eyebrow">AFTER 30 DAYS</span>
+      <h2>30日後の3つの選択肢</h2>
+      <div class="role-grid">
+        <div class="role-card" style="border-left: 3px solid var(--accent);">
+          <div class="name">① 時間を増やして本格参入</div>
+          <div class="desc">1日2–3時間に増やして<a href="phase1-basics.html" style="color:var(--accent); font-weight:700;">フェーズ1</a>の残りへ。最短3–6ヶ月で就職・案件獲得ラインに到達する。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid var(--navy2);">
+          <div class="name">② 30分ペースを継続</div>
+          <div class="desc">同じペースでフェーズ1を進める。到達は遅くなる（フェーズ1完了まで6ヶ月〜1年）が、習慣が壊れないのが最大の強み。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #b5432f;">
+          <div class="name">③ 撤退する</div>
+          <div class="desc">「向いていない」と分かるのも立派な成果。失ったのは15時間と約1,500円だけ。ここで得たHTML/CSSの知識は他の仕事でも活きる。</div>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:16px;">判断基準：30日のうち「面白い」と感じた日が半分以上あれば①か②へ。毎回苦痛だったなら③を選んでいい。ただし「難しい」と「向いていない」は別物。難しいのは全員同じ。</div>
+    </section>
+
+    <p class="nav-links">
+      <a href="income-guide.html">稼ぎ方 完全ガイド →</a>
+      <a href="roadmap-checklist.html">ロードマップ進捗チェックリスト →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'engineer-30day-progress';
+
+      function load() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+      function save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      var state = load();
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('.day input[type="checkbox"]'));
+
+      function render() {
+        boxes.forEach(function (box) {
+          var checked = !!state[box.dataset.id];
+          box.checked = checked;
+          box.closest('.day').classList.toggle('done', checked);
+        });
+
+        var total = boxes.length;
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        document.getElementById('overall-pct').textContent = pct + '%';
+        document.getElementById('overall-fill').style.width = pct + '%';
+
+        document.querySelectorAll('section[data-week]').forEach(function (section) {
+          var weekBoxes = Array.prototype.slice.call(section.querySelectorAll('input[type="checkbox"]'));
+          var weekDone = weekBoxes.filter(function (b) { return b.checked; }).length;
+          section.querySelector('.week-count').textContent = weekDone + '/' + weekBoxes.length;
+        });
+      }
+
+      boxes.forEach(function (box) {
+        box.addEventListener('change', function () {
+          state[box.dataset.id] = box.checked;
+          save(state);
+          render();
+        });
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        if (!confirm('すべてのチェックを外してリセットします。よろしいですか？')) return;
+        state = {};
+        save(state);
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1330">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>30×30 — 1日30分×30日</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1330'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%2318c5d4' stroke-width='3.5' stroke-linecap='round' stroke-dasharray='47 16' transform='rotate(-90 16 16)'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #0c1330;
+      --surface: #16204a;
+      --surface2: #1c2857;
+      --line: rgba(255, 255, 255, 0.09);
+      --text: #eef1fb;
+      --muted: #8f9ac2;
+      --dim: #5a6591;
+      --accent: #18c5d4;
+      --accent-soft: #5fe0ea;
+      --danger: #ff7a6e;
+      --mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { height: 100%; }
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100%;
+      line-height: 1.6;
+      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    }
+    .app { max-width: 520px; margin: 0 auto; padding: 20px 18px 48px; }
+
+    /* ── Header ── */
+    .app-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+    .app-title { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+    .app-title .x { color: var(--accent); }
+    .app-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+    /* ── Hero: ring + stats ── */
+    .hero {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 20px; margin-bottom: 14px;
+    }
+    .ring-wrap { position: relative; width: 108px; height: 108px; flex-shrink: 0; }
+    .ring-wrap svg { transform: rotate(-90deg); }
+    .ring-bg { stroke: rgba(255,255,255,0.08); }
+    .ring-fg { stroke: var(--accent); transition: stroke-dashoffset 0.5s ease; }
+    .ring-center {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .ring-center .big { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .ring-center .small { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+    .hero-stats { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .stat { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    .stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat .k { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+    .stat .v { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .stat .v .unit { font-size: 11px; font-weight: 600; color: var(--muted); margin-left: 2px; }
+
+    /* ── Today card ── */
+    .today {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px; margin-bottom: 14px;
+    }
+    .today-eyebrow {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      color: var(--accent-soft); background: rgba(24,197,212,0.12);
+      border: 1px solid rgba(24,197,212,0.35);
+      padding: 4px 10px; border-radius: 5px; margin-bottom: 10px;
+    }
+    .today-week { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 4px; }
+    .today-title { font-size: 18px; font-weight: 800; line-height: 1.45; margin-bottom: 8px; text-wrap: balance; }
+    .today-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+    /* ── Timer ── */
+    .timer {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+      padding: 16px; text-align: center; margin-bottom: 14px;
+    }
+    .timer-digits {
+      font-family: var(--mono); font-size: 44px; font-weight: 700;
+      font-variant-numeric: tabular-nums; letter-spacing: 2px; line-height: 1.1;
+    }
+    .timer.running .timer-digits { color: var(--accent-soft); }
+    .timer.finished .timer-digits { color: var(--accent); }
+    .timer-track { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin: 12px 0; }
+    .timer-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); border-radius: 3px; transition: width 1s linear; }
+    .timer-msg { font-size: 12px; color: var(--muted); min-height: 18px; }
+    .timer.finished .timer-msg { color: var(--accent-soft); font-weight: 700; }
+    .timer-btns { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+
+    /* ── Buttons ── */
+    button {
+      font-family: inherit; cursor: pointer; border: none; border-radius: 10px;
+      font-weight: 800; transition: opacity 0.15s ease, transform 0.05s ease;
+    }
+    button:active { transform: scale(0.98); }
+    button:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+    .btn-primary {
+      width: 100%; padding: 14px; font-size: 15px;
+      background: linear-gradient(135deg, var(--accent), #0ea5b5); color: #06202a;
+    }
+    .btn-primary:disabled { opacity: 0.35; cursor: default; }
+    .btn-ghost {
+      padding: 9px 18px; font-size: 13px; background: var(--surface2);
+      color: var(--text); border: 1px solid var(--line);
+    }
+    .btn-danger-ghost {
+      padding: 8px 16px; font-size: 12px; background: none;
+      color: var(--danger); border: 1px solid rgba(255,122,110,0.35);
+    }
+
+    /* ── Note ── */
+    .note-field { margin-top: 14px; }
+    .note-field label { display: block; font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; }
+    .note-field textarea {
+      width: 100%; min-height: 64px; resize: vertical;
+      background: var(--bg); color: var(--text);
+      border: 1px solid var(--line); border-radius: 10px;
+      padding: 10px 12px; font-family: inherit; font-size: 13px; line-height: 1.6;
+    }
+    .note-field textarea:focus { outline: none; border-color: rgba(24,197,212,0.5); }
+
+    /* ── Map ── */
+    .map-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 20px; margin-bottom: 14px;
+    }
+    .map-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+    .map-head h2 { font-size: 13px; font-weight: 800; letter-spacing: 1px; }
+    .map-head .hint { font-size: 10px; color: var(--dim); }
+    .map-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .cell {
+      aspect-ratio: 1; border-radius: 10px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--dim);
+      font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; padding: 0;
+    }
+    .cell.done { background: rgba(24,197,212,0.18); border-color: rgba(24,197,212,0.45); color: var(--accent-soft); }
+    .cell.current { border-color: var(--accent); color: var(--text); box-shadow: 0 0 0 1px var(--accent); }
+    .cell.selected { background: var(--accent); border-color: var(--accent); color: #06202a; }
+    .map-legend { display: flex; gap: 14px; margin-top: 12px; font-size: 10px; color: var(--muted); }
+    .map-legend span { display: flex; align-items: center; gap: 5px; }
+    .lg { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+    .lg.done { background: rgba(24,197,212,0.18); border: 1px solid rgba(24,197,212,0.45); }
+    .lg.current { background: var(--bg); border: 1px solid var(--accent); }
+    .lg.todo { background: var(--bg); border: 1px solid var(--line); }
+
+    /* ── Detail (selected day) ── */
+    .detail {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px; margin-bottom: 14px;
+    }
+    .detail .status { font-size: 11px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
+    .detail .status.is-done { color: var(--accent-soft); }
+    .detail .status.is-todo { color: var(--muted); }
+    .detail .today-title { font-size: 16px; }
+    .detail .btn-row { margin-top: 14px; }
+
+    /* ── Weeks overview ── */
+    .weeks {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 20px; margin-bottom: 14px;
+    }
+    .weeks h2 { font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
+    .week-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .week-row:last-child { border-bottom: none; }
+    .week-row .wl { font-size: 13px; }
+    .week-row .wl .wn { font-size: 10px; color: var(--accent); font-weight: 800; letter-spacing: 1px; display: block; }
+    .week-row .wc { font-size: 12px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* ── Complete banner ── */
+    .complete-banner {
+      background: linear-gradient(135deg, rgba(24,197,212,0.18), rgba(95,224,234,0.08));
+      border: 1px solid rgba(24,197,212,0.45);
+      border-radius: 16px; padding: 22px; text-align: center; margin-bottom: 14px;
+    }
+    .complete-banner .big { font-size: 22px; font-weight: 800; color: var(--accent-soft); margin-bottom: 6px; }
+    .complete-banner p { font-size: 13px; color: var(--text); }
+    .complete-banner a { color: var(--accent-soft); font-weight: 800; }
+
+    /* ── Footer ── */
+    .app-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+    .app-foot a { font-size: 12px; color: var(--muted); text-decoration: none; }
+    .app-foot a:hover { color: var(--accent-soft); }
+
+    .hidden { display: none !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+    @media (max-width: 380px) {
+      .hero { flex-direction: column; }
+      .timer-digits { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="app-head">
+      <div class="app-title">30<span class="x">×</span>30</div>
+      <div class="app-sub">1日30分 × 30日</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="ring-wrap">
+        <svg width="108" height="108" viewBox="0 0 108 108" aria-hidden="true">
+          <circle class="ring-bg" cx="54" cy="54" r="47" fill="none" stroke-width="9"></circle>
+          <circle class="ring-fg" id="ring" cx="54" cy="54" r="47" fill="none" stroke-width="9"
+                  stroke-linecap="round" stroke-dasharray="295.3" stroke-dashoffset="295.3"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="big" id="done-count">0<span style="font-size:14px; color:var(--muted);">/30</span></div>
+          <div class="small">DAYS</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="k">連続日数</span><span class="v" id="streak">0<span class="unit">日</span></span></div>
+        <div class="stat"><span class="k">積み上げ時間</span><span class="v" id="hours">0<span class="unit">時間</span></span></div>
+        <div class="stat"><span class="k">現在の週</span><span class="v" id="cur-week">Week 1</span></div>
+      </div>
+    </div>
+
+    <!-- Complete banner (hidden until all 30 done) -->
+    <div class="complete-banner hidden" id="complete-banner">
+      <div class="big">30日完走！</div>
+      <p>15時間の積み上げ、お疲れさまでした。次は<a href="../income-guide.html">稼ぎ方 完全ガイド</a>でルートを決めて、<a href="../phase1-basics.html">フェーズ1</a>の残りへ。</p>
+    </div>
+
+    <!-- Today -->
+    <div class="today" id="today-card">
+      <span class="today-eyebrow" id="today-eyebrow">TODAY / DAY 1</span>
+      <div class="today-week" id="today-week"></div>
+      <div class="today-title" id="today-title"></div>
+      <div class="today-desc" id="today-desc"></div>
+
+      <div class="timer" id="timer">
+        <div class="timer-digits" id="timer-digits">30:00</div>
+        <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+        <div class="timer-msg" id="timer-msg">タイマーを開始して30分だけ集中する</div>
+        <div class="timer-btns">
+          <button class="btn-ghost" id="timer-toggle" type="button">スタート</button>
+          <button class="btn-ghost" id="timer-reset" type="button">リセット</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="done-btn" type="button">今日の分を完了にする</button>
+
+      <div class="note-field">
+        <label for="today-note">今日のメモ（学んだこと・つまずき）</label>
+        <textarea id="today-note" placeholder="例: Flexboxのjustify-contentとalign-itemsの違いがわかった"></textarea>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-card">
+      <div class="map-head">
+        <h2>30日マップ</h2>
+        <span class="hint">タップで各日の詳細</span>
+      </div>
+      <div class="map-grid" id="map-grid"></div>
+      <div class="map-legend">
+        <span><i class="lg done"></i>完了</span>
+        <span><i class="lg current"></i>今日</span>
+        <span><i class="lg todo"></i>未着手</span>
+      </div>
+    </div>
+
+    <!-- Selected day detail -->
+    <div class="detail hidden" id="detail">
+      <div class="status" id="detail-status"></div>
+      <div class="today-week" id="detail-week"></div>
+      <div class="today-title" id="detail-title"></div>
+      <div class="today-desc" id="detail-desc"></div>
+      <div class="note-field">
+        <label for="detail-note">この日のメモ</label>
+        <textarea id="detail-note"></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn-ghost" id="detail-toggle" type="button">完了にする</button>
+      </div>
+    </div>
+
+    <!-- Weeks -->
+    <div class="weeks">
+      <h2>週ごとのテーマ</h2>
+      <div id="week-rows"></div>
+    </div>
+
+    <div class="app-foot">
+      <a href="../thirty-day-plan.html">プランの解説ページ →</a>
+      <button class="btn-danger-ghost" id="reset-all" type="button">全データをリセット</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var STORAGE_KEY = 'engineer-30day-app-v1';
+      var TIMER_SECONDS = 30 * 60;
+      var RING_CIRCUMFERENCE = 295.3;
+
+      var WEEKS = [
+        { label: 'Week 1', theme: 'HTMLに触れる' },
+        { label: 'Week 2', theme: 'CSSで見た目を作る' },
+        { label: 'Week 3', theme: 'ページを完成させて公開する' },
+        { label: 'Week 4', theme: 'JavaScriptの味見と、次の一手' }
+      ];
+
+      // w: week index (0-3)
+      var TASKS = [
+        { w: 0, t: 'Progateに登録して、HTML & CSS 初級編を始める', d: '見出し・段落・リンクまで。今日はアカウント作成と最初のレッスンだけでOK。' },
+        { w: 0, t: '画像・リストのタグを学ぶ', d: 'img・ul/ol/li。Progateの続きを30分進める。' },
+        { w: 0, t: 'フォームとボタンのタグを学ぶ', d: 'input・button・form。「見たことある部品」がタグで書けることを実感する。' },
+        { w: 0, t: 'HTML & CSS 初級編のHTMLパートを終える', d: '終わらなければ翌日に持ち越してOK。進捗より継続が優先。' },
+        { w: 0, t: 'VS CodeとChromeを準備して、hello.htmlを作る', d: 'ローカルにファイルを作り、ブラウザで開く。教材の外で動かす最初の一歩。' },
+        { w: 0, t: '自己紹介ページの骨組みをHTMLだけで書く', d: '名前・趣味・好きなもの3つ。見た目は気にしない。構造だけ。' },
+        { w: 0, t: '週の復習 — わからなかったタグをMDNで3つ調べる', d: '「調べて解決する」練習。エンジニアの仕事の半分はこれ。' },
+        { w: 1, t: 'CSSの基本 — セレクタ・色・フォント', d: 'ProgateのCSSパートへ。HTMLに色がつく瞬間を体験する。' },
+        { w: 1, t: 'ボックスモデルを理解する', d: 'margin・padding・border。CSSで最初につまずく場所なので30分まるごと使う。' },
+        { w: 1, t: 'Flexboxで横並びを作る', d: 'display: flex。現代のレイアウトの主役。' },
+        { w: 1, t: 'Flexbox Froggyで遊びながら定着させる', d: '無料のブラウザゲーム。24面クリアを目指す（終わらなくてOK）。' },
+        { w: 1, t: '自己紹介ページにCSSを当てる', d: '背景色・文字色・余白。DAY 6の骨組みに見た目をつける。' },
+        { w: 1, t: 'ヘッダーとカード風レイアウトを作る', d: '上部にタイトルバー、コンテンツを白いカードに。Flexboxを実戦投入。' },
+        { w: 1, t: '週の復習 — 好きなサイトを観察して1ブロック真似る', d: '「このボタンはどう作られている？」と右クリック→検証で覗いてみる。' },
+        { w: 2, t: 'フォントと配色を決めて適用する', d: 'Google Fontsから1書体、色は3色まで（背景・文字・アクセント）。' },
+        { w: 2, t: 'メディアクエリの基本を学ぶ', d: '@media (max-width: 600px)。画面幅で見た目を変える仕組み。' },
+        { w: 2, t: '自己紹介ページをスマホ対応にする', d: 'Chromeの検証モードでスマホ表示を確認しながら調整。' },
+        { w: 2, t: 'GitHubアカウントとリポジトリを作る', d: 'アカウント作成 → 「my-profile」リポジトリ作成 → ファイルをアップロード。' },
+        { w: 2, t: 'GitHub Pagesで公開する', d: 'Settings → Pages → 公開。自分のページがURL付きでネット上に存在する日。' },
+        { w: 2, t: '公開ページをスマホの実機で見て微調整する', d: '文字が小さい・はみ出す等を直して再アップロード。' },
+        { w: 2, t: '週の復習 — 公開URLを1人に見せて感想を1つもらう', d: '「人に見せる」心理的ハードルを最小サイズで越えておく。' },
+        { w: 3, t: 'JavaScript初級を始める — 変数と計算', d: 'ProgateのJavaScriptコースへ。「動きを作る言語」の最初の一歩。' },
+        { w: 3, t: '条件分岐（if / else）', d: '「もし〜なら」をコードで書く。プログラミングの本体に触れる。' },
+        { w: 3, t: '関数', d: '処理に名前をつけて使い回す仕組み。' },
+        { w: 3, t: '配列とループ', d: '複数のデータをまとめて処理する。ここまでがJSの基礎4点セット。' },
+        { w: 3, t: 'DOM操作の初歩 — ボタンで文字を変える', d: 'HTMLの要素をJSから書き換える。Webページが「動く」原理。' },
+        { w: 3, t: '自己紹介ページに「動く要素」を1つ足す', d: 'ボタンで挨拶が切り替わる、ダークモード切替など。小さくてOK。' },
+        { w: 3, t: '総復習 — できたこと・わからないことを書き出す', d: '箇条書きでOK。この記録が次の計画の材料になる。' },
+        { w: 3, t: '「稼ぎ方 完全ガイド」を読んで目標ルートを決める', d: '正社員・副業・フリーランス。どこを目指すかで次の学習内容が変わる。' },
+        { w: 3, t: '次の30日の計画を立てる', d: '時間を増やして本格参入するか、30分継続か。ここまで来たら適性は十分ある。' }
+      ];
+
+      // ── State ──
+      function load() {
+        try {
+          var raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          if (raw && typeof raw === 'object' && raw.days) return raw;
+        } catch (e) { /* fall through */ }
+        return { days: {} };
+      }
+      function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+      var state = load();
+      var selectedDay = null; // 1-based day shown in detail panel, or null
+
+      function dayData(n) { return state.days[n] || {}; }
+      function isDone(n) { return !!dayData(n).done; }
+      function setDay(n, patch) {
+        var cur = state.days[n] || {};
+        for (var k in patch) cur[k] = patch[k];
+        state.days[n] = cur;
+        save();
+      }
+
+      function currentDay() {
+        for (var i = 1; i <= 30; i++) { if (!isDone(i)) return i; }
+        return null; // all complete
+      }
+      function doneCount() {
+        var c = 0;
+        for (var i = 1; i <= 30; i++) { if (isDone(i)) c++; }
+        return c;
+      }
+
+      function localDateStr(d) {
+        return d.getFullYear() + '-' +
+          String(d.getMonth() + 1).padStart(2, '0') + '-' +
+          String(d.getDate()).padStart(2, '0');
+      }
+      function streak() {
+        var dates = {};
+        for (var i = 1; i <= 30; i++) {
+          var da = dayData(i);
+          if (da.done && da.doneAt) dates[da.doneAt] = true;
+        }
+        var count = 0;
+        var cursor = new Date();
+        // streak counts through yesterday if today's session isn't done yet
+        if (!dates[localDateStr(cursor)]) cursor.setDate(cursor.getDate() - 1);
+        while (dates[localDateStr(cursor)]) {
+          count++;
+          cursor.setDate(cursor.getDate() - 1);
+        }
+        return count;
+      }
+
+      // ── Elements ──
+      var $ = function (id) { return document.getElementById(id); };
+      var ring = $('ring');
+      var mapGrid = $('map-grid');
+      var weekRows = $('week-rows');
+
+      // Build map cells once
+      var cells = [];
+      for (var i = 1; i <= 30; i++) {
+        (function (n) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'cell';
+          b.textContent = n;
+          b.setAttribute('aria-label', 'DAY ' + n + ': ' + TASKS[n - 1].t);
+          b.addEventListener('click', function () {
+            selectedDay = (selectedDay === n) ? null : n;
+            render();
+            if (selectedDay) $('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+          mapGrid.appendChild(b);
+          cells.push(b);
+        })(i);
+      }
+
+      // ── Render ──
+      function render() {
+        var done = doneCount();
+        var cur = currentDay();
+
+        // hero
+        $('done-count').innerHTML = done + '<span style="font-size:14px; color:var(--muted);">/30</span>';
+        ring.style.strokeDashoffset = String(RING_CIRCUMFERENCE * (1 - done / 30));
+        $('streak').innerHTML = streak() + '<span class="unit">日</span>';
+        $('hours').innerHTML = (Math.round(done * 0.5 * 10) / 10) + '<span class="unit">時間</span>';
+        $('cur-week').textContent = cur ? WEEKS[TASKS[cur - 1].w].label : '完走';
+
+        // today card / complete banner
+        if (cur === null) {
+          $('complete-banner').classList.remove('hidden');
+          $('today-card').classList.add('hidden');
+        } else {
+          $('complete-banner').classList.add('hidden');
+          $('today-card').classList.remove('hidden');
+          var task = TASKS[cur - 1];
+          $('today-eyebrow').textContent = 'TODAY / DAY ' + cur;
+          $('today-week').textContent = WEEKS[task.w].label + ' — ' + WEEKS[task.w].theme;
+          $('today-title').textContent = task.t;
+          $('today-desc').textContent = task.d;
+          var note = $('today-note');
+          if (note.dataset.day !== String(cur)) {
+            note.dataset.day = String(cur);
+            note.value = dayData(cur).note || '';
+          }
+        }
+
+        // map
+        cells.forEach(function (cell, idx) {
+          var n = idx + 1;
+          cell.classList.toggle('done', isDone(n));
+          cell.classList.toggle('current', cur === n);
+          cell.classList.toggle('selected', selectedDay === n);
+        });
+
+        // detail
+        if (selectedDay) {
+          $('detail').classList.remove('hidden');
+          var t = TASKS[selectedDay - 1];
+          var d = dayData(selectedDay);
+          var st = $('detail-status');
+          st.textContent = 'DAY ' + selectedDay + ' — ' + (d.done ? '完了' + (d.doneAt ? '（' + d.doneAt + '）' : '') : '未完了');
+          st.className = 'status ' + (d.done ? 'is-done' : 'is-todo');
+          $('detail-week').textContent = WEEKS[t.w].label + ' — ' + WEEKS[t.w].theme;
+          $('detail-title').textContent = t.t;
+          $('detail-desc').textContent = t.d;
+          $('detail-toggle').textContent = d.done ? '未完了に戻す' : '完了にする';
+          var dnote = $('detail-note');
+          if (dnote.dataset.day !== String(selectedDay)) {
+            dnote.dataset.day = String(selectedDay);
+            dnote.value = d.note || '';
+          }
+        } else {
+          $('detail').classList.add('hidden');
+          $('detail-note').dataset.day = '';
+        }
+
+        // weeks overview
+        weekRows.innerHTML = '';
+        WEEKS.forEach(function (w, wi) {
+          var total = 0, wd = 0;
+          TASKS.forEach(function (t, ti) {
+            if (t.w === wi) { total++; if (isDone(ti + 1)) wd++; }
+          });
+          var row = document.createElement('div');
+          row.className = 'week-row';
+          var left = document.createElement('div');
+          left.className = 'wl';
+          var wn = document.createElement('span');
+          wn.className = 'wn';
+          wn.textContent = w.label;
+          left.appendChild(wn);
+          left.appendChild(document.createTextNode(w.theme));
+          var right = document.createElement('span');
+          right.className = 'wc';
+          right.textContent = wd + '/' + total;
+          row.appendChild(left);
+          row.appendChild(right);
+          weekRows.appendChild(row);
+        });
+      }
+
+      // ── Actions ──
+      $('done-btn').addEventListener('click', function () {
+        var cur = currentDay();
+        if (cur === null) return;
+        setDay(cur, { done: true, doneAt: localDateStr(new Date()) });
+        resetTimer();
+        render();
+      });
+
+      $('today-note').addEventListener('input', function () {
+        var day = Number(this.dataset.day);
+        if (day) setDay(day, { note: this.value });
+      });
+
+      $('detail-note').addEventListener('input', function () {
+        var day = Number(this.dataset.day);
+        if (day) setDay(day, { note: this.value });
+      });
+
+      $('detail-toggle').addEventListener('click', function () {
+        if (!selectedDay) return;
+        var d = dayData(selectedDay);
+        if (d.done) {
+          setDay(selectedDay, { done: false, doneAt: null });
+        } else {
+          setDay(selectedDay, { done: true, doneAt: localDateStr(new Date()) });
+        }
+        render();
+      });
+
+      $('reset-all').addEventListener('click', function () {
+        if (!confirm('30日分の進捗とメモをすべて削除します。よろしいですか？')) return;
+        state = { days: {} };
+        save();
+        selectedDay = null;
+        resetTimer();
+        render();
+      });
+
+      // ── Timer ──
+      var remaining = TIMER_SECONDS;
+      var ticking = null;
+
+      function fmt(sec) {
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      }
+      function renderTimer() {
+        $('timer-digits').textContent = fmt(remaining);
+        $('timer-fill').style.width = ((TIMER_SECONDS - remaining) / TIMER_SECONDS * 100) + '%';
+        document.title = ticking ? fmt(remaining) + ' — 30×30' : '30×30 — 1日30分×30日';
+      }
+      function stopTicking() {
+        if (ticking) { clearInterval(ticking); ticking = null; }
+        $('timer').classList.remove('running');
+        $('timer-toggle').textContent = remaining === TIMER_SECONDS ? 'スタート' : '再開';
+      }
+      function resetTimer() {
+        stopTicking();
+        remaining = TIMER_SECONDS;
+        $('timer').classList.remove('finished');
+        $('timer-msg').textContent = 'タイマーを開始して30分だけ集中する';
+        $('timer-toggle').textContent = 'スタート';
+        $('timer-toggle').disabled = false;
+        renderTimer();
+      }
+      function finishTimer() {
+        stopTicking();
+        $('timer').classList.add('finished');
+        $('timer-msg').textContent = '30分お疲れさまでした。ここで強制終了 — 完了ボタンへ！';
+        $('timer-toggle').disabled = true;
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        renderTimer();
+      }
+
+      $('timer-toggle').addEventListener('click', function () {
+        if (ticking) { stopTicking(); renderTimer(); return; }
+        if (remaining <= 0) return;
+        $('timer').classList.add('running');
+        $('timer-toggle').textContent = '一時停止';
+        $('timer-msg').textContent = '集中タイム — 乗ってきても30分で止めるのがコツ';
+        var lastTick = Date.now();
+        ticking = setInterval(function () {
+          var now = Date.now();
+          var elapsed = Math.round((now - lastTick) / 1000);
+          if (elapsed >= 1) {
+            remaining = Math.max(0, remaining - elapsed);
+            lastTick = now;
+            renderTimer();
+            if (remaining <= 0) finishTimer();
+          }
+        }, 250);
+      });
+
+      $('timer-reset').addEventListener('click', resetTimer);
+
+      // ── Init ──
+      renderTimer();
+      render();
+    })();
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>エンジニアの稼ぎ方 完全ガイド - DX室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Income bar chart */
+    .income-chart { display: flex; flex-direction: column; gap: 10px; }
+    .income-row { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 10px; }
+    .income-label { font-size: 13px; color: #6b7aa5; text-align: right; white-space: nowrap; font-weight: 600; }
+    .income-bar-wrap { height: 32px; background: #fff; border-radius: 6px; border: 1px solid rgba(30,39,97,0.08); overflow: hidden; }
+    .income-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding: 0 10px; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; min-width: fit-content; }
+    .bar-navy { background: linear-gradient(90deg, var(--navy), var(--navy2)); }
+    .bar-accent { background: linear-gradient(90deg, #0ea5a5, var(--accent)); }
+    .bar-mixed { background: linear-gradient(90deg, var(--navy2), var(--accent)); }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+    .callout.warn { background: rgba(220,53,69,0.06); border-color: rgba(220,53,69,0.25); }
+    .callout.warn strong { color: #a4283a; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: rgba(30,39,97,0.12); }
+    .tl-item { position: relative; padding-bottom: 24px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ''; position: absolute; left: -24px; top: 7px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+    .tl-item.done::before { background: var(--accent); }
+    .tl-period { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+    .tl-title { font-size: 15px; font-weight: 700; color: var(--navy); margin: 2px 0; }
+    .tl-desc { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+    .data-table .plus { color: #1a8a5a; font-weight: 700; }
+    .data-table .minus { color: #b5432f; font-weight: 700; }
+
+    /* Path cards */
+    .path-card { background: #fff; border-radius: 10px; padding: 22px 24px; margin-bottom: 20px; border: 1px solid rgba(30,39,97,0.08); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .path-card h3 { font-size: 18px; color: var(--navy); font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .path-tag { font-size: 10px; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; font-weight: 700; }
+    .tag-easy { background: rgba(26,138,90,0.1); color: #1a8a5a; border: 1px solid rgba(26,138,90,0.2); }
+    .tag-mid { background: rgba(24,197,212,0.1); color: #0ea5a5; border: 1px solid rgba(24,197,212,0.3); }
+    .tag-hard { background: rgba(220,53,69,0.08); color: #b5432f; border: 1px solid rgba(220,53,69,0.2); }
+
+    .path-meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 14px 0; padding: 14px; background: var(--paper); border-radius: 8px; }
+    .path-meta dt { font-size: 10px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+    .path-meta dd { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .path-meta dd.accent { color: var(--accent); }
+
+    /* Pros / Cons */
+    .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+    .proscons-col { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid rgba(30,39,97,0.08); }
+    .proscons-col h4 { font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+    .proscons-col h4.pro { color: #1a8a5a; }
+    .proscons-col h4.con { color: #b5432f; }
+    .proscons-col ul { list-style: none; padding: 0; }
+    .proscons-col li { font-size: 13px; color: #555; padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+    .proscons-col li::before { position: absolute; left: 0; font-size: 11px; font-weight: 800; }
+    .proscons-col.pros li::before { content: '+'; color: #1a8a5a; }
+    .proscons-col.cons li::before { content: '−'; color: #b5432f; }
+
+    /* Expand grid */
+    .expand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .expand-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); }
+    .expand-item h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .expand-item p { font-size: 13px; color: #555; line-height: 1.6; }
+    .expand-effect { font-size: 12px; font-weight: 700; color: #1a8a5a; margin-top: 8px; }
+
+    /* Stat box (reuse from existing pattern) */
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 18px 22px; text-align: center; margin-bottom: 14px; }
+    .stat-box .num { font-size: 34px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 13px; margin-top: 4px; }
+
+    /* Equation boxes */
+    .equation { display: flex; align-items: stretch; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+    .eq-box { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); flex: 1; min-width: 200px; }
+    .eq-box h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+    .eq-box p { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Result box */
+    .result-box { background: rgba(24,197,212,0.08); border: 1px solid rgba(24,197,212,0.3); border-radius: 8px; padding: 14px 18px; margin-top: 14px; }
+    .result-box .headline { font-size: 12px; color: #6b7aa5; margin-bottom: 4px; }
+    .result-box .amount { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .result-box .note { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    @media (max-width: 600px) {
+      .income-row { grid-template-columns: 1fr; gap: 2px; }
+      .income-label { text-align: left; font-size: 12px; }
+      .proscons { grid-template-columns: 1fr; }
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>エンジニアの稼ぎ方 完全ガイド</h1>
+  </header>
+  <main>
+    <p class="lead">未経験からどう始めて、何にいくら投資して、どのルートでいくら稼げるのか。正社員・業務委託・副業・プロダクト開発まで、すべてのパスを数字で解説する。</p>
+
+    <!-- =========================================
+         Section: 年収レンジ一覧
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INCOME OVERVIEW</span>
+      <h2>稼ぎ方マップ — 年収レンジ一覧</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">同じ「エンジニア」でも、働き方と経験年数で収入は大きく変わる。まず全体像を掴む。</p>
+
+      <div class="income-chart">
+        <div class="income-row">
+          <div class="income-label">未経験 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:25%;">250–350万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">経験1–3年 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:38%;">350–500万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">経験3–5年 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:52%;">500–750万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">シニア 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:72%;">700–1,200万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">テックリード 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:85%;">1,000–1,500万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">SES</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-mixed" style="width:30%;">300–450万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">フリーランス</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:80%;">480–1,440万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">副業</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:42%;">+60–600万/年</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">自社プロダクト</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:100%;">0–青天井</div></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>額面 ≠ 手取り：</strong>フリーランスの数字は額面。ここから国保・年金・税金・経費を引くと手取りは60–70%程度になる。正社員の場合は会社が社保の半額を負担してくれるため、額面差ほど手取り差は大きくない。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: ゼロからのロードマップ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">STARTING FROM ZERO</span>
+      <h2>ゼロからのロードマップ</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">完全未経験からエンジニアとして稼ぎ始めるまでの現実的なタイムライン。</p>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">Month 0–1</div>
+          <div class="tl-title">基礎学習</div>
+          <div class="tl-desc">HTML/CSS/JavaScriptの基礎。Progateや無料教材で十分。毎日2–3時間。この段階では1円も稼げないが、ここを飛ばすと後で詰む。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">Month 2–3</div>
+          <div class="tl-title">フレームワーク + ポートフォリオ</div>
+          <div class="tl-desc">React/Next.js または Ruby on Rails など、一つのフレームワークを深掘り。実際に動くアプリを1–2個作る。GitHubにコードを置く。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">Month 3–4</div>
+          <div class="tl-title">実務に近い経験を積む</div>
+          <div class="tl-desc">OSSにコントリビュート、友人のサイト制作、無償〜低単価の案件。「仕事として納品した」実績を作る。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Month 4–6</div>
+          <div class="tl-title">就職活動 or 案件獲得</div>
+          <div class="tl-desc">未経験OKの企業に応募（正社員/SES）、またはクラウドソーシングで小さい案件を取る。ここで初めて「稼ぐ」フェーズに入る。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Month 6–12</div>
+          <div class="tl-title">実務経験を貯める</div>
+          <div class="tl-desc">最初の半年–1年は修行期間。給与は低くても「実務n年」の看板を作ることが最大のリターンになる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Year 1–2</div>
+          <div class="tl-title">キャリアの分岐点</div>
+          <div class="tl-desc">実務1年を超えたあたりで選択肢が増える。転職で年収アップ、副業開始、フリーランス転向。ここからが本番。</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>最速ルート：</strong>「Web制作」が最短。HTML/CSS + WordPressで2–3ヶ月後にはランサーズで5–15万円/案件が取れる。ただし単価の天井は低い。長期的に稼ぎたいならプログラミング（React, Python等）に投資するほうがリターンは大きい。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 各ルート詳細
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INCOME PATHS</span>
+      <h2>各ルートの詳細</h2>
+
+      <!-- 正社員 -->
+      <div class="path-card">
+        <h3>正社員 <span class="path-tag tag-easy">参入しやすい</span></h3>
+        <div class="path-meta">
+          <dl><dt>年収レンジ</dt><dd>250–1,500万円</dd></dl>
+          <dl><dt>参入までの期間</dt><dd class="accent">3–6ヶ月</dd></dl>
+          <dl><dt>安定性</dt><dd>高い</dd></dl>
+          <dl><dt>スキル上昇</dt><dd>中–高</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">最もオーソドックスなルート。未経験でも採用している企業は多い（特にSES系）。メリットは社会保険・福利厚生・安定収入・チームでの学び。デメリットは収入の伸びが遅いこと。</p>
+        <p style="font-size:14px; color:#555; line-height:1.7;"><strong style="color:var(--navy);">年収の上げ方：</strong>同じ会社に居続けるより、2–3年ごとに転職するほうが年収は上がりやすい。転職のたびに50–150万円アップが現実的。外資系・メガベンチャーに行けば一気に跳ねる。</p>
+        <div class="proscons">
+          <div class="proscons-col pros">
+            <h4 class="pro">メリット</h4>
+            <ul>
+              <li>社保・厚生年金の会社負担</li>
+              <li>有給・育休などの法的保護</li>
+              <li>チームで学べる（レビュー文化）</li>
+              <li>未経験からでも入れる</li>
+              <li>住宅手当等の福利厚生</li>
+            </ul>
+          </div>
+          <div class="proscons-col cons">
+            <h4 class="con">デメリット</h4>
+            <ul>
+              <li>年収の上昇が緩やか</li>
+              <li>技術選定の自由度が低い</li>
+              <li>副業禁止の会社もある</li>
+              <li>勤務時間・場所の制約</li>
+              <li>社内政治に時間を取られることも</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SES -->
+      <div class="path-card">
+        <h3>SES（客先常駐）<span class="path-tag tag-easy">参入しやすい</span></h3>
+        <div class="path-meta">
+          <dl><dt>年収レンジ</dt><dd>250–450万円</dd></dl>
+          <dl><dt>参入までの期間</dt><dd class="accent">1–3ヶ月</dd></dl>
+          <dl><dt>安定性</dt><dd>中</dd></dl>
+          <dl><dt>スキル上昇</dt><dd>低–中</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">SES企業に正社員として入社し、クライアント企業に常駐して働く形態。未経験の最速の入口だが、自社の売上（月単価50–80万円）のうち、自分の手取りは25–40万円程度。差額がSES企業のマージン。</p>
+        <div class="warning-box">
+          <strong>現場ガチャに注意：</strong>良い現場に当たればモダンな開発経験が積める。悪い現場だとExcelとテストだけで技術が伸びない。1年以上SESにいるなら、実務経験を武器に自社開発企業への転職を目指すのが定石。
+        </div>
+      </div>
+
+      <!-- フリーランス -->
+      <div class="path-card">
+        <h3>フリーランス・業務委託 <span class="path-tag tag-mid">実務経験要</span></h3>
+        <div class="path-meta">
+          <dl><dt>月単価</dt><dd>40–120万円</dd></dl>
+          <dl><dt>必要経験</dt><dd class="accent">実務2年以上推奨</dd></dl>
+          <dl><dt>安定性</dt><dd>中</dd></dl>
+          <dl><dt>収入の天井</dt><dd>高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">レバテック、ITプロパートナーズ等のエージェント経由で業務委託案件を受ける。正社員と同じようにチームに入って働くが、雇用関係ではなく契約。</p>
+
+        <table class="data-table">
+          <thead><tr><th>スキル帯</th><th>月単価の目安</th><th>年収換算（税引前）</th><th>手取り目安</th></tr></thead>
+          <tbody>
+            <tr><td>実務1–2年</td><td class="money">40–55万</td><td>480–660万</td><td>340–460万</td></tr>
+            <tr><td>実務3–4年</td><td class="money">60–80万</td><td>720–960万</td><td>500–670万</td></tr>
+            <tr><td>実務5年+</td><td class="money">80–100万</td><td>960–1,200万</td><td>670–840万</td></tr>
+            <tr><td>上位層・PM兼務</td><td class="money">100–150万</td><td>1,200–1,800万</td><td>840–1,200万</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn" style="margin-top:14px;">
+          <strong>手取り計算の罠：</strong>月単価80万 = 年960万だが、ここから所得税・住民税（約20%）、国民健康保険（約50万/年）、国民年金（約20万/年）、経費を引くと手取りは600万前後。正社員の年収700万と実質的にほぼ同じ。「フリーランスは稼げる」の実態はこういう構造。
+        </div>
+
+        <div class="proscons">
+          <div class="proscons-col pros">
+            <h4 class="pro">メリット</h4>
+            <ul>
+              <li>正社員より額面が高い</li>
+              <li>案件・技術を選べる</li>
+              <li>リモート案件が多い</li>
+              <li>経費計上で節税できる</li>
+              <li>複数案件の掛け持ちも可能</li>
+            </ul>
+          </div>
+          <div class="proscons-col cons">
+            <h4 class="con">デメリット</h4>
+            <ul>
+              <li>社保なし（国保+国民年金）</li>
+              <li>有給・ボーナスなし</li>
+              <li>契約切れのリスク</li>
+              <li>確定申告の手間</li>
+              <li>住宅ローン審査に不利</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 副業 -->
+      <div class="path-card">
+        <h3>副業 <span class="path-tag tag-mid">本業+αの収入</span></h3>
+        <div class="path-meta">
+          <dl><dt>月収レンジ</dt><dd>5–50万円</dd></dl>
+          <dl><dt>必要時間</dt><dd class="accent">月20–60時間</dd></dl>
+          <dl><dt>リスク</dt><dd>低い</dd></dl>
+          <dl><dt>始めやすさ</dt><dd>高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">正社員の安定収入をベースに、空き時間で追加収入を得る。リスクが最も低い稼ぎ方の拡張手段。</p>
+
+        <table class="data-table">
+          <thead><tr><th>副業の種類</th><th>月収目安</th><th>必要スキル</th><th>時間/月</th></tr></thead>
+          <tbody>
+            <tr><td>Web制作（LP等）</td><td class="money">5–20万</td><td>HTML/CSS/WP</td><td>15–30h</td></tr>
+            <tr><td>業務委託（週1–2）</td><td class="money">15–40万</td><td>実務2年+</td><td>32–64h</td></tr>
+            <tr><td>技術ライティング</td><td class="money">3–15万</td><td>文章力+専門知識</td><td>10–25h</td></tr>
+            <tr><td>プログラミング講師</td><td class="money">5–20万</td><td>教え方の上手さ</td><td>10–30h</td></tr>
+            <tr><td>ツール開発・販売</td><td class="money">0–100万+</td><td>企画力+開発力</td><td>不定</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">副業の探し方は、<strong style="color:var(--navy);">クラウドワークス・ランサーズ</strong>（初心者向け、単価低め）、<strong style="color:var(--navy);">YOUTRUST・Offers・複業クラウド</strong>（経験者向け、週1–2稼働の業務委託）、<strong style="color:var(--navy);">知人経由</strong>（最も単価が高くなりやすい）の3ルートが主流。</p>
+      </div>
+
+      <!-- 自分のプロダクト -->
+      <div class="path-card">
+        <h3>自分のプロダクト <span class="path-tag tag-hard">ハイリスク・ハイリターン</span></h3>
+        <div class="path-meta">
+          <dl><dt>収入レンジ</dt><dd>0円–青天井</dd></dl>
+          <dl><dt>必要経験</dt><dd class="accent">開発力+企画力</dd></dl>
+          <dl><dt>リスク</dt><dd>高い</dd></dl>
+          <dl><dt>スケーラビリティ</dt><dd>最高</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">唯一「時間の切り売り」から脱却できるルート。自分の労働時間に収入が比例しない。寝ている間にも売上が立つ。</p>
+
+        <table class="data-table">
+          <thead><tr><th>プロダクト種別</th><th>月収の目安</th><th>成功確率</th><th>開発期間</th></tr></thead>
+          <tbody>
+            <tr><td>個人SaaS</td><td class="money">0–300万+</td><td>5–10%</td><td>1–6ヶ月</td></tr>
+            <tr><td>スマホアプリ</td><td class="money">0–100万+</td><td>3–8%</td><td>2–6ヶ月</td></tr>
+            <tr><td>Chrome拡張・ツール</td><td class="money">0–50万</td><td>10–20%</td><td>1–4週間</td></tr>
+            <tr><td>テンプレート・テーマ販売</td><td class="money">1–30万</td><td>15–25%</td><td>1–2週間</td></tr>
+            <tr><td>APIサービス</td><td class="money">0–200万+</td><td>5–10%</td><td>1–3ヶ月</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          成功確率は低いが、副業としてやれば生活費のリスクはゼロ。「月5万円のサブスク収入」を目指すくらいが現実的な第一歩。MRR（月次定期収入）5万円を超えれば、年間60万円の不労所得に近い収入源になる。
+        </div>
+      </div>
+
+      <!-- 技術発信 -->
+      <div class="path-card">
+        <h3>技術発信・教育 <span class="path-tag tag-mid">ストック型収入</span></h3>
+        <div class="path-meta">
+          <dl><dt>月収レンジ</dt><dd>0–100万円+</dd></dl>
+          <dl><dt>立ち上げ期間</dt><dd class="accent">6ヶ月–2年</dd></dl>
+          <dl><dt>リスク</dt><dd>低い</dd></dl>
+          <dl><dt>本業との相乗効果</dt><dd>非常に高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">直接の収入だけでなく、ブランディング効果で本業の年収・フリーランス単価を引き上げる間接効果が大きい。</p>
+
+        <table class="data-table">
+          <thead><tr><th>発信の種類</th><th>収益化方法</th><th>月収目安</th><th>到達時間</th></tr></thead>
+          <tbody>
+            <tr><td>技術ブログ</td><td>広告・アフィリエイト</td><td class="money">0.5–10万</td><td>6–18ヶ月</td></tr>
+            <tr><td>Zenn / note 有料記事</td><td>コンテンツ販売</td><td class="money">1–20万</td><td>3–12ヶ月</td></tr>
+            <tr><td>Udemy講座</td><td>講座販売</td><td class="money">3–50万</td><td>1–3ヶ月（制作）</td></tr>
+            <tr><td>YouTube</td><td>広告・案件</td><td class="money">1–100万+</td><td>12–24ヶ月</td></tr>
+            <tr><td>技術書執筆</td><td>印税</td><td class="money">一時金30–200万</td><td>3–12ヶ月（執筆）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 必要な投資
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INVESTMENT</span>
+      <h2>必要な投資 — 何にいくらかかるのか</h2>
+
+      <table class="data-table">
+        <thead><tr><th>投資項目</th><th>費用</th><th>必須度</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>PC（開発用）</td><td class="money">10–30万円</td><td><strong>必須</strong></td><td>M系チップのMacBook Air 15万前後が最もコスパ良い。Windowsならメモリ16GB以上</td></tr>
+          <tr><td>外部ディスプレイ</td><td class="money">2–5万円</td><td>推奨</td><td>生産性が体感1.3倍になる。27インチ4Kが基本</td></tr>
+          <tr><td>プログラミングスクール</td><td class="money">0–80万円</td><td>任意</td><td>独学で十分な人も多い。挫折しやすい人は20–30万円帯がバランス良い</td></tr>
+          <tr><td>オンライン教材</td><td class="money">0–5万円</td><td>推奨</td><td>Udemy（セール時1,500円/講座）、書籍（2,000–4,000円/冊）</td></tr>
+          <tr><td>ドメイン・サーバ</td><td class="money">0.5–1.5万円/年</td><td>任意</td><td>ポートフォリオサイト用。Vercel無料枠で済むケースも多い</td></tr>
+          <tr><td>開発ツール</td><td class="money">0–3万円/年</td><td>任意</td><td>VS Code（無料）、GitHub（無料）、Figma（無料枠あり）、AI支援ツール</td></tr>
+          <tr><td>資格取得</td><td class="money">0.5–3万円/件</td><td>任意</td><td>AWS認定、基本情報技術者など。転職時に多少有利。必須ではない</td></tr>
+          <tr><td>椅子・デスク</td><td class="money">3–15万円</td><td>推奨</td><td>長時間作業するなら体への投資。中古のアーロンチェアが5–8万で狙い目</td></tr>
+        </tbody>
+      </table>
+
+      <div class="stat-box" style="margin-top:20px;">
+        <div class="num">約15万円</div>
+        <div class="label">最低限の初期投資（PC + 教材費）</div>
+      </div>
+      <p style="font-size:13px; color:#555;">スクールなしの独学ルートなら、PC代だけで始められる。フリーランスになる場合は開業届（無料）と青色申告のための会計ソフト（年1万円程度）が追加で必要。</p>
+
+      <h2 style="margin-top:32px;">投資の回収シミュレーション</h2>
+
+      <table class="data-table" style="margin-top:14px;">
+        <thead><tr><th>シナリオ</th><th>初期投資</th><th>学習期間（無収入）</th><th>1年目の年収</th><th>投資回収</th></tr></thead>
+        <tbody>
+          <tr><td>独学 → SES就職</td><td class="money">15万円</td><td>3–4ヶ月</td><td>280–350万</td><td class="plus">即月で回収</td></tr>
+          <tr><td>スクール → 自社開発</td><td class="money">50–80万円</td><td>4–6ヶ月</td><td>320–400万</td><td class="plus">3–6ヶ月で回収</td></tr>
+          <tr><td>独学 → Web制作副業</td><td class="money">15万円</td><td>2–3ヶ月</td><td>+60–120万（副業分）</td><td class="plus">2–3ヶ月で回収</td></tr>
+          <tr><td>独学 → フリーランス</td><td class="money">15万円</td><td>12–24ヶ月（実務経験込）</td><td>480–720万</td><td class="plus">即回収</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:13px; color:#555; margin-top:14px;">どのルートでも、金銭的な投資は比較的少ない。最大の投資は「時間」。学習期間の3–6ヶ月 × 毎日2–4時間 = 200–700時間程度の時間投資が必要。これは他の専門職（医師、弁護士、公認会計士）と比較すると圧倒的に少ない。</p>
+    </section>
+
+    <!-- =========================================
+         Section: 技術分野別の単価感
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MARKET RATES</span>
+      <h2>技術分野別の単価感</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">何を学ぶかで稼ぎの天井が変わる。参入しやすさと単価のバランスを見る。</p>
+
+      <table class="data-table">
+        <thead><tr><th>技術分野</th><th>フリーランス月単価</th><th>参入難易度</th><th>将来性</th><th>求人数</th></tr></thead>
+        <tbody>
+          <tr><td>Web制作（HTML/CSS/WP）</td><td class="money">20–40万</td><td>低い</td><td>横ばい</td><td>非常に多い</td></tr>
+          <tr><td>フロントエンド（React/Vue）</td><td class="money">55–90万</td><td>中</td><td>高い</td><td>多い</td></tr>
+          <tr><td>バックエンド（Go/Java/Python）</td><td class="money">60–100万</td><td>中</td><td>安定</td><td>非常に多い</td></tr>
+          <tr><td>インフラ/SRE（AWS/GCP/K8s）</td><td class="money">70–110万</td><td>中–高</td><td>高い</td><td>多い</td></tr>
+          <tr><td>モバイル（Swift/Kotlin/Flutter）</td><td class="money">65–100万</td><td>中</td><td>安定</td><td>中</td></tr>
+          <tr><td>データエンジニアリング</td><td class="money">70–120万</td><td>中–高</td><td>非常に高い</td><td>増加中</td></tr>
+          <tr><td>機械学習/AI</td><td class="money">80–150万</td><td>高い</td><td>非常に高い</td><td>増加中</td></tr>
+          <tr><td>セキュリティ</td><td class="money">80–130万</td><td>高い</td><td>非常に高い</td><td>不足</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        未経験者へのおすすめは<strong>フロントエンド（React）</strong>。参入障壁が比較的低く、求人数が多く、副業案件も見つけやすい。そこからフルスタック方向に広げていくのが王道ルート。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 収入の広げ方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GROWTH</span>
+      <h2>収入の幅の広げ方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">稼ぎ始めたあと、どうやって天井を上げていくか。</p>
+
+      <div class="expand-grid">
+        <div class="expand-item">
+          <h4>技術領域を広げる</h4>
+          <p>フロントだけ → フルスタック、インフラ、モバイルへ。対応できる案件の幅が広がると単価交渉力が上がる。</p>
+          <div class="expand-effect">単価 +10–30万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>上流工程に入る</h4>
+          <p>コードを書くだけでなく、要件定義・設計・PM的な動きができると、技術者としての希少性が跳ね上がる。</p>
+          <div class="expand-effect">単価 +20–50万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>英語を武器にする</h4>
+          <p>外資系企業やグローバル案件にアクセスできる。日本語だけのエンジニアとは完全に別の市場で戦える。</p>
+          <div class="expand-effect">年収 1.3–2.0倍</div>
+        </div>
+        <div class="expand-item">
+          <h4>ニッチ専門性を持つ</h4>
+          <p>セキュリティ、機械学習、ブロックチェーン、3D/XRなど。「この分野ならこの人」になれば指名で仕事が来る。</p>
+          <div class="expand-effect">単価 +20–60万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>発信でブランドを作る</h4>
+          <p>SNS、ブログ、登壇。「あの人に頼みたい」で仕事が来るようになると、営業コストがゼロになる。</p>
+          <div class="expand-effect">案件単価 +10–30%</div>
+        </div>
+        <div class="expand-item">
+          <h4>収入源を複線化する</h4>
+          <p>正社員 + 副業、フリーランス + SaaS収入、業務委託 + コンテンツ販売。一つに依存しないポートフォリオを組む。</p>
+          <div class="expand-effect">リスク分散 + 合計年収UP</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>最も効率の良い戦略：</strong>正社員で安定収入を確保しつつ、副業で「時間の切り売り」以外の収入源を育てる。SaaS収入が月20万円を超えたあたりで独立を検討するのが、リスクを最小化しつつリターンを最大化するルート。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 年齢との関係
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">AGE FACTOR</span>
+      <h2>年齢は関係あるのか</h2>
+
+      <table class="data-table">
+        <thead><tr><th>転職開始年齢</th><th>未経験採用の難易度</th><th>現実的な戦略</th></tr></thead>
+        <tbody>
+          <tr><td>20代前半</td><td class="plus">非常に有利</td><td>どのルートでも選び放題。焦らず良い企業を選ぶ</td></tr>
+          <tr><td>20代後半</td><td class="plus">有利</td><td>前職の経験 × エンジニアリングの掛け算が武器になる</td></tr>
+          <tr><td>30代前半</td><td>普通</td><td>ポートフォリオの質が重要。スクール経由が効率的</td></tr>
+          <tr><td>30代後半</td><td class="minus">やや不利</td><td>副業から始めて実績を作る。いきなり転職より段階的に</td></tr>
+          <tr><td>40代以降</td><td class="minus">不利（正社員は厳しい）</td><td>フリーランス・副業ルート。前職の業界知識 × 技術が活路</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">年齢が上がるほど「未経験正社員」の枠は狭くなるが、フリーランスや副業には年齢制限がない。30代以降は「前職の専門性 + エンジニアリング」の掛け算で差別化するのが最も効率的。医療 × エンジニア、金融 × エンジニア、不動産 × エンジニアなど、ドメイン知識は大きな武器になる。</p>
+    </section>
+
+    <!-- =========================================
+         Section: リアルな収入モデル
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REAL MODELS</span>
+      <h2>リアルな収入モデル — 3パターン</h2>
+
+      <div class="path-card">
+        <h3>堅実ルート</h3>
+        <div class="path-meta">
+          <dl><dt>1年目</dt><dd>正社員 年収300万</dd></dl>
+          <dl><dt>3年目</dt><dd>転職 年収500万</dd></dl>
+          <dl><dt>5年目</dt><dd>年収650万 + 副業月10万</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">5年目の合計年収</div>
+          <div class="amount">約770万円</div>
+          <div class="note">SESまたは中小企業で経験を積み、2–3年で自社開発企業に転職。副業で月10万円を安定して稼ぐ。家族がいても安心できるルート。</div>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <h3>攻めルート</h3>
+        <div class="path-meta">
+          <dl><dt>1年目</dt><dd>正社員 年収350万</dd></dl>
+          <dl><dt>2年目</dt><dd>フリーランス 月単価65万</dd></dl>
+          <dl><dt>4年目</dt><dd>月単価90万 + SaaS月5万</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">4年目の合計年収（税引前）</div>
+          <div class="amount">約1,140万円</div>
+          <div class="note">最短で正社員を卒業し、フリーランスへ。単価交渉と技術の幅出しで月90万に到達。年収換算で1,080万円 + SaaS収入60万円。手取りは約780万円。</div>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <h3>起業家ルート</h3>
+        <div class="path-meta">
+          <dl><dt>1–2年目</dt><dd>正社員で修行 年収350万</dd></dl>
+          <dl><dt>2–3年目</dt><dd>副業でプロダクト開発</dd></dl>
+          <dl><dt>3–5年目</dt><dd>MRR 50万達成で独立</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">独立後の年収</div>
+          <div class="amount">MRR 50万 = 年600万+</div>
+          <div class="note">最もリスクが高いが、成功すれば労働時間に縛られない収入が手に入る。9割は途中で別の道に切り替えるが、打席に立ち続ければ確率は上がる。副業として始めればダウンサイドはほぼゼロ。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: よくある失敗
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PITFALLS</span>
+      <h2>よくある失敗パターン</h2>
+
+      <div class="role-grid">
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">学習期間が長すぎる</div>
+          <div class="desc">完璧に学んでから就職しようとして、1年以上学習だけを続ける。実務で学ぶことが圧倒的に多いので、60%の理解で飛び込むほうが効率的。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">スクールに依存する</div>
+          <div class="desc">80万円のスクールに通ったから就職できるはず、と受け身になる。スクールは「学び方を学ぶ場所」であって、就職保証ではない。自走力がなければスクール後も厳しい。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">技術だけに偏る</div>
+          <div class="desc">最新技術を追いかけるが、ビジネス的な価値を出す力が育たない。技術力だけでは年収700万あたりで頭打ちになりやすい。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">フリーランス = 高収入と思い込む</div>
+          <div class="desc">額面だけ見て独立し、税金・保険の負担で手取りが思ったより少ない現実に直面する。正社員の年収 × 1.3–1.5倍の額面がないと実質ダウンになる。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ — 何から始めるべきか</h2>
+
+      <div class="result-box" style="margin-bottom:20px; margin-top:0;">
+        <div class="headline">今日できること</div>
+        <div class="amount" style="font-size:18px;">PCを開いて、Progate or freeCodeCamp で HTML/CSS を始める。無料。所要時間30分。</div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">今すぐ</div>
+          <div class="tl-title">学ぶ言語を1つ選んで始める</div>
+          <div class="tl-desc">迷うならJavaScript。Web系の仕事の大半で使う。フロントもバックも書ける。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">1ヶ月後</div>
+          <div class="tl-title">何か1つ作る</div>
+          <div class="tl-desc">ToDoアプリでもいい。「自分で考えて作った」ものがあると理解度が急激に上がる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">3ヶ月後</div>
+          <div class="tl-title">ポートフォリオを完成させる</div>
+          <div class="tl-desc">GitHub + デプロイされたアプリ1–2個。これが就職・案件獲得の武器になる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">4–6ヶ月後</div>
+          <div class="tl-title">最初の収入を得る</div>
+          <div class="tl-desc">就職 or 小さい案件。金額は問わない。「エンジニアとして稼いだ」実績が次につながる。</div>
+        </div>
+      </div>
+
+      <ol class="summary-list" style="margin-top:20px;">
+        <li>エンジニアリングは初期投資が少なく、学習期間が短く、リターンが大きい数少ないスキル。</li>
+        <li>最低限PC1台（約15万円）と3–6ヶ月の学習で、年収250万以上の仕事に就ける。</li>
+        <li>2–3年の実務経験で選択肢が一気に広がる。転職・副業・フリーランス、すべてが視野に入る。</li>
+        <li>フリーランスの額面に惑わされない。手取りベースで比較すると正社員との差は思ったほど大きくない。</li>
+        <li>「時間の切り売り」から脱却したいなら、自分のプロダクトを副業として持つのが最善手。</li>
+        <li>年齢や学歴は関係ない。PCとインターネット接続さえあれば今日から始められる。</li>
+      </ol>
+    </section>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニアの稼ぎ方 完全ガイド — 2026年版 ／ 数字は日本国内市場の目安。個人の経験・スキル・市場環境により変動します。</p>
+  </main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>エンジニア育成シリーズ - DX室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    .section-title { font-size: 14px; color: #6b7aa5; letter-spacing: 2px; text-transform: uppercase; margin: 32px 0 12px; }
+    .section-title:first-of-type { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>エンジニア育成シリーズ</h1>
+  </header>
+  <main>
+    <p class="lead">未経験からエンジニアとして稼げるようになるまでの体系的な研修シリーズ。まず「稼ぎ方 完全ガイド」で全体像を掴み、フェーズ1から順に進める。進捗はチェックリストで管理。</p>
+
+    <h2 class="section-title">全体像</h2>
+    <div class="card-grid">
+      <a class="card" href="income-guide.html">
+        <div class="card-label">Overview</div>
+        <div class="card-value">エンジニアの稼ぎ方 完全ガイド</div>
+      </a>
+      <a class="card" href="roadmap-checklist.html">
+        <div class="card-label">Checklist</div>
+        <div class="card-value">ロードマップ進捗チェックリスト</div>
+      </a>
+      <a class="card" href="thirty-day-plan.html">
+        <div class="card-label">Starter / 30min×30days</div>
+        <div class="card-value">1日30分×30日プラン</div>
+      </a>
+      <a class="card" href="app/">
+        <div class="card-label">App / Timer + Tracker</div>
+        <div class="card-value">30×30 アプリ（タイマー付き進捗トラッカー）</div>
+      </a>
+    </div>
+
+    <h2 class="section-title">フェーズ別 詳細ガイド</h2>
+    <div class="card-grid">
+      <a class="card" href="phase1-basics.html">
+        <div class="card-label">Phase 1 / Month 0–1</div>
+        <div class="card-value">基礎学習 — HTML/CSS/JavaScript</div>
+      </a>
+      <a class="card" href="phase2-portfolio.html">
+        <div class="card-label">Phase 2 / Month 2–3</div>
+        <div class="card-value">フレームワーク + ポートフォリオ</div>
+      </a>
+      <a class="card" href="phase3-experience.html">
+        <div class="card-label">Phase 3 / Month 3–4</div>
+        <div class="card-value">実務に近い経験を積む</div>
+      </a>
+      <a class="card" href="phase4-first-income.html">
+        <div class="card-label">Phase 4 / Month 4–6</div>
+        <div class="card-value">就職活動・案件獲得 — 最初の収入</div>
+      </a>
+      <a class="card" href="phase5-growth.html">
+        <div class="card-label">Phase 5 / Month 6–24</div>
+        <div class="card-value">実務経験とキャリアの分岐点</div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ1: 基礎学習 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Numbered work cards */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+    .page-nav a { display: inline-block; background: #fff; border: 1px solid rgba(30,39,97,0.15); border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ1: 基礎学習</h1>
+  </header>
+  <main>
+    <p class="lead">Month 0–1。このフェーズのゴールは、HTML/CSS/JavaScriptの基礎を身につけ、自力で1枚のWebページを作れるようになり、Gitで管理できるようになること。1円も稼げない時期だが、ここを飛ばすと後で確実に詰む。毎日2–3時間の学習を前提に進める。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「なんとなく分かった」で先に進まないために、フェーズ1の完了条件を7つに固定する。チェックリストのフェーズ1の項目と同じなので、終わったものからチェックを付けていく。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">開発環境構築</div><div class="desc">VS Code・ブラウザの開発者ツール・ターミナルを一通り使える状態にする</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">HTML &amp; CSS基礎完走</div><div class="desc">Progate等の入門コースを最後までやり切る。タグとセレクタの基本が分かる</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">JavaScript基礎完走</div><div class="desc">変数・条件分岐・ループ・関数・配列まで。書きながら理解する</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">Flexbox・Gridで模写1枚</div><div class="desc">既存サイトのレイアウトを見ながら再現する。レイアウトの引き出しを作る</div></div>
+        <div class="work-item"><span class="num">5</span><div class="title">自力で1枚ページ</div><div class="desc">お手本なしで、自分で構成を考えて1枚ページを作る。フェーズ1の集大成</div></div>
+        <div class="work-item"><span class="num">6</span><div class="title">Git・GitHub基本操作</div><div class="desc">init / add / commit / push ができ、GitHubに自分のコードが置いてある</div></div>
+        <div class="work-item"><span class="num">7</span><div class="title">毎日2時間×2週間の習慣化</div><div class="desc">スキルより先に習慣。2週間連続で学習時間を確保できたら合格</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>判断基準はシンプル：</strong>7項目すべてにチェックが付いたらフェーズ2（フレームワーク + ポートフォリオ）へ進む。1つでも欠けているなら、まだこのフェーズにいる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 週ごとの進め方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">WEEKLY PLAN</span>
+      <h2>週ごとの進め方 — 4週間モデル</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">毎日2–3時間を前提にした標準ペース。多少前後してもいいが、順番は変えないこと。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">Week 1: 環境構築 + HTML/CSS入門</div><div class="desc">初日にVS Codeとブラウザを整え、2日目からProgate等でHTML/CSSを進める。タグの意味を暗記しようとせず、手を動かして「書けば表示される」感覚を掴む</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">Week 2: CSSレイアウト（Flexbox/Grid）+ 模写</div><div class="desc">レイアウトの主役はFlexboxとGrid。基礎を学んだら、シンプルなLPを1枚選んで模写する。「見た目をコードで再現できる」がこの週のゴール</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">Week 3: JavaScript基礎（変数〜DOM操作）</div><div class="desc">変数・条件分岐・ループ・関数を一通り学び、最後にDOM操作（ボタンを押したら表示が変わる等）まで到達する。ここが最初の山場。分からなくても止まらず先へ</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">Week 4: 自力で1枚ページ制作 + GitHubにpush</div><div class="desc">お手本なしで自己紹介ページや架空店舗のLPを1枚作る。完成度は6割でいい。Git・GitHubの基本操作を覚え、作ったページをpushして公開できる状態にする</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>ペースの目安：</strong>2–3時間 × 28日 = 約60–90時間。教材の完走に約40時間、模写と自作に約30時間、Gitに約10時間という配分が標準。教材に90時間かけて自作ゼロ、が最悪のパターン。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 教材
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MATERIALS</span>
+      <h2>教材 — これだけで足りる</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">教材選びに時間をかけるのが一番の無駄。下のどれかを選んで今日から始める。全部やる必要はない。</p>
+
+      <table class="data-table">
+        <thead><tr><th>教材</th><th>費用</th><th>使いどころ</th></tr></thead>
+        <tbody>
+          <tr><td>Progate（HTML・CSS・JavaScriptコース）</td><td class="money">月1,490円</td><td>最初の入口に最適。ブラウザだけで完結し、環境構築なしで始められる。1–2ヶ月で解約すればコスパ最強</td></tr>
+          <tr><td>freeCodeCamp</td><td class="money">無料</td><td>英語だが内容は一級品。演習量が多く、英語に抵抗がなければこれ一本でも完走できる</td></tr>
+          <tr><td>ドットインストール</td><td class="money">無料〜月1,080円</td><td>3分動画で手元の環境を見ながら学べる。環境構築やGit入門など「画面を見たい」場面で使う</td></tr>
+          <tr><td>MDN Web Docs</td><td class="money">無料</td><td>公式リファレンス。教材ではなく辞書。タグやプロパティの意味を調べる癖をここで付ける</td></tr>
+          <tr><td>書籍「1冊ですべて身につくHTML&amp;CSSとWebデザイン入門講座」</td><td class="money">約2,500円</td><td>手を動かしながら1サイト作り切る定番書。動画より本派の人はこちらをメイン教材に</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>推奨の組み合わせ：</strong>Progate（メイン）+ MDN（辞書）の2つで十分。フェーズ1の教材費は多くても月1,490円 + 書籍1冊。高額な教材やスクールはこの段階では不要。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: つまずきポイント
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PITFALLS</span>
+      <h2>つまずきポイント — 挫折の9割はこの3つ</h2>
+
+      <div class="work-list" style="grid-template-columns: 1fr;">
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">1</span><div class="title">完璧主義で進まない</div><div class="desc">タグやプロパティを暗記しようとして止まる。現役エンジニアも大半は調べながら書いている。暗記は不要。「調べれば書ける」状態になればその単元は合格として、どんどん先へ進む。</div></div>
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">2</span><div class="title">環境構築で消耗する</div><div class="desc">エディタやターミナルの設定でエラーが出て、コードを1行も書かないまま数日溶かすパターン。環境構築が1日で終わらなければ、一旦Progateなどブラウザ完結の教材に切り替えて学習を先に進め、環境は週末に落ち着いて再挑戦すればいい。</div></div>
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">3</span><div class="title">写経だけで手が動かない</div><div class="desc">教材のコードを写して「分かったつもり」になるが、白紙から書けと言われると手が止まる。教材を1周したら必ずお手本なしで自力で作ること。Week 4の自作ページはこの罠を避けるための必須工程。</div></div>
+      </div>
+
+      <div class="warning-box" style="margin-top:16px;">
+        <strong>教材の2周目は禁止。</strong>不安だからともう1周したくなるが、2周目の学習効率は自作の数分の1しかない。理解度6割で自作に進むほうが圧倒的に速く身につく。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>フェーズ1のゴールは「HTML/CSS/JSの基礎 + 自力で1枚ページ + Git」。完了条件はチェックリストの7項目で判定する。</li>
+        <li>4週間モデルで進める：Week 1 環境構築 + HTML/CSS、Week 2 Flexbox/Grid + 模写、Week 3 JavaScript基礎、Week 4 自作 + GitHub。</li>
+        <li>教材はProgate + MDNの2つで十分。教材費は月1,490円程度。この段階で高額な投資は不要。</li>
+        <li>暗記不要・完璧主義禁止。理解度6割で先に進み、教材1周後は必ずお手本なしで自力で作る。</li>
+        <li>スキルより先に「毎日2時間」の習慣。2週間続けられたら、フェーズ2に進む土台はできている。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ1: 基礎学習（Month 0–1）</p>
+  </main>
+</body>
+</html>
