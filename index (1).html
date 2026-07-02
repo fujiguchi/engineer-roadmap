@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>エンジニアの稼ぎ方 完全ガイド - DX室</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Income bar chart */
+    .income-chart { display: flex; flex-direction: column; gap: 10px; }
+    .income-row { display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 10px; }
+    .income-label { font-size: 13px; color: #6b7aa5; text-align: right; white-space: nowrap; font-weight: 600; }
+    .income-bar-wrap { height: 32px; background: #fff; border-radius: 6px; border: 1px solid rgba(30,39,97,0.08); overflow: hidden; }
+    .income-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding: 0 10px; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; min-width: fit-content; }
+    .bar-navy { background: linear-gradient(90deg, var(--navy), var(--navy2)); }
+    .bar-accent { background: linear-gradient(90deg, #0ea5a5, var(--accent)); }
+    .bar-mixed { background: linear-gradient(90deg, var(--navy2), var(--accent)); }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+    .callout.warn { background: rgba(220,53,69,0.06); border-color: rgba(220,53,69,0.25); }
+    .callout.warn strong { color: #a4283a; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: rgba(30,39,97,0.12); }
+    .tl-item { position: relative; padding-bottom: 24px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ''; position: absolute; left: -24px; top: 7px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+    .tl-item.done::before { background: var(--accent); }
+    .tl-period { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+    .tl-title { font-size: 15px; font-weight: 700; color: var(--navy); margin: 2px 0; }
+    .tl-desc { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+    .data-table .plus { color: #1a8a5a; font-weight: 700; }
+    .data-table .minus { color: #b5432f; font-weight: 700; }
+
+    /* Path cards */
+    .path-card { background: #fff; border-radius: 10px; padding: 22px 24px; margin-bottom: 20px; border: 1px solid rgba(30,39,97,0.08); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .path-card h3 { font-size: 18px; color: var(--navy); font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .path-tag { font-size: 10px; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; font-weight: 700; }
+    .tag-easy { background: rgba(26,138,90,0.1); color: #1a8a5a; border: 1px solid rgba(26,138,90,0.2); }
+    .tag-mid { background: rgba(24,197,212,0.1); color: #0ea5a5; border: 1px solid rgba(24,197,212,0.3); }
+    .tag-hard { background: rgba(220,53,69,0.08); color: #b5432f; border: 1px solid rgba(220,53,69,0.2); }
+
+    .path-meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 14px 0; padding: 14px; background: var(--paper); border-radius: 8px; }
+    .path-meta dt { font-size: 10px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+    .path-meta dd { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .path-meta dd.accent { color: var(--accent); }
+
+    /* Pros / Cons */
+    .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+    .proscons-col { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid rgba(30,39,97,0.08); }
+    .proscons-col h4 { font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+    .proscons-col h4.pro { color: #1a8a5a; }
+    .proscons-col h4.con { color: #b5432f; }
+    .proscons-col ul { list-style: none; padding: 0; }
+    .proscons-col li { font-size: 13px; color: #555; padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+    .proscons-col li::before { position: absolute; left: 0; font-size: 11px; font-weight: 800; }
+    .proscons-col.pros li::before { content: '+'; color: #1a8a5a; }
+    .proscons-col.cons li::before { content: '−'; color: #b5432f; }
+
+    /* Expand grid */
+    .expand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .expand-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); }
+    .expand-item h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .expand-item p { font-size: 13px; color: #555; line-height: 1.6; }
+    .expand-effect { font-size: 12px; font-weight: 700; color: #1a8a5a; margin-top: 8px; }
+
+    /* Stat box (reuse from existing pattern) */
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 18px 22px; text-align: center; margin-bottom: 14px; }
+    .stat-box .num { font-size: 34px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 13px; margin-top: 4px; }
+
+    /* Equation boxes */
+    .equation { display: flex; align-items: stretch; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+    .eq-box { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); flex: 1; min-width: 200px; }
+    .eq-box h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+    .eq-box p { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Result box */
+    .result-box { background: rgba(24,197,212,0.08); border: 1px solid rgba(24,197,212,0.3); border-radius: 8px; padding: 14px 18px; margin-top: 14px; }
+    .result-box .headline { font-size: 12px; color: #6b7aa5; margin-bottom: 4px; }
+    .result-box .amount { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .result-box .note { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    @media (max-width: 600px) {
+      .income-row { grid-template-columns: 1fr; gap: 2px; }
+      .income-label { text-align: left; font-size: 12px; }
+      .proscons { grid-template-columns: 1fr; }
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>エンジニアの稼ぎ方 完全ガイド</h1>
+  </header>
+  <main>
+    <p class="lead">未経験からどう始めて、何にいくら投資して、どのルートでいくら稼げるのか。正社員・業務委託・副業・プロダクト開発まで、すべてのパスを数字で解説する。</p>
+
+    <!-- =========================================
+         Section: 年収レンジ一覧
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INCOME OVERVIEW</span>
+      <h2>稼ぎ方マップ — 年収レンジ一覧</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">同じ「エンジニア」でも、働き方と経験年数で収入は大きく変わる。まず全体像を掴む。</p>
+
+      <div class="income-chart">
+        <div class="income-row">
+          <div class="income-label">未経験 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:25%;">250–350万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">経験1–3年 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:38%;">350–500万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">経験3–5年 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:52%;">500–750万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">シニア 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:72%;">700–1,200万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">テックリード 正社員</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-navy" style="width:85%;">1,000–1,500万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">SES</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-mixed" style="width:30%;">300–450万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">フリーランス</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:80%;">480–1,440万</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">副業</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:42%;">+60–600万/年</div></div>
+        </div>
+        <div class="income-row">
+          <div class="income-label">自社プロダクト</div>
+          <div class="income-bar-wrap"><div class="income-bar bar-accent" style="width:100%;">0–青天井</div></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>額面 ≠ 手取り：</strong>フリーランスの数字は額面。ここから国保・年金・税金・経費を引くと手取りは60–70%程度になる。正社員の場合は会社が社保の半額を負担してくれるため、額面差ほど手取り差は大きくない。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: ゼロからのロードマップ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">STARTING FROM ZERO</span>
+      <h2>ゼロからのロードマップ</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">完全未経験からエンジニアとして稼ぎ始めるまでの現実的なタイムライン。</p>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">Month 0–1</div>
+          <div class="tl-title">基礎学習</div>
+          <div class="tl-desc">HTML/CSS/JavaScriptの基礎。Progateや無料教材で十分。毎日2–3時間。この段階では1円も稼げないが、ここを飛ばすと後で詰む。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">Month 2–3</div>
+          <div class="tl-title">フレームワーク + ポートフォリオ</div>
+          <div class="tl-desc">React/Next.js または Ruby on Rails など、一つのフレームワークを深掘り。実際に動くアプリを1–2個作る。GitHubにコードを置く。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">Month 3–4</div>
+          <div class="tl-title">実務に近い経験を積む</div>
+          <div class="tl-desc">OSSにコントリビュート、友人のサイト制作、無償〜低単価の案件。「仕事として納品した」実績を作る。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Month 4–6</div>
+          <div class="tl-title">就職活動 or 案件獲得</div>
+          <div class="tl-desc">未経験OKの企業に応募（正社員/SES）、またはクラウドソーシングで小さい案件を取る。ここで初めて「稼ぐ」フェーズに入る。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Month 6–12</div>
+          <div class="tl-title">実務経験を貯める</div>
+          <div class="tl-desc">最初の半年–1年は修行期間。給与は低くても「実務n年」の看板を作ることが最大のリターンになる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">Year 1–2</div>
+          <div class="tl-title">キャリアの分岐点</div>
+          <div class="tl-desc">実務1年を超えたあたりで選択肢が増える。転職で年収アップ、副業開始、フリーランス転向。ここからが本番。</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>最速ルート：</strong>「Web制作」が最短。HTML/CSS + WordPressで2–3ヶ月後にはランサーズで5–15万円/案件が取れる。ただし単価の天井は低い。長期的に稼ぎたいならプログラミング（React, Python等）に投資するほうがリターンは大きい。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 各ルート詳細
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INCOME PATHS</span>
+      <h2>各ルートの詳細</h2>
+
+      <!-- 正社員 -->
+      <div class="path-card">
+        <h3>正社員 <span class="path-tag tag-easy">参入しやすい</span></h3>
+        <div class="path-meta">
+          <dl><dt>年収レンジ</dt><dd>250–1,500万円</dd></dl>
+          <dl><dt>参入までの期間</dt><dd class="accent">3–6ヶ月</dd></dl>
+          <dl><dt>安定性</dt><dd>高い</dd></dl>
+          <dl><dt>スキル上昇</dt><dd>中–高</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">最もオーソドックスなルート。未経験でも採用している企業は多い（特にSES系）。メリットは社会保険・福利厚生・安定収入・チームでの学び。デメリットは収入の伸びが遅いこと。</p>
+        <p style="font-size:14px; color:#555; line-height:1.7;"><strong style="color:var(--navy);">年収の上げ方：</strong>同じ会社に居続けるより、2–3年ごとに転職するほうが年収は上がりやすい。転職のたびに50–150万円アップが現実的。外資系・メガベンチャーに行けば一気に跳ねる。</p>
+        <div class="proscons">
+          <div class="proscons-col pros">
+            <h4 class="pro">メリット</h4>
+            <ul>
+              <li>社保・厚生年金の会社負担</li>
+              <li>有給・育休などの法的保護</li>
+              <li>チームで学べる（レビュー文化）</li>
+              <li>未経験からでも入れる</li>
+              <li>住宅手当等の福利厚生</li>
+            </ul>
+          </div>
+          <div class="proscons-col cons">
+            <h4 class="con">デメリット</h4>
+            <ul>
+              <li>年収の上昇が緩やか</li>
+              <li>技術選定の自由度が低い</li>
+              <li>副業禁止の会社もある</li>
+              <li>勤務時間・場所の制約</li>
+              <li>社内政治に時間を取られることも</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SES -->
+      <div class="path-card">
+        <h3>SES（客先常駐）<span class="path-tag tag-easy">参入しやすい</span></h3>
+        <div class="path-meta">
+          <dl><dt>年収レンジ</dt><dd>250–450万円</dd></dl>
+          <dl><dt>参入までの期間</dt><dd class="accent">1–3ヶ月</dd></dl>
+          <dl><dt>安定性</dt><dd>中</dd></dl>
+          <dl><dt>スキル上昇</dt><dd>低–中</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">SES企業に正社員として入社し、クライアント企業に常駐して働く形態。未経験の最速の入口だが、自社の売上（月単価50–80万円）のうち、自分の手取りは25–40万円程度。差額がSES企業のマージン。</p>
+        <div class="warning-box">
+          <strong>現場ガチャに注意：</strong>良い現場に当たればモダンな開発経験が積める。悪い現場だとExcelとテストだけで技術が伸びない。1年以上SESにいるなら、実務経験を武器に自社開発企業への転職を目指すのが定石。
+        </div>
+      </div>
+
+      <!-- フリーランス -->
+      <div class="path-card">
+        <h3>フリーランス・業務委託 <span class="path-tag tag-mid">実務経験要</span></h3>
+        <div class="path-meta">
+          <dl><dt>月単価</dt><dd>40–120万円</dd></dl>
+          <dl><dt>必要経験</dt><dd class="accent">実務2年以上推奨</dd></dl>
+          <dl><dt>安定性</dt><dd>中</dd></dl>
+          <dl><dt>収入の天井</dt><dd>高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">レバテック、ITプロパートナーズ等のエージェント経由で業務委託案件を受ける。正社員と同じようにチームに入って働くが、雇用関係ではなく契約。</p>
+
+        <table class="data-table">
+          <thead><tr><th>スキル帯</th><th>月単価の目安</th><th>年収換算（税引前）</th><th>手取り目安</th></tr></thead>
+          <tbody>
+            <tr><td>実務1–2年</td><td class="money">40–55万</td><td>480–660万</td><td>340–460万</td></tr>
+            <tr><td>実務3–4年</td><td class="money">60–80万</td><td>720–960万</td><td>500–670万</td></tr>
+            <tr><td>実務5年+</td><td class="money">80–100万</td><td>960–1,200万</td><td>670–840万</td></tr>
+            <tr><td>上位層・PM兼務</td><td class="money">100–150万</td><td>1,200–1,800万</td><td>840–1,200万</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warn" style="margin-top:14px;">
+          <strong>手取り計算の罠：</strong>月単価80万 = 年960万だが、ここから所得税・住民税（約20%）、国民健康保険（約50万/年）、国民年金（約20万/年）、経費を引くと手取りは600万前後。正社員の年収700万と実質的にほぼ同じ。「フリーランスは稼げる」の実態はこういう構造。
+        </div>
+
+        <div class="proscons">
+          <div class="proscons-col pros">
+            <h4 class="pro">メリット</h4>
+            <ul>
+              <li>正社員より額面が高い</li>
+              <li>案件・技術を選べる</li>
+              <li>リモート案件が多い</li>
+              <li>経費計上で節税できる</li>
+              <li>複数案件の掛け持ちも可能</li>
+            </ul>
+          </div>
+          <div class="proscons-col cons">
+            <h4 class="con">デメリット</h4>
+            <ul>
+              <li>社保なし（国保+国民年金）</li>
+              <li>有給・ボーナスなし</li>
+              <li>契約切れのリスク</li>
+              <li>確定申告の手間</li>
+              <li>住宅ローン審査に不利</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 副業 -->
+      <div class="path-card">
+        <h3>副業 <span class="path-tag tag-mid">本業+αの収入</span></h3>
+        <div class="path-meta">
+          <dl><dt>月収レンジ</dt><dd>5–50万円</dd></dl>
+          <dl><dt>必要時間</dt><dd class="accent">月20–60時間</dd></dl>
+          <dl><dt>リスク</dt><dd>低い</dd></dl>
+          <dl><dt>始めやすさ</dt><dd>高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">正社員の安定収入をベースに、空き時間で追加収入を得る。リスクが最も低い稼ぎ方の拡張手段。</p>
+
+        <table class="data-table">
+          <thead><tr><th>副業の種類</th><th>月収目安</th><th>必要スキル</th><th>時間/月</th></tr></thead>
+          <tbody>
+            <tr><td>Web制作（LP等）</td><td class="money">5–20万</td><td>HTML/CSS/WP</td><td>15–30h</td></tr>
+            <tr><td>業務委託（週1–2）</td><td class="money">15–40万</td><td>実務2年+</td><td>32–64h</td></tr>
+            <tr><td>技術ライティング</td><td class="money">3–15万</td><td>文章力+専門知識</td><td>10–25h</td></tr>
+            <tr><td>プログラミング講師</td><td class="money">5–20万</td><td>教え方の上手さ</td><td>10–30h</td></tr>
+            <tr><td>ツール開発・販売</td><td class="money">0–100万+</td><td>企画力+開発力</td><td>不定</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">副業の探し方は、<strong style="color:var(--navy);">クラウドワークス・ランサーズ</strong>（初心者向け、単価低め）、<strong style="color:var(--navy);">YOUTRUST・Offers・複業クラウド</strong>（経験者向け、週1–2稼働の業務委託）、<strong style="color:var(--navy);">知人経由</strong>（最も単価が高くなりやすい）の3ルートが主流。</p>
+      </div>
+
+      <!-- 自分のプロダクト -->
+      <div class="path-card">
+        <h3>自分のプロダクト <span class="path-tag tag-hard">ハイリスク・ハイリターン</span></h3>
+        <div class="path-meta">
+          <dl><dt>収入レンジ</dt><dd>0円–青天井</dd></dl>
+          <dl><dt>必要経験</dt><dd class="accent">開発力+企画力</dd></dl>
+          <dl><dt>リスク</dt><dd>高い</dd></dl>
+          <dl><dt>スケーラビリティ</dt><dd>最高</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">唯一「時間の切り売り」から脱却できるルート。自分の労働時間に収入が比例しない。寝ている間にも売上が立つ。</p>
+
+        <table class="data-table">
+          <thead><tr><th>プロダクト種別</th><th>月収の目安</th><th>成功確率</th><th>開発期間</th></tr></thead>
+          <tbody>
+            <tr><td>個人SaaS</td><td class="money">0–300万+</td><td>5–10%</td><td>1–6ヶ月</td></tr>
+            <tr><td>スマホアプリ</td><td class="money">0–100万+</td><td>3–8%</td><td>2–6ヶ月</td></tr>
+            <tr><td>Chrome拡張・ツール</td><td class="money">0–50万</td><td>10–20%</td><td>1–4週間</td></tr>
+            <tr><td>テンプレート・テーマ販売</td><td class="money">1–30万</td><td>15–25%</td><td>1–2週間</td></tr>
+            <tr><td>APIサービス</td><td class="money">0–200万+</td><td>5–10%</td><td>1–3ヶ月</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          成功確率は低いが、副業としてやれば生活費のリスクはゼロ。「月5万円のサブスク収入」を目指すくらいが現実的な第一歩。MRR（月次定期収入）5万円を超えれば、年間60万円の不労所得に近い収入源になる。
+        </div>
+      </div>
+
+      <!-- 技術発信 -->
+      <div class="path-card">
+        <h3>技術発信・教育 <span class="path-tag tag-mid">ストック型収入</span></h3>
+        <div class="path-meta">
+          <dl><dt>月収レンジ</dt><dd>0–100万円+</dd></dl>
+          <dl><dt>立ち上げ期間</dt><dd class="accent">6ヶ月–2年</dd></dl>
+          <dl><dt>リスク</dt><dd>低い</dd></dl>
+          <dl><dt>本業との相乗効果</dt><dd>非常に高い</dd></dl>
+        </div>
+        <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:14px;">直接の収入だけでなく、ブランディング効果で本業の年収・フリーランス単価を引き上げる間接効果が大きい。</p>
+
+        <table class="data-table">
+          <thead><tr><th>発信の種類</th><th>収益化方法</th><th>月収目安</th><th>到達時間</th></tr></thead>
+          <tbody>
+            <tr><td>技術ブログ</td><td>広告・アフィリエイト</td><td class="money">0.5–10万</td><td>6–18ヶ月</td></tr>
+            <tr><td>Zenn / note 有料記事</td><td>コンテンツ販売</td><td class="money">1–20万</td><td>3–12ヶ月</td></tr>
+            <tr><td>Udemy講座</td><td>講座販売</td><td class="money">3–50万</td><td>1–3ヶ月（制作）</td></tr>
+            <tr><td>YouTube</td><td>広告・案件</td><td class="money">1–100万+</td><td>12–24ヶ月</td></tr>
+            <tr><td>技術書執筆</td><td>印税</td><td class="money">一時金30–200万</td><td>3–12ヶ月（執筆）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 必要な投資
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">INVESTMENT</span>
+      <h2>必要な投資 — 何にいくらかかるのか</h2>
+
+      <table class="data-table">
+        <thead><tr><th>投資項目</th><th>費用</th><th>必須度</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>PC（開発用）</td><td class="money">10–30万円</td><td><strong>必須</strong></td><td>M系チップのMacBook Air 15万前後が最もコスパ良い。Windowsならメモリ16GB以上</td></tr>
+          <tr><td>外部ディスプレイ</td><td class="money">2–5万円</td><td>推奨</td><td>生産性が体感1.3倍になる。27インチ4Kが基本</td></tr>
+          <tr><td>プログラミングスクール</td><td class="money">0–80万円</td><td>任意</td><td>独学で十分な人も多い。挫折しやすい人は20–30万円帯がバランス良い</td></tr>
+          <tr><td>オンライン教材</td><td class="money">0–5万円</td><td>推奨</td><td>Udemy（セール時1,500円/講座）、書籍（2,000–4,000円/冊）</td></tr>
+          <tr><td>ドメイン・サーバ</td><td class="money">0.5–1.5万円/年</td><td>任意</td><td>ポートフォリオサイト用。Vercel無料枠で済むケースも多い</td></tr>
+          <tr><td>開発ツール</td><td class="money">0–3万円/年</td><td>任意</td><td>VS Code（無料）、GitHub（無料）、Figma（無料枠あり）、AI支援ツール</td></tr>
+          <tr><td>資格取得</td><td class="money">0.5–3万円/件</td><td>任意</td><td>AWS認定、基本情報技術者など。転職時に多少有利。必須ではない</td></tr>
+          <tr><td>椅子・デスク</td><td class="money">3–15万円</td><td>推奨</td><td>長時間作業するなら体への投資。中古のアーロンチェアが5–8万で狙い目</td></tr>
+        </tbody>
+      </table>
+
+      <div class="stat-box" style="margin-top:20px;">
+        <div class="num">約15万円</div>
+        <div class="label">最低限の初期投資（PC + 教材費）</div>
+      </div>
+      <p style="font-size:13px; color:#555;">スクールなしの独学ルートなら、PC代だけで始められる。フリーランスになる場合は開業届（無料）と青色申告のための会計ソフト（年1万円程度）が追加で必要。</p>
+
+      <h2 style="margin-top:32px;">投資の回収シミュレーション</h2>
+
+      <table class="data-table" style="margin-top:14px;">
+        <thead><tr><th>シナリオ</th><th>初期投資</th><th>学習期間（無収入）</th><th>1年目の年収</th><th>投資回収</th></tr></thead>
+        <tbody>
+          <tr><td>独学 → SES就職</td><td class="money">15万円</td><td>3–4ヶ月</td><td>280–350万</td><td class="plus">即月で回収</td></tr>
+          <tr><td>スクール → 自社開発</td><td class="money">50–80万円</td><td>4–6ヶ月</td><td>320–400万</td><td class="plus">3–6ヶ月で回収</td></tr>
+          <tr><td>独学 → Web制作副業</td><td class="money">15万円</td><td>2–3ヶ月</td><td>+60–120万（副業分）</td><td class="plus">2–3ヶ月で回収</td></tr>
+          <tr><td>独学 → フリーランス</td><td class="money">15万円</td><td>12–24ヶ月（実務経験込）</td><td>480–720万</td><td class="plus">即回収</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:13px; color:#555; margin-top:14px;">どのルートでも、金銭的な投資は比較的少ない。最大の投資は「時間」。学習期間の3–6ヶ月 × 毎日2–4時間 = 200–700時間程度の時間投資が必要。これは他の専門職（医師、弁護士、公認会計士）と比較すると圧倒的に少ない。</p>
+    </section>
+
+    <!-- =========================================
+         Section: 技術分野別の単価感
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MARKET RATES</span>
+      <h2>技術分野別の単価感</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">何を学ぶかで稼ぎの天井が変わる。参入しやすさと単価のバランスを見る。</p>
+
+      <table class="data-table">
+        <thead><tr><th>技術分野</th><th>フリーランス月単価</th><th>参入難易度</th><th>将来性</th><th>求人数</th></tr></thead>
+        <tbody>
+          <tr><td>Web制作（HTML/CSS/WP）</td><td class="money">20–40万</td><td>低い</td><td>横ばい</td><td>非常に多い</td></tr>
+          <tr><td>フロントエンド（React/Vue）</td><td class="money">55–90万</td><td>中</td><td>高い</td><td>多い</td></tr>
+          <tr><td>バックエンド（Go/Java/Python）</td><td class="money">60–100万</td><td>中</td><td>安定</td><td>非常に多い</td></tr>
+          <tr><td>インフラ/SRE（AWS/GCP/K8s）</td><td class="money">70–110万</td><td>中–高</td><td>高い</td><td>多い</td></tr>
+          <tr><td>モバイル（Swift/Kotlin/Flutter）</td><td class="money">65–100万</td><td>中</td><td>安定</td><td>中</td></tr>
+          <tr><td>データエンジニアリング</td><td class="money">70–120万</td><td>中–高</td><td>非常に高い</td><td>増加中</td></tr>
+          <tr><td>機械学習/AI</td><td class="money">80–150万</td><td>高い</td><td>非常に高い</td><td>増加中</td></tr>
+          <tr><td>セキュリティ</td><td class="money">80–130万</td><td>高い</td><td>非常に高い</td><td>不足</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        未経験者へのおすすめは<strong>フロントエンド（React）</strong>。参入障壁が比較的低く、求人数が多く、副業案件も見つけやすい。そこからフルスタック方向に広げていくのが王道ルート。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 収入の広げ方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GROWTH</span>
+      <h2>収入の幅の広げ方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">稼ぎ始めたあと、どうやって天井を上げていくか。</p>
+
+      <div class="expand-grid">
+        <div class="expand-item">
+          <h4>技術領域を広げる</h4>
+          <p>フロントだけ → フルスタック、インフラ、モバイルへ。対応できる案件の幅が広がると単価交渉力が上がる。</p>
+          <div class="expand-effect">単価 +10–30万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>上流工程に入る</h4>
+          <p>コードを書くだけでなく、要件定義・設計・PM的な動きができると、技術者としての希少性が跳ね上がる。</p>
+          <div class="expand-effect">単価 +20–50万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>英語を武器にする</h4>
+          <p>外資系企業やグローバル案件にアクセスできる。日本語だけのエンジニアとは完全に別の市場で戦える。</p>
+          <div class="expand-effect">年収 1.3–2.0倍</div>
+        </div>
+        <div class="expand-item">
+          <h4>ニッチ専門性を持つ</h4>
+          <p>セキュリティ、機械学習、ブロックチェーン、3D/XRなど。「この分野ならこの人」になれば指名で仕事が来る。</p>
+          <div class="expand-effect">単価 +20–60万/月</div>
+        </div>
+        <div class="expand-item">
+          <h4>発信でブランドを作る</h4>
+          <p>SNS、ブログ、登壇。「あの人に頼みたい」で仕事が来るようになると、営業コストがゼロになる。</p>
+          <div class="expand-effect">案件単価 +10–30%</div>
+        </div>
+        <div class="expand-item">
+          <h4>収入源を複線化する</h4>
+          <p>正社員 + 副業、フリーランス + SaaS収入、業務委託 + コンテンツ販売。一つに依存しないポートフォリオを組む。</p>
+          <div class="expand-effect">リスク分散 + 合計年収UP</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>最も効率の良い戦略：</strong>正社員で安定収入を確保しつつ、副業で「時間の切り売り」以外の収入源を育てる。SaaS収入が月20万円を超えたあたりで独立を検討するのが、リスクを最小化しつつリターンを最大化するルート。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 年齢との関係
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">AGE FACTOR</span>
+      <h2>年齢は関係あるのか</h2>
+
+      <table class="data-table">
+        <thead><tr><th>転職開始年齢</th><th>未経験採用の難易度</th><th>現実的な戦略</th></tr></thead>
+        <tbody>
+          <tr><td>20代前半</td><td class="plus">非常に有利</td><td>どのルートでも選び放題。焦らず良い企業を選ぶ</td></tr>
+          <tr><td>20代後半</td><td class="plus">有利</td><td>前職の経験 × エンジニアリングの掛け算が武器になる</td></tr>
+          <tr><td>30代前半</td><td>普通</td><td>ポートフォリオの質が重要。スクール経由が効率的</td></tr>
+          <tr><td>30代後半</td><td class="minus">やや不利</td><td>副業から始めて実績を作る。いきなり転職より段階的に</td></tr>
+          <tr><td>40代以降</td><td class="minus">不利（正社員は厳しい）</td><td>フリーランス・副業ルート。前職の業界知識 × 技術が活路</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">年齢が上がるほど「未経験正社員」の枠は狭くなるが、フリーランスや副業には年齢制限がない。30代以降は「前職の専門性 + エンジニアリング」の掛け算で差別化するのが最も効率的。医療 × エンジニア、金融 × エンジニア、不動産 × エンジニアなど、ドメイン知識は大きな武器になる。</p>
+    </section>
+
+    <!-- =========================================
+         Section: リアルな収入モデル
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REAL MODELS</span>
+      <h2>リアルな収入モデル — 3パターン</h2>
+
+      <div class="path-card">
+        <h3>堅実ルート</h3>
+        <div class="path-meta">
+          <dl><dt>1年目</dt><dd>正社員 年収300万</dd></dl>
+          <dl><dt>3年目</dt><dd>転職 年収500万</dd></dl>
+          <dl><dt>5年目</dt><dd>年収650万 + 副業月10万</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">5年目の合計年収</div>
+          <div class="amount">約770万円</div>
+          <div class="note">SESまたは中小企業で経験を積み、2–3年で自社開発企業に転職。副業で月10万円を安定して稼ぐ。家族がいても安心できるルート。</div>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <h3>攻めルート</h3>
+        <div class="path-meta">
+          <dl><dt>1年目</dt><dd>正社員 年収350万</dd></dl>
+          <dl><dt>2年目</dt><dd>フリーランス 月単価65万</dd></dl>
+          <dl><dt>4年目</dt><dd>月単価90万 + SaaS月5万</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">4年目の合計年収（税引前）</div>
+          <div class="amount">約1,140万円</div>
+          <div class="note">最短で正社員を卒業し、フリーランスへ。単価交渉と技術の幅出しで月90万に到達。年収換算で1,080万円 + SaaS収入60万円。手取りは約780万円。</div>
+        </div>
+      </div>
+
+      <div class="path-card">
+        <h3>起業家ルート</h3>
+        <div class="path-meta">
+          <dl><dt>1–2年目</dt><dd>正社員で修行 年収350万</dd></dl>
+          <dl><dt>2–3年目</dt><dd>副業でプロダクト開発</dd></dl>
+          <dl><dt>3–5年目</dt><dd>MRR 50万達成で独立</dd></dl>
+        </div>
+        <div class="result-box">
+          <div class="headline">独立後の年収</div>
+          <div class="amount">MRR 50万 = 年600万+</div>
+          <div class="note">最もリスクが高いが、成功すれば労働時間に縛られない収入が手に入る。9割は途中で別の道に切り替えるが、打席に立ち続ければ確率は上がる。副業として始めればダウンサイドはほぼゼロ。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: よくある失敗
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PITFALLS</span>
+      <h2>よくある失敗パターン</h2>
+
+      <div class="role-grid">
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">学習期間が長すぎる</div>
+          <div class="desc">完璧に学んでから就職しようとして、1年以上学習だけを続ける。実務で学ぶことが圧倒的に多いので、60%の理解で飛び込むほうが効率的。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">スクールに依存する</div>
+          <div class="desc">80万円のスクールに通ったから就職できるはず、と受け身になる。スクールは「学び方を学ぶ場所」であって、就職保証ではない。自走力がなければスクール後も厳しい。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">技術だけに偏る</div>
+          <div class="desc">最新技術を追いかけるが、ビジネス的な価値を出す力が育たない。技術力だけでは年収700万あたりで頭打ちになりやすい。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #dc3545;">
+          <div class="name">フリーランス = 高収入と思い込む</div>
+          <div class="desc">額面だけ見て独立し、税金・保険の負担で手取りが思ったより少ない現実に直面する。正社員の年収 × 1.3–1.5倍の額面がないと実質ダウンになる。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ — 何から始めるべきか</h2>
+
+      <div class="result-box" style="margin-bottom:20px; margin-top:0;">
+        <div class="headline">今日できること</div>
+        <div class="amount" style="font-size:18px;">PCを開いて、Progate or freeCodeCamp で HTML/CSS を始める。無料。所要時間30分。</div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">今すぐ</div>
+          <div class="tl-title">学ぶ言語を1つ選んで始める</div>
+          <div class="tl-desc">迷うならJavaScript。Web系の仕事の大半で使う。フロントもバックも書ける。</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-period">1ヶ月後</div>
+          <div class="tl-title">何か1つ作る</div>
+          <div class="tl-desc">ToDoアプリでもいい。「自分で考えて作った」ものがあると理解度が急激に上がる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">3ヶ月後</div>
+          <div class="tl-title">ポートフォリオを完成させる</div>
+          <div class="tl-desc">GitHub + デプロイされたアプリ1–2個。これが就職・案件獲得の武器になる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">4–6ヶ月後</div>
+          <div class="tl-title">最初の収入を得る</div>
+          <div class="tl-desc">就職 or 小さい案件。金額は問わない。「エンジニアとして稼いだ」実績が次につながる。</div>
+        </div>
+      </div>
+
+      <ol class="summary-list" style="margin-top:20px;">
+        <li>エンジニアリングは初期投資が少なく、学習期間が短く、リターンが大きい数少ないスキル。</li>
+        <li>最低限PC1台（約15万円）と3–6ヶ月の学習で、年収250万以上の仕事に就ける。</li>
+        <li>2–3年の実務経験で選択肢が一気に広がる。転職・副業・フリーランス、すべてが視野に入る。</li>
+        <li>フリーランスの額面に惑わされない。手取りベースで比較すると正社員との差は思ったほど大きくない。</li>
+        <li>「時間の切り売り」から脱却したいなら、自分のプロダクトを副業として持つのが最善手。</li>
+        <li>年齢や学歴は関係ない。PCとインターネット接続さえあれば今日から始められる。</li>
+      </ol>
+    </section>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニアの稼ぎ方 完全ガイド — 2026年版 ／ 数字は日本国内市場の目安。個人の経験・スキル・市場環境により変動します。</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ1: 基礎学習 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Numbered work cards */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+    .page-nav a { display: inline-block; background: #fff; border: 1px solid rgba(30,39,97,0.15); border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ1: 基礎学習</h1>
+  </header>
+  <main>
+    <p class="lead">Month 0–1。このフェーズのゴールは、HTML/CSS/JavaScriptの基礎を身につけ、自力で1枚のWebページを作れるようになり、Gitで管理できるようになること。1円も稼げない時期だが、ここを飛ばすと後で確実に詰む。毎日2–3時間の学習を前提に進める。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「なんとなく分かった」で先に進まないために、フェーズ1の完了条件を7つに固定する。チェックリストのフェーズ1の項目と同じなので、終わったものからチェックを付けていく。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">開発環境構築</div><div class="desc">VS Code・ブラウザの開発者ツール・ターミナルを一通り使える状態にする</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">HTML &amp; CSS基礎完走</div><div class="desc">Progate等の入門コースを最後までやり切る。タグとセレクタの基本が分かる</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">JavaScript基礎完走</div><div class="desc">変数・条件分岐・ループ・関数・配列まで。書きながら理解する</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">Flexbox・Gridで模写1枚</div><div class="desc">既存サイトのレイアウトを見ながら再現する。レイアウトの引き出しを作る</div></div>
+        <div class="work-item"><span class="num">5</span><div class="title">自力で1枚ページ</div><div class="desc">お手本なしで、自分で構成を考えて1枚ページを作る。フェーズ1の集大成</div></div>
+        <div class="work-item"><span class="num">6</span><div class="title">Git・GitHub基本操作</div><div class="desc">init / add / commit / push ができ、GitHubに自分のコードが置いてある</div></div>
+        <div class="work-item"><span class="num">7</span><div class="title">毎日2時間×2週間の習慣化</div><div class="desc">スキルより先に習慣。2週間連続で学習時間を確保できたら合格</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>判断基準はシンプル：</strong>7項目すべてにチェックが付いたらフェーズ2（フレームワーク + ポートフォリオ）へ進む。1つでも欠けているなら、まだこのフェーズにいる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 週ごとの進め方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">WEEKLY PLAN</span>
+      <h2>週ごとの進め方 — 4週間モデル</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">毎日2–3時間を前提にした標準ペース。多少前後してもいいが、順番は変えないこと。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">Week 1: 環境構築 + HTML/CSS入門</div><div class="desc">初日にVS Codeとブラウザを整え、2日目からProgate等でHTML/CSSを進める。タグの意味を暗記しようとせず、手を動かして「書けば表示される」感覚を掴む</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">Week 2: CSSレイアウト（Flexbox/Grid）+ 模写</div><div class="desc">レイアウトの主役はFlexboxとGrid。基礎を学んだら、シンプルなLPを1枚選んで模写する。「見た目をコードで再現できる」がこの週のゴール</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">Week 3: JavaScript基礎（変数〜DOM操作）</div><div class="desc">変数・条件分岐・ループ・関数を一通り学び、最後にDOM操作（ボタンを押したら表示が変わる等）まで到達する。ここが最初の山場。分からなくても止まらず先へ</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">Week 4: 自力で1枚ページ制作 + GitHubにpush</div><div class="desc">お手本なしで自己紹介ページや架空店舗のLPを1枚作る。完成度は6割でいい。Git・GitHubの基本操作を覚え、作ったページをpushして公開できる状態にする</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>ペースの目安：</strong>2–3時間 × 28日 = 約60–90時間。教材の完走に約40時間、模写と自作に約30時間、Gitに約10時間という配分が標準。教材に90時間かけて自作ゼロ、が最悪のパターン。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 教材
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MATERIALS</span>
+      <h2>教材 — これだけで足りる</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">教材選びに時間をかけるのが一番の無駄。下のどれかを選んで今日から始める。全部やる必要はない。</p>
+
+      <table class="data-table">
+        <thead><tr><th>教材</th><th>費用</th><th>使いどころ</th></tr></thead>
+        <tbody>
+          <tr><td>Progate（HTML・CSS・JavaScriptコース）</td><td class="money">月1,490円</td><td>最初の入口に最適。ブラウザだけで完結し、環境構築なしで始められる。1–2ヶ月で解約すればコスパ最強</td></tr>
+          <tr><td>freeCodeCamp</td><td class="money">無料</td><td>英語だが内容は一級品。演習量が多く、英語に抵抗がなければこれ一本でも完走できる</td></tr>
+          <tr><td>ドットインストール</td><td class="money">無料〜月1,080円</td><td>3分動画で手元の環境を見ながら学べる。環境構築やGit入門など「画面を見たい」場面で使う</td></tr>
+          <tr><td>MDN Web Docs</td><td class="money">無料</td><td>公式リファレンス。教材ではなく辞書。タグやプロパティの意味を調べる癖をここで付ける</td></tr>
+          <tr><td>書籍「1冊ですべて身につくHTML&amp;CSSとWebデザイン入門講座」</td><td class="money">約2,500円</td><td>手を動かしながら1サイト作り切る定番書。動画より本派の人はこちらをメイン教材に</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>推奨の組み合わせ：</strong>Progate（メイン）+ MDN（辞書）の2つで十分。フェーズ1の教材費は多くても月1,490円 + 書籍1冊。高額な教材やスクールはこの段階では不要。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: つまずきポイント
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PITFALLS</span>
+      <h2>つまずきポイント — 挫折の9割はこの3つ</h2>
+
+      <div class="work-list" style="grid-template-columns: 1fr;">
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">1</span><div class="title">完璧主義で進まない</div><div class="desc">タグやプロパティを暗記しようとして止まる。現役エンジニアも大半は調べながら書いている。暗記は不要。「調べれば書ける」状態になればその単元は合格として、どんどん先へ進む。</div></div>
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">2</span><div class="title">環境構築で消耗する</div><div class="desc">エディタやターミナルの設定でエラーが出て、コードを1行も書かないまま数日溶かすパターン。環境構築が1日で終わらなければ、一旦Progateなどブラウザ完結の教材に切り替えて学習を先に進め、環境は週末に落ち着いて再挑戦すればいい。</div></div>
+        <div class="work-item" style="border-left: 3px solid #dc3545;"><span class="num">3</span><div class="title">写経だけで手が動かない</div><div class="desc">教材のコードを写して「分かったつもり」になるが、白紙から書けと言われると手が止まる。教材を1周したら必ずお手本なしで自力で作ること。Week 4の自作ページはこの罠を避けるための必須工程。</div></div>
+      </div>
+
+      <div class="warning-box" style="margin-top:16px;">
+        <strong>教材の2周目は禁止。</strong>不安だからともう1周したくなるが、2周目の学習効率は自作の数分の1しかない。理解度6割で自作に進むほうが圧倒的に速く身につく。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>フェーズ1のゴールは「HTML/CSS/JSの基礎 + 自力で1枚ページ + Git」。完了条件はチェックリストの7項目で判定する。</li>
+        <li>4週間モデルで進める：Week 1 環境構築 + HTML/CSS、Week 2 Flexbox/Grid + 模写、Week 3 JavaScript基礎、Week 4 自作 + GitHub。</li>
+        <li>教材はProgate + MDNの2つで十分。教材費は月1,490円程度。この段階で高額な投資は不要。</li>
+        <li>暗記不要・完璧主義禁止。理解度6割で先に進み、教材1周後は必ずお手本なしで自力で作る。</li>
+        <li>スキルより先に「毎日2時間」の習慣。2週間続けられたら、フェーズ2に進む土台はできている。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ1: 基礎学習（Month 0–1）</p>
+  </main>
+</body>
+</html>

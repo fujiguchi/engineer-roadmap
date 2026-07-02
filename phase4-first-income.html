@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ4: 就職活動・案件獲得 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .plus { color: #1a8a5a; font-weight: 700; }
+    .data-table .minus { color: #b5432f; font-weight: 700; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+    .warning-box ul { margin: 6px 0 0 18px; }
+    .warning-box li { margin-bottom: 4px; }
+
+    /* Work list */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Pros / Cons */
+    .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+    .proscons-col { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid rgba(30,39,97,0.08); }
+    .proscons-col h4 { font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+    .proscons-col h4.pro { color: #1a8a5a; }
+    .proscons-col h4.con { color: #b5432f; }
+    .proscons-col ul { list-style: none; padding: 0; }
+    .proscons-col li { font-size: 13px; color: #555; padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+    .proscons-col li::before { position: absolute; left: 0; font-size: 11px; font-weight: 800; }
+    .proscons-col.pros li::before { content: '+'; color: #1a8a5a; }
+    .proscons-col.cons li::before { content: '−'; color: #b5432f; }
+
+    /* Stat box */
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 18px 22px; text-align: center; margin-bottom: 14px; }
+    .stat-box .num { font-size: 34px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 13px; margin-top: 4px; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 14px; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(30,39,97,0.1); }
+    .page-nav a { font-size: 14px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .proscons { grid-template-columns: 1fr; }
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ4: 就職活動・案件獲得 — 最初の収入</h1>
+  </header>
+  <main>
+    <p class="lead">Month 4–6。ここから初めて「稼ぐ」フェーズに入る。動かすルートは2つ — 就職（正社員/SES）と案件獲得（副業/フリーランス）。どちらか一方に絞らず並行で動かす。このフェーズの目的は金額ではなく「エンジニアとして対価を得た」という実績を作ること。1円でも稼げばゴールライン通過。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">チェックリストのフェーズ4は次の6項目。すべて埋まればこのロードマップのゴール地点に到達する。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">職務経歴書・スキルシートを作る</div>
+          <div class="desc">学習経緯・制作物・使用技術をA4で1–2枚に。前職の経験も「課題解決の実績」として書く。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">GitHubとポートフォリオを応募用に磨き込む</div>
+          <div class="desc">ピン留めリポジトリの整理・READMEの充実・デモURLの動作確認。採用担当は最初の30秒で判断する。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">応募チャネルに登録する</div>
+          <div class="desc">転職: Green / Wantedly / Findy。案件: クラウドワークス / ランサーズ / ココナラ。両側とも登録する。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">20社に応募する or 5件提案する</div>
+          <div class="desc">数を打つのが前提の設計。落ちても消耗しない。応募数が足りないのが最も多い停滞原因。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">5</span>
+          <div class="title">面接・商談ごとに振り返りメモを書く</div>
+          <div class="desc">聞かれた質問・答えに詰まった点を記録して次に反映。面接は才能ではなく回数で上手くなる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">6</span>
+          <div class="title">エンジニアとして最初の収入を得る</div>
+          <div class="desc">内定 or 案件の納品。金額は問わない。ここがこのロードマップのゴール地点。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 2ルートの比較
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">TWO ROUTES</span>
+      <h2>2ルートの比較 — 就職 vs 案件獲得</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">どちらを選ぶかで悩む時間がもったいない。性質が違うだけで、優劣はない。</p>
+
+      <table class="data-table">
+        <thead><tr><th>比較軸</th><th>就職ルート（正社員 / SES）</th><th>案件ルート（副業 / フリーランス）</th></tr></thead>
+        <tbody>
+          <tr><td><strong>収入の安定性</strong></td><td class="plus">高い（月給固定 + 社保）</td><td class="minus">低い（案件ごと・納品ベース）</td></tr>
+          <tr><td><strong>学べる量</strong></td><td class="plus">多い（レビュー文化・チーム開発）</td><td>案件次第（納品して終わりも多い）</td></tr>
+          <tr><td><strong>始めやすさ</strong></td><td>選考に1–2ヶ月かかる</td><td class="plus">今日提案して来週受注もあり得る</td></tr>
+          <tr><td><strong>向いている人</strong></td><td>腰を据えて実務経験を積みたい人</td><td>現職を続けながら実績を作りたい人</td></tr>
+        </tbody>
+      </table>
+
+      <div class="proscons">
+        <div class="proscons-col pros">
+          <h4 class="pro">並行で動かすメリット</h4>
+          <ul>
+            <li>選考の待ち時間を提案に使える</li>
+            <li>納品実績が職務経歴書の武器になる</li>
+            <li>面接で「稼働中の案件」を語れる</li>
+            <li>片方が全滅しても心が折れにくい</li>
+          </ul>
+        </div>
+        <div class="proscons-col cons">
+          <h4 class="con">並行運用の注意点</h4>
+          <ul>
+            <li>時間管理が甘いと両方中途半端になる</li>
+            <li>案件の納期と面接日程の衝突に注意</li>
+            <li>週の時間配分を先に決めておく必要がある</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>結論：両方同時に動かすのが最適。</strong>就職ルートは結果が出るまで時間がかかるので、待ち時間に案件提案を回す。小さくても納品実績ができれば職務経歴書に書けて、面接でも語れる。片方の進捗がもう片方の武器になる構造。
+      </div>
+
+      <p style="font-size:14px; color:#555; margin:20px 0 12px;"><strong style="color:var(--navy);">主な応募チャネル：</strong>登録は初日にまとめて済ませる。</p>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">転職サイト</div>
+          <div class="desc">Green / Wantedly / Findy。未経験可の求人が多く、カジュアル面談から入れる。GitHub連携があるFindyはポートフォリオが直接効く。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">クラウドソーシング</div>
+          <div class="desc">クラウドワークス / ランサーズ / ココナラ。単価は低いが実績ゼロから受注できる唯一の場所。最初の1件の評価が資産になる。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">知人経由</div>
+          <div class="desc">前職のつながり・友人の店のサイト制作など。競争がなく単価も高くなりやすい。「エンジニアになった」と周囲に宣言しておく。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 職務経歴書の書き方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">RESUME</span>
+      <h2>職務経歴書の書き方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">未経験者の職務経歴書は「学習をどう仕事の言葉に翻訳するか」で決まる。ポイントは4つ。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">学習経緯は「期間 × 内容 × 成果物」で数値化</div>
+          <div class="desc">「独学で勉強しました」ではなく「6ヶ月・約500時間でJavaScript/Reactを学習し、Webアプリを2つ公開」。数字が入ると一気に具体性が出る。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">制作物はURL + 技術 + 工夫を1行ずつ</div>
+          <div class="desc">「タスク管理アプリ（React/Firebase）— デモURL / リアルタイム同期を実装」のように、見る側が10秒で把握できる形式にする。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">前職の経験は「課題解決の実績」として翻訳</div>
+          <div class="desc">営業なら「顧客の課題をヒアリングして提案した経験」、事務なら「Excel業務を自動化して工数を削減した経験」。異業種の経験は掛け算の武器になる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">A4で1–2枚に収める</div>
+          <div class="desc">長い経歴書は読まれない。書きたいことを全部書くのではなく、相手が知りたいことだけを残す。ここでも「要約力」が見られている。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 企業の見分け方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">COMPANY CHECK</span>
+      <h2>企業の見分け方 — 自社開発 / 受託 / SES</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">同じ「エンジニア募集」でも事業形態で働き方が大きく違う。応募前に必ず見分ける。</p>
+
+      <table class="data-table">
+        <thead><tr><th>形態</th><th>仕事の内容</th><th>未経験の入りやすさ</th><th>注意点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>自社開発</strong></td><td>自社のサービス・プロダクトを開発</td><td class="minus">狭き門（倍率高）</td><td>選考でポートフォリオの質を厳しく見られる</td></tr>
+          <tr><td><strong>受託開発</strong></td><td>他社から開発を請け負う</td><td>中</td><td>納期駆動。多様な案件で経験の幅は広がる</td></tr>
+          <tr><td><strong>SES（客先常駐）</strong></td><td>クライアント企業に常駐して働く</td><td class="plus">最も入りやすい</td><td>現場ガチャあり。良い現場ならモダンな経験が積める</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>SESは踏み台として割り切ればアリ。</strong>未経験の最速の入口であることは事実。悪い現場だとExcelとテストだけで技術が伸びないリスクがあるので、面接で「どんな現場に配属されるか」「配属先の技術スタック」を必ず質問する。1年経験を積んだら自社開発への転職を目指すのが定石。
+      </div>
+
+      <div class="warning-box">
+        <strong>避けるべきシグナル — 1つでも当てはまったら慎重に：</strong>
+        <ul>
+          <li>「未経験歓迎・大量採用・研修1週間で現場」— 人を仕入れて売るビジネスモデルの可能性大</li>
+          <li>面接でコードの話が一切出ない — 技術力を評価する気がない＝入った後も評価されない</li>
+          <li>求人票に具体的な技術名がない（「最新技術に触れられる」だけ等）— 実態はレガシー保守のことが多い</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 応募の数値目安
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">NUMBERS</span>
+      <h2>応募の数値目安 — 落ちるのが前提の設計</h2>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="num">1–2割</div>
+          <div class="label">未経験の書類通過率</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">2–3割</div>
+          <div class="label">面接の通過率</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">20–30社</div>
+          <div class="label">内定1件に必要な応募数</div>
+        </div>
+      </div>
+
+      <p style="font-size:14px; color:#555; line-height:1.7;">書類通過率1–2割 × 面接通過率2–3割を掛け算すると、内定1件を取るには20–30社への応募が「標準」になる。5社落ちて凹むのは設計を知らないだけ。10社落ちてようやく折り返し地点、くらいの感覚で淡々と数を打つ。</p>
+
+      <div class="callout">
+        <strong>案件ルートの目安：</strong>クラウドソーシングは提案5件で返信1件程度が普通。実績ゼロの間は返信率がさらに下がるので、最初の1件を取るまでは10–15件提案するつもりで。1件納品して評価がつくと、返信率が目に見えて上がる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 提案文の書き方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PROPOSAL</span>
+      <h2>提案文の書き方（案件ルート）</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">発注者は何十件もの提案を斜め読みしている。長い自己紹介は読まれない。テンプレ構成はこの4ブロック。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">挨拶は1行だけ</div>
+          <div class="desc">「はじめまして。Web制作を行っている◯◯です」。経歴の長語りは不要。すぐ本題へ。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">できること + 実績URL</div>
+          <div class="desc">「同様のLP制作の実績があります（URL）」。口で説明するより動くものを見せる。ポートフォリオがここで効く。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">納期と進め方を具体的に</div>
+          <div class="desc">「着手から5営業日で初稿、修正2回込みで10日で納品します」。段取りを示せる人は実績が少なくても信頼される。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">質問を1つ添える</div>
+          <div class="desc">「参考にされたいデザインはありますか？」等。質問は返信のきっかけになり、要件を読み込んだ証拠にもなる。</div>
+        </div>
+      </div>
+
+      <div class="warning-box" style="margin-top:16px;">
+        <strong>単価を安売りしすぎない：</strong>実績作りのための値引きは相場の7割まで。「無料でやります」「相場の半額以下」は誠意ではなく、値段でしか選ばれない客層と、対等に扱われない関係を引き寄せる。安くする場合も「今回は実績作りのため特別価格です」と理由を明示して、次回から通常価格に戻せる形にしておく。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+      <ol class="summary-list">
+        <li>就職ルートと案件ルートは並行で動かす。片方の進捗がもう片方の武器になる。</li>
+        <li>職務経歴書は「期間 × 内容 × 成果物」で数値化。前職の経験は課題解決の実績として翻訳する。</li>
+        <li>企業は自社開発 / 受託 / SESを見分けて応募する。「大量採用・コードの話ゼロ・技術名なし」は危険シグナル。</li>
+        <li>内定1件 = 20–30社応募が標準。落ちるのが前提の設計なので、1社ごとに凹まず振り返って次に反映する。</li>
+        <li>このフェーズのゴールは金額ではなく実績。1円でも稼げば「エンジニアとして稼いだ人」になり、次のフェーズが始まる。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ フェーズ4 ／ 数字は日本国内市場の目安。個人の経験・市場環境により変動します。</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+/* Visual design tokens adapted from dx-consul-decks (shared/style.css) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0f1729;
+  --navy: #1e2761;
+  --navy2: #2c3a86;
+  --paper: #f7f8fc;
+  --accent: #18c5d4;
+  --accent-soft: #5fe0ea;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+header.page-header {
+  background: linear-gradient(135deg, #0b1226 0%, #1a2360 60%, #101d4a 100%);
+  color: #fff;
+  padding: 32px 48px;
+}
+
+header.page-header .badge {
+  display: inline-block;
+  background: rgba(24, 197, 212, 0.12);
+  border: 1px solid rgba(24, 197, 212, 0.45);
+  color: var(--accent-soft);
+  font-size: 12px;
+  letter-spacing: 4px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+header.page-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+main {
+  padding: 32px 48px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 22px;
+  border: 1px solid rgba(30, 39, 97, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card:hover {
+  border-color: rgba(24, 197, 212, 0.45);
+}
+
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7aa5;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.card-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(30, 39, 97, 0.2);
+  color: var(--navy);
+}

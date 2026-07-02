@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ロードマップ進捗チェックリスト - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 20px; }
+    section.block { margin-bottom: 36px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 6px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Overall progress (sticky) */
+    .progress-panel {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper); padding: 14px 0 12px;
+      border-bottom: 1px solid rgba(30,39,97,0.1); margin-bottom: 28px;
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .progress-head .label { font-size: 12px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; }
+    .progress-head .pct { font-size: 20px; font-weight: 800; color: var(--navy); }
+    .progress-track { height: 10px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--navy2), var(--accent)); border-radius: 6px; transition: width 0.3s ease; }
+
+    /* Phase header row */
+    .phase-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .phase-meta { font-size: 12px; color: #6b7aa5; }
+    .phase-progress { display: flex; align-items: center; gap: 8px; min-width: 160px; }
+    .phase-track { flex: 1; height: 6px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 4px; overflow: hidden; min-width: 100px; }
+    .phase-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 4px; transition: width 0.3s ease; }
+    .phase-count { font-size: 12px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .phase-link { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .phase-link:hover { text-decoration: underline; }
+
+    /* Task items */
+    .task-list { display: flex; flex-direction: column; gap: 8px; }
+    .task {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1px solid rgba(30,39,97,0.08); border-radius: 10px;
+      padding: 12px 16px; cursor: pointer; user-select: none;
+      transition: border-color 0.15s ease;
+    }
+    .task:hover { border-color: rgba(24,197,212,0.45); }
+    .task input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+      border: 2px solid rgba(30,39,97,0.25); border-radius: 6px;
+      background: #fff; cursor: pointer; position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .task input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+    .task input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; left: 5px; top: 1px;
+      width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .task input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .task .t { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+    .task .d { font-size: 12px; color: #6b7aa5; margin-top: 2px; line-height: 1.6; }
+    .task.done .t { color: #9aa3bd; text-decoration: line-through; }
+    .task.done .d { color: #b6bdd1; }
+
+    /* Reset row */
+    .reset-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .reset-btn {
+      font-family: inherit; font-size: 12px; font-weight: 700; color: #b5432f;
+      background: none; border: 1px solid rgba(220,53,69,0.3); border-radius: 6px;
+      padding: 6px 14px; cursor: pointer;
+    }
+    .reset-btn:hover { background: rgba(220,53,69,0.06); }
+
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--ink); line-height: 1.7; margin-bottom: 20px; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+      .phase-progress { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>ロードマップ進捗チェックリスト</h1>
+  </header>
+  <main>
+    <p class="lead">未経験からエンジニアとして最初の収入を得るまでの全タスク。チェックはこのブラウザに自動保存される。各フェーズの詳しい進め方はリンク先の詳細ガイドへ。</p>
+
+    <div class="callout">進捗はこの端末のブラウザ（localStorage）にのみ保存されます。別の端末には引き継がれません。</div>
+
+    <div class="progress-panel">
+      <div class="progress-head">
+        <span class="label">全体進捗</span>
+        <span class="pct" id="overall-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="overall-fill"></div></div>
+    </div>
+
+    <!-- Phase 1 -->
+    <section class="block" data-phase="p1">
+      <span class="eyebrow">PHASE 1 / MONTH 0–1</span>
+      <div class="phase-head">
+        <h2>基礎学習</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/7</span>
+          <a class="phase-link" href="phase1-basics.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p1-env"><span><span class="t">開発環境を整える</span><span class="d" style="display:block;">VS Code・Chrome・Gitをインストール。ターミナルの基本操作（cd / ls / mkdir）に慣れる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-htmlcss"><span><span class="t">HTML/CSSの基礎を完走する</span><span class="d" style="display:block;">Progate HTML&CSS（初級〜上級）または freeCodeCamp Responsive Web Design。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-js"><span><span class="t">JavaScriptの基礎を完走する</span><span class="d" style="display:block;">変数・関数・配列・オブジェクト・DOM操作まで。ProgateのJavaScriptコースが目安。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-layout"><span><span class="t">Flexbox / Grid でレイアウトを組めるようになる</span><span class="d" style="display:block;">MDNのガイドを読み、実在するサイトのファーストビューを1枚模写する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-page"><span><span class="t">Webページを自力で1枚作る</span><span class="d" style="display:block;">自己紹介ページや架空店舗のLPなど。教材を見ずにゼロから書き切る。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-git"><span><span class="t">Git / GitHub の基本操作を身につける</span><span class="d" style="display:block;">init / add / commit / push / branch。作ったページをGitHubにpushする。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p1-habit"><span><span class="t">毎日2時間以上の学習を2週間続ける</span><span class="d" style="display:block;">時間帯を固定して習慣化する。挫折の最大要因は「学習が途切れること」。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 2 -->
+    <section class="block" data-phase="p2">
+      <span class="eyebrow">PHASE 2 / MONTH 2–3</span>
+      <div class="phase-head">
+        <h2>フレームワーク + ポートフォリオ</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/7</span>
+          <a class="phase-link" href="phase2-portfolio.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p2-es6"><span><span class="t">モダンJavaScript文法を習得する</span><span class="d" style="display:block;">アロー関数・分割代入・map/filter・async/await・モジュール。Reactの前提知識。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-react"><span><span class="t">React公式チュートリアルを完走する</span><span class="d" style="display:block;">コンポーネント・props・state・イベント処理までを理解する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-todo"><span><span class="t">Todoアプリを自力で作る</span><span class="d" style="display:block;">追加・削除・完了切替・絞り込み。チュートリアルを見ずに書き切るのが条件。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-api"><span><span class="t">外部APIと連携するアプリを1本作る</span><span class="d" style="display:block;">天気・映画・GitHub APIなど。fetch・ローディング・エラー処理を経験する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-deploy"><span><span class="t">作ったアプリをデプロイして公開する</span><span class="d" style="display:block;">Vercel / Netlify / Cloudflare Pages。URLを人に送れる状態にする。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-readme"><span><span class="t">各リポジトリにREADMEを書く</span><span class="d" style="display:block;">概要・スクリーンショット・使用技術・工夫した点。採用担当が最初に見る場所。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p2-portfolio"><span><span class="t">ポートフォリオサイトを公開する</span><span class="d" style="display:block;">自己紹介 + 制作物2–3点 + 連絡先。これ自体も制作物の一つになる。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 3 -->
+    <section class="block" data-phase="p3">
+      <span class="eyebrow">PHASE 3 / MONTH 3–4</span>
+      <div class="phase-head">
+        <h2>実務に近い経験を積む</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/5</span>
+          <a class="phase-link" href="phase3-experience.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p3-app"><span><span class="t">「自分の課題を解決する」アプリをもう1本作る</span><span class="d" style="display:block;">家計簿・学習記録・シフト管理など。企画から自分でやった経験が面接で最も語れる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-oss"><span><span class="t">OSSにプルリクエストを1件出す</span><span class="d" style="display:block;">ドキュメント修正やtypo修正でOK。「他人のコードベースで作業した」実績になる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-client"><span><span class="t">実在の相手がいる制作を1件引き受ける</span><span class="d" style="display:block;">知人の店のサイト、サークルのページなど。要望を聞いて納品するプロセスが実務経験に近い。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-review"><span><span class="t">他人からコードレビューを受ける</span><span class="d" style="display:block;">コミュニティ・メンターサービス・SNS。指摘されて直す経験が実務との最大のギャップを埋める。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p3-articles"><span><span class="t">技術記事を3本公開する</span><span class="d" style="display:block;">Zenn / Qiita。つまずいた点と解決法でいい。言語化できる人は面接で強い。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 4 -->
+    <section class="block" data-phase="p4">
+      <span class="eyebrow">PHASE 4 / MONTH 4–6</span>
+      <div class="phase-head">
+        <h2>就職活動・案件獲得 — 最初の収入</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/6</span>
+          <a class="phase-link" href="phase4-first-income.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p4-resume"><span><span class="t">職務経歴書・スキルシートを作る</span><span class="d" style="display:block;">学習経緯・制作物・使用技術を1–2枚に。前職の経験も「課題解決の実績」として書く。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-github"><span><span class="t">GitHubとポートフォリオを応募用に磨き込む</span><span class="d" style="display:block;">ピン留めリポジトリの整理・READMEの充実・デモURLの動作確認。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-register"><span><span class="t">応募チャネルに登録する</span><span class="d" style="display:block;">転職: Green / Wantedly / Findy。案件: クラウドワークス / ランサーズ / ココナラ。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-apply"><span><span class="t">20社に応募する or 5件提案する</span><span class="d" style="display:block;">未経験の書類通過率は1–2割が普通。数を打つのが前提。落ちても消耗しない。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-retro"><span><span class="t">面接・商談ごとに振り返りメモを書く</span><span class="d" style="display:block;">聞かれた質問・答えに詰まった点を記録して次に反映。面接は回数で上手くなる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p4-income"><span><span class="t">エンジニアとして最初の収入を得る</span><span class="d" style="display:block;">内定 or 案件の納品。金額は問わない。ここがこのロードマップのゴール地点。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Phase 5 -->
+    <section class="block" data-phase="p5">
+      <span class="eyebrow">PHASE 5 / MONTH 6–24</span>
+      <div class="phase-head">
+        <h2>実務経験とキャリアの分岐点</h2>
+        <div class="phase-progress">
+          <div class="phase-track"><div class="phase-fill"></div></div>
+          <span class="phase-count">0/5</span>
+          <a class="phase-link" href="phase5-growth.html">詳細ガイド →</a>
+        </div>
+      </div>
+      <div class="task-list">
+        <label class="task"><input type="checkbox" data-id="p5-team"><span><span class="t">チーム開発のフローを一通り経験する</span><span class="d" style="display:block;">ブランチ運用・プルリクエスト・レビュー・リリース。実務6ヶ月の最重要テーマ。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-strength"><span><span class="t">「得意」と言える領域を1つ作る</span><span class="d" style="display:block;">フロント・API・インフラ・テストなど。チーム内で「これは○○さん」と言われる状態。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-market"><span><span class="t">自分の市場価値を測定する</span><span class="d" style="display:block;">転職ドラフト・Findyの年収予測・エージェント面談。現年収とのギャップを把握する。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-side"><span><span class="t">副業の受け入れ態勢を作る</span><span class="d" style="display:block;">就業規則の確認・開業届の検討・副業プラットフォーム登録。実務1年から現実的になる。</span></span></label>
+        <label class="task"><input type="checkbox" data-id="p5-decide"><span><span class="t">2年目の進路を意思決定する</span><span class="d" style="display:block;">転職で年収アップ / 副業で複線化 / フリーランス転向。「稼ぎ方 完全ガイド」の比較表で判断。</span></span></label>
+      </div>
+    </section>
+
+    <div class="reset-row">
+      <button class="reset-btn" id="reset-btn" type="button">進捗をリセット</button>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'engineer-roadmap-progress';
+
+      function load() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+      function save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      var state = load();
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('.task input[type="checkbox"]'));
+
+      function render() {
+        boxes.forEach(function (box) {
+          var checked = !!state[box.dataset.id];
+          box.checked = checked;
+          box.closest('.task').classList.toggle('done', checked);
+        });
+
+        var total = boxes.length;
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        document.getElementById('overall-pct').textContent = pct + '%';
+        document.getElementById('overall-fill').style.width = pct + '%';
+
+        document.querySelectorAll('section[data-phase]').forEach(function (section) {
+          var phaseBoxes = Array.prototype.slice.call(section.querySelectorAll('input[type="checkbox"]'));
+          var phaseDone = phaseBoxes.filter(function (b) { return b.checked; }).length;
+          var phasePct = phaseBoxes.length ? (phaseDone / phaseBoxes.length) * 100 : 0;
+          section.querySelector('.phase-fill').style.width = phasePct + '%';
+          section.querySelector('.phase-count').textContent = phaseDone + '/' + phaseBoxes.length;
+        });
+      }
+
+      boxes.forEach(function (box) {
+        box.addEventListener('change', function () {
+          state[box.dataset.id] = box.checked;
+          save(state);
+          render();
+        });
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        if (!confirm('すべてのチェックを外してリセットします。よろしいですか？')) return;
+        state = {};
+        save(state);
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

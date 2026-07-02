@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ3: 実務に近い経験を積む - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; margin: 16px 0; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Work list (numbered cards) */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .footer-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .footer-nav a { font-size: 14px; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .footer-nav a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ3: 実務に近い経験を積む</h1>
+  </header>
+  <main>
+    <p class="lead">Month 3–4。ポートフォリオと実務の間には「一人で好きに作った」と「他人の要望・他人のコードの中で作業した」の大きなギャップがある。このフェーズでそれを埋める。目標は「仕事として納品した」「他人のコードベースで作業した」という実績を作ること。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">次の5つがすべて終わったらフェーズ3は完了。チェックリストのフェーズ3の項目と同じもの。</p>
+
+      <table class="data-table">
+        <thead><tr><th>完了条件</th><th>目安</th><th>ポイント</th></tr></thead>
+        <tbody>
+          <tr><td>「自分の課題を解決する」アプリをもう1本作る</td><td class="money">2–3週間</td><td>家計簿・学習記録・シフト管理など。企画から自分でやった経験が面接で最も語れる</td></tr>
+          <tr><td>OSSにプルリクエストを1件出す</td><td class="money">数日</td><td>ドキュメント修正やtypo修正でOK。「他人のコードベースで作業した」実績になる</td></tr>
+          <tr><td>実在の相手がいる制作を1件引き受ける</td><td class="money">2–4週間</td><td>知人の店のサイト、サークルのページなど。要望を聞いて納品するプロセスが実務経験に近い</td></tr>
+          <tr><td>他人からコードレビューを受ける</td><td class="money">1回以上</td><td>コミュニティ・メンターサービス・SNS。指摘されて直す経験が実務との最大のギャップを埋める</td></tr>
+          <tr><td>技術記事を3本公開する</td><td class="money">各2–3時間</td><td>Zenn / Qiita。つまずいた点と解決法でいい。言語化できる人は面接で強い</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>順番は自由、並行でOK：</strong>アプリ開発を進めながら、詰まったところを記事にして、区切りのいいタイミングでレビューを受ける──という回し方が最も効率がいい。5つは独立したタスクではなく、互いに材料を供給し合う。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: OSSコントリビュート
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">OSS</span>
+      <h2>OSSコントリビュートの始め方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">「OSSに貢献」と聞くと大げさに感じるが、入口は驚くほど低い。次の5ステップで進める。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">普段使うライブラリのGitHubを見る</div>
+          <div class="desc">ReactでもRailsでも、自分が毎日触っているものが一番良い。使っているからこそ、ドキュメントの分かりにくさや誤りに気づける。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">「good first issue」ラベルを探す</div>
+          <div class="desc">多くのリポジトリには初心者向けのIssueにこのラベルが付いている。Issues画面でラベル検索すれば、着手しやすい課題の一覧が出てくる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">ドキュメントのtypo修正・翻訳から入る</div>
+          <div class="desc">最初のPRはコードでなくていい。誤字修正、リンク切れ修正、日本語ドキュメントの翻訳。ハードルが低く、mergeされやすい。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">4</span>
+          <div class="title">CONTRIBUTING.mdを読んでPR作法に従う</div>
+          <div class="desc">ブランチの命名、コミットメッセージの形式、PRテンプレートなど、リポジトリごとのルールがある。読まずに出すと作法違反で差し戻される。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">5</span>
+          <div class="title">レビュー指摘には全部返信して直す</div>
+          <div class="desc">指摘されたら放置せず、すべてに返信して修正する。このやり取り自体が実務のコードレビューとまったく同じ訓練になる。</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>1行でも実績になる：</strong>typo修正1行のPRでも、「他人のコードベースを読み、リポジトリの作法に従ってPRを出し、mergeされた」という事実は変わらない。面接で「OSSにコントリビュートした経験があります」と言える。完璧なコード改善を狙って何も出さないより、小さく1件出すほうが圧倒的に価値がある。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 実在クライアント案件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REAL CLIENT</span>
+      <h2>実在クライアント案件の取り方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">いきなりクラウドソーシングで戦う必要はない。知人の店、所属しているサークル、家族の職場──身近な相手で「本物の要望を持った他人」がいれば十分。無償でも構わない。ただし条件が一つある。</p>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">① 要件を聞く</div>
+          <div class="desc">「何が欲しいですか」ではなく「何に困っていますか」から聞く。相手は「ホームページが欲しい」としか言えないことが多い。困りごとを機能に翻訳するのが仕事。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">② 見積もる</div>
+          <div class="desc">無償でも「この内容なら○日かかります」と工数を見積もって伝える。作業を金額・日数に換算する感覚は、実務に出る前にここで練習しておく。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">③ 納期を切る</div>
+          <div class="desc">「できたら渡します」は禁止。「○月○日までに納品します」と自分で期限を宣言する。納期があるだけで作業の質と段取りが一変する。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">④ 納品する</div>
+          <div class="desc">デプロイして相手が使える状態にし、更新方法を説明して引き渡す。「動くものを見せた」ではなく「相手が使い始めた」までがゴール。</div>
+        </div>
+      </div>
+
+      <p style="font-size:14px; color:#555; margin-top:14px; line-height:1.7;">この「要件を聞く → 見積もる → 納期を切る → 納品する」の全工程を自分でやることが条件。どれか一つでも飛ばすと、それはただの趣味の制作であって実務経験の代わりにはならない。</p>
+
+      <div class="warning-box">
+        <strong>無償案件の線引きに注意：</strong>無償・低単価の案件で最も多い失敗は「無限対応」。納品後に「ここも直して」「ついでにこれも」が延々と続く。着手前に「修正は○回まで」「対応範囲はこのページのみ、それ以外は別途相談」と、修正回数と範囲を必ず最初に合意しておくこと。これ自体が実務で必須の契約感覚の練習になる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: コードレビュー
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">REVIEW</span>
+      <h2>コードレビューを受ける方法</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">独学の最大の弱点は「自分のコードの悪い癖に気づけない」こと。実務では毎日レビューで指摘される。<strong style="color:var(--navy);">指摘され慣れること</strong>が、実務に入る前にできる最大の準備。</p>
+
+      <table class="data-table">
+        <thead><tr><th>手段</th><th>費用</th><th>特徴</th><th>向いている人</th></tr></thead>
+        <tbody>
+          <tr><td>MENTA等のメンターサービス</td><td class="money">月3,000円〜</td><td>現役エンジニアと契約して継続的にレビューしてもらえる。質が安定</td><td>確実にフィードバックが欲しい人</td></tr>
+          <tr><td>コミュニティ・もくもく会</td><td class="money">無料</td><td>connpass等で探せる勉強会。その場で画面を見せて聞ける。人脈もできる</td><td>対面で質問したい人</td></tr>
+          <tr><td>SNSでレビュー募集</td><td class="money">無料</td><td>GitHubのURLを添えて募集。反応は運次第だが、思わぬ視点がもらえる</td><td>公開に抵抗がない人</td></tr>
+          <tr><td>スクールの単発レビュー</td><td class="money">数千円〜/回</td><td>単発のコードレビューサービスやスポット相談。1回で網羅的に見てもらえる</td><td>ポートフォリオを仕上げたい人</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>指摘は多いほど得：</strong>最初のレビューで10個も20個も指摘されるのが普通。凹む必要はない。指摘1件 = 実務前に潰せた癖1件。「なぜそう直すのか」を毎回聞いて、次のコードに反映するサイクルを回す。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 技術記事
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">WRITING</span>
+      <h2>技術記事の書き方 — 3本公開する</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">投稿先はZennかQiita。ネタ探しに悩む必要はない。<strong style="color:var(--navy);">「自分がつまずいて調べたこと」で十分。</strong>同じ場所でつまずく人は必ずいる。</p>
+
+      <table class="data-table">
+        <thead><tr><th>テンプレの流れ</th><th>書く内容</th></tr></thead>
+        <tbody>
+          <tr><td class="money">① 何をしようとしたか</td><td>「Reactでログイン機能を作ろうとした」など、前提と目的を1–2行で</td></tr>
+          <tr><td class="money">② 何が起きたか</td><td>エラーメッセージや期待と違った挙動をそのまま貼る。検索で辿り着く人の入口になる</td></tr>
+          <tr><td class="money">③ 原因</td><td>調べて分かった原因。参考にした公式ドキュメントや記事のリンクも添える</td></tr>
+          <tr><td class="money">④ 解決法</td><td>実際に直したコードと手順。同じ状況の人がコピーして解決できるレベルで具体的に</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>完璧主義にならない：</strong>目標は3本で十分。バズる必要も、網羅的な解説である必要もない。「エラーと解決法を筋道立てて言語化できる」ことを示すのが目的で、これは面接での技術説明力の証明にそのままなる。1本2–3時間で書き切って公開する。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>フェーズ3の目的は「一人で作った」から「他人の要望・他人のコードの中で作業した」への転換。この実績が未経験者の中で頭一つ抜ける材料になる。</li>
+        <li>OSSはtypo修正1行から。「good first issue」を探し、CONTRIBUTING.mdの作法に従い、指摘には全部返信して直す。mergeされた事実がそのまま実績。</li>
+        <li>実在クライアント案件は身近な相手で十分。無償でもOKだが「要件を聞く→見積もる→納期を切る→納品する」の全工程をやること。修正回数と範囲は最初に合意する。</li>
+        <li>コードレビューは指摘され慣れるのが目的。メンターサービス・もくもく会・SNS、どの手段でもいいので必ず一度は他人の目を通す。</li>
+        <li>技術記事は「つまずき→原因→解決法」のテンプレで3本。完璧主義にならず、書き切って公開することを優先する。</li>
+      </ol>
+    </section>
+
+    <div class="footer-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ3: 実務に近い経験を積む（Month 3–4）</p>
+  </main>
+</body>
+</html>

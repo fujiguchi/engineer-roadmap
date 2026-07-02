@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>1日30分×30日プラン - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 20px; }
+    section.block { margin-bottom: 36px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 12px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 14px 0; }
+    .callout strong { color: var(--navy); }
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; margin: 14px 0; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 16px 0; }
+    .stat-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 16px 20px; text-align: center; }
+    .stat-box .num { font-size: 28px; font-weight: 800; color: var(--accent-soft); }
+    .stat-box .label { font-size: 12px; margin-top: 4px; }
+
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Progress panel */
+    .progress-panel {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper); padding: 14px 0 12px;
+      border-bottom: 1px solid rgba(30,39,97,0.1); margin-bottom: 28px;
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .progress-head .label { font-size: 12px; font-weight: 700; color: #6b7aa5; letter-spacing: 1px; text-transform: uppercase; }
+    .progress-head .pct { font-size: 20px; font-weight: 800; color: var(--navy); }
+    .progress-track { height: 10px; background: #fff; border: 1px solid rgba(30,39,97,0.1); border-radius: 6px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--navy2), var(--accent)); border-radius: 6px; transition: width 0.3s ease; }
+
+    /* Week block */
+    .week-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .week-count { font-size: 12px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+    /* Day items */
+    .day-list { display: flex; flex-direction: column; gap: 6px; }
+    .day {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fff; border: 1px solid rgba(30,39,97,0.08); border-radius: 10px;
+      padding: 10px 14px; cursor: pointer; user-select: none;
+      transition: border-color 0.15s ease;
+    }
+    .day:hover { border-color: rgba(24,197,212,0.45); }
+    .day .daynum {
+      flex-shrink: 0; width: 44px; font-size: 11px; font-weight: 800; color: var(--accent);
+      letter-spacing: 0.5px; margin-top: 3px;
+    }
+    .day input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+      border: 2px solid rgba(30,39,97,0.25); border-radius: 6px;
+      background: #fff; cursor: pointer; position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .day input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+    .day input[type="checkbox"]:checked::after {
+      content: ''; position: absolute; left: 5px; top: 1px;
+      width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg);
+    }
+    .day input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .day .t { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+    .day .d { font-size: 12px; color: #6b7aa5; margin-top: 1px; line-height: 1.6; }
+    .day.done .t { color: #9aa3bd; text-decoration: line-through; }
+    .day.done .d { color: #b6bdd1; }
+
+    .reset-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .reset-btn {
+      font-family: inherit; font-size: 12px; font-weight: 700; color: #b5432f;
+      background: none; border: 1px solid rgba(220,53,69,0.3); border-radius: 6px;
+      padding: 6px 14px; cursor: pointer;
+    }
+    .reset-btn:hover { background: rgba(220,53,69,0.06); }
+
+    .nav-links { margin-top: 32px; font-size: 13px; }
+    .nav-links a { color: var(--accent); font-weight: 700; text-decoration: none; margin-right: 20px; }
+    .nav-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+      .day .daynum { width: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>1日30分×30日プラン</h1>
+  </header>
+  <main>
+    <p class="lead">忙しくても続けられる最小単位のプラン。1日30分・30日で「HTML/CSSの基礎 + 自分のページを1枚公開 + JavaScriptの味見」まで到達する。エンジニア適性の確認と学習習慣づくりを最小コストで行う設計。</p>
+
+    <section class="block">
+      <span class="eyebrow">HONEST MATH</span>
+      <h2>まず正直な話 — 30分×30日で何ができるか</h2>
+      <div class="stat-row">
+        <div class="stat-box"><div class="num">15時間</div><div class="label">合計投資時間（30分×30日）</div></div>
+        <div class="stat-box"><div class="num">約1,500円</div><div class="label">必要な費用（Progate 1ヶ月分）</div></div>
+        <div class="stat-box"><div class="num">1枚</div><div class="label">公開できる自分のWebページ</div></div>
+      </div>
+      <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:10px;">15時間は、ロードマップのフェーズ1完了（目安100–150時間）の約1割。つまりこの30日で「稼げるレベル」には到達しない。到達するのは次の3つ。</p>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">① 基礎の土台</div>
+          <div class="desc">HTML/CSSで簡単なページが書けて、JavaScriptが何かを説明できる状態。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">② 公開実績</div>
+          <div class="desc">自分で作ったページがURL付きでインターネット上に存在する状態。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">③ 適性の判定材料</div>
+          <div class="desc">「これを仕事にしたいか」を15時間の実体験ベースで判断できる状態。</div>
+        </div>
+      </div>
+      <div class="callout"><strong>このプランの設計意図：</strong>撤退コストを最小にすること。合わないと分かっても失うのは15時間と1,500円だけ。逆に「向いている」と分かればフェーズ1に自信を持って投資できる。いきなりスクールに80万円払うより、まずこの30日。</div>
+    </section>
+
+    <div class="callout" style="border-color: rgba(24,197,212,0.5);"><strong>アプリ版があります：</strong>30分タイマー・連続日数・今日のタスク表示つきの<a href="app/" style="color:var(--accent); font-weight:700;">30×30 アプリ</a>で進めるのがおすすめ。スマホのホーム画面に追加すると毎日開きやすい。</div>
+
+    <div class="progress-panel">
+      <div class="progress-head">
+        <span class="label">30日の進捗</span>
+        <span class="pct" id="overall-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="overall-fill"></div></div>
+    </div>
+
+    <!-- Week 1 -->
+    <section class="block" data-week="w1">
+      <span class="eyebrow">WEEK 1 / DAY 1–7</span>
+      <div class="week-head">
+        <h2>HTMLに触れる</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 1</span><input type="checkbox" data-id="d01"><span><span class="t">Progateに登録して、HTML &amp; CSS 初級編を始める</span><span class="d" style="display:block;">見出し・段落・リンクまで。今日はアカウント作成と最初のレッスンだけでOK。</span></span></label>
+        <label class="day"><span class="daynum">DAY 2</span><input type="checkbox" data-id="d02"><span><span class="t">画像・リストのタグを学ぶ</span><span class="d" style="display:block;">img・ul/ol/li。Progateの続きを30分進める。</span></span></label>
+        <label class="day"><span class="daynum">DAY 3</span><input type="checkbox" data-id="d03"><span><span class="t">フォームとボタンのタグを学ぶ</span><span class="d" style="display:block;">input・button・form。「見たことある部品」がタグで書けることを実感する。</span></span></label>
+        <label class="day"><span class="daynum">DAY 4</span><input type="checkbox" data-id="d04"><span><span class="t">HTML &amp; CSS 初級編のHTMLパートを終える</span><span class="d" style="display:block;">終わらなければ翌日に持ち越してOK。進捗より継続が優先。</span></span></label>
+        <label class="day"><span class="daynum">DAY 5</span><input type="checkbox" data-id="d05"><span><span class="t">VS CodeとChromeを準備して、hello.htmlを作る</span><span class="d" style="display:block;">ローカルにファイルを作り、ブラウザで開く。教材の外で動かす最初の一歩。</span></span></label>
+        <label class="day"><span class="daynum">DAY 6</span><input type="checkbox" data-id="d06"><span><span class="t">自己紹介ページの骨組みをHTMLだけで書く</span><span class="d" style="display:block;">名前・趣味・好きなもの3つ。見た目は気にしない。構造だけ。</span></span></label>
+        <label class="day"><span class="daynum">DAY 7</span><input type="checkbox" data-id="d07"><span><span class="t">週の復習 — わからなかったタグをMDNで3つ調べる</span><span class="d" style="display:block;">「調べて解決する」練習。エンジニアの仕事の半分はこれ。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 2 -->
+    <section class="block" data-week="w2">
+      <span class="eyebrow">WEEK 2 / DAY 8–14</span>
+      <div class="week-head">
+        <h2>CSSで見た目を作る</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 8</span><input type="checkbox" data-id="d08"><span><span class="t">CSSの基本 — セレクタ・色・フォント</span><span class="d" style="display:block;">ProgateのCSSパートへ。HTMLに色がつく瞬間を体験する。</span></span></label>
+        <label class="day"><span class="daynum">DAY 9</span><input type="checkbox" data-id="d09"><span><span class="t">ボックスモデルを理解する</span><span class="d" style="display:block;">margin・padding・border。CSSで最初につまずく場所なので30分まるごと使う。</span></span></label>
+        <label class="day"><span class="daynum">DAY 10</span><input type="checkbox" data-id="d10"><span><span class="t">Flexboxで横並びを作る</span><span class="d" style="display:block;">display: flex。現代のレイアウトの主役。</span></span></label>
+        <label class="day"><span class="daynum">DAY 11</span><input type="checkbox" data-id="d11"><span><span class="t">Flexbox Froggyで遊びながら定着させる</span><span class="d" style="display:block;">無料のブラウザゲーム。24面クリアを目指す（終わらなくてOK）。</span></span></label>
+        <label class="day"><span class="daynum">DAY 12</span><input type="checkbox" data-id="d12"><span><span class="t">自己紹介ページにCSSを当てる</span><span class="d" style="display:block;">背景色・文字色・余白。DAY 6の骨組みに見た目をつける。</span></span></label>
+        <label class="day"><span class="daynum">DAY 13</span><input type="checkbox" data-id="d13"><span><span class="t">ヘッダーとカード風レイアウトを作る</span><span class="d" style="display:block;">上部にタイトルバー、コンテンツを白いカードに。Flexboxを実戦投入。</span></span></label>
+        <label class="day"><span class="daynum">DAY 14</span><input type="checkbox" data-id="d14"><span><span class="t">週の復習 — 好きなサイトを観察して1ブロック真似る</span><span class="d" style="display:block;">「このボタンはどう作られている？」と右クリック→検証で覗いてみる。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 3 -->
+    <section class="block" data-week="w3">
+      <span class="eyebrow">WEEK 3 / DAY 15–21</span>
+      <div class="week-head">
+        <h2>ページを完成させて公開する</h2>
+        <span class="week-count">0/7</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 15</span><input type="checkbox" data-id="d15"><span><span class="t">フォントと配色を決めて適用する</span><span class="d" style="display:block;">Google Fontsから1書体、色は3色まで（背景・文字・アクセント）。</span></span></label>
+        <label class="day"><span class="daynum">DAY 16</span><input type="checkbox" data-id="d16"><span><span class="t">メディアクエリの基本を学ぶ</span><span class="d" style="display:block;">@media (max-width: 600px)。画面幅で見た目を変える仕組み。</span></span></label>
+        <label class="day"><span class="daynum">DAY 17</span><input type="checkbox" data-id="d17"><span><span class="t">自己紹介ページをスマホ対応にする</span><span class="d" style="display:block;">Chromeの検証モードでスマホ表示を確認しながら調整。</span></span></label>
+        <label class="day"><span class="daynum">DAY 18</span><input type="checkbox" data-id="d18"><span><span class="t">GitHubアカウントとリポジトリを作る</span><span class="d" style="display:block;">アカウント作成 → 「my-profile」リポジトリ作成 → ファイルをアップロード。</span></span></label>
+        <label class="day"><span class="daynum">DAY 19</span><input type="checkbox" data-id="d19"><span><span class="t">GitHub Pagesで公開する</span><span class="d" style="display:block;">Settings → Pages → 公開。自分のページがURL付きでネット上に存在する日。</span></span></label>
+        <label class="day"><span class="daynum">DAY 20</span><input type="checkbox" data-id="d20"><span><span class="t">公開ページをスマホの実機で見て微調整する</span><span class="d" style="display:block;">文字が小さい・はみ出す等を直して再アップロード。</span></span></label>
+        <label class="day"><span class="daynum">DAY 21</span><input type="checkbox" data-id="d21"><span><span class="t">週の復習 — 公開URLを1人に見せて感想を1つもらう</span><span class="d" style="display:block;">「人に見せる」心理的ハードルを最小サイズで越えておく。</span></span></label>
+      </div>
+    </section>
+
+    <!-- Week 4 -->
+    <section class="block" data-week="w4">
+      <span class="eyebrow">WEEK 4 / DAY 22–30</span>
+      <div class="week-head">
+        <h2>JavaScriptの味見と、次の一手</h2>
+        <span class="week-count">0/9</span>
+      </div>
+      <div class="day-list">
+        <label class="day"><span class="daynum">DAY 22</span><input type="checkbox" data-id="d22"><span><span class="t">JavaScript初級を始める — 変数と計算</span><span class="d" style="display:block;">ProgateのJavaScriptコースへ。「動きを作る言語」の最初の一歩。</span></span></label>
+        <label class="day"><span class="daynum">DAY 23</span><input type="checkbox" data-id="d23"><span><span class="t">条件分岐（if / else）</span><span class="d" style="display:block;">「もし〜なら」をコードで書く。プログラミングの本体に触れる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 24</span><input type="checkbox" data-id="d24"><span><span class="t">関数</span><span class="d" style="display:block;">処理に名前をつけて使い回す仕組み。</span></span></label>
+        <label class="day"><span class="daynum">DAY 25</span><input type="checkbox" data-id="d25"><span><span class="t">配列とループ</span><span class="d" style="display:block;">複数のデータをまとめて処理する。ここまでがJSの基礎4点セット。</span></span></label>
+        <label class="day"><span class="daynum">DAY 26</span><input type="checkbox" data-id="d26"><span><span class="t">DOM操作の初歩 — ボタンで文字を変える</span><span class="d" style="display:block;">HTMLの要素をJSから書き換える。Webページが「動く」原理。</span></span></label>
+        <label class="day"><span class="daynum">DAY 27</span><input type="checkbox" data-id="d27"><span><span class="t">自己紹介ページに「動く要素」を1つ足す</span><span class="d" style="display:block;">ボタンで挨拶が切り替わる、ダークモード切替など。小さくてOK。</span></span></label>
+        <label class="day"><span class="daynum">DAY 28</span><input type="checkbox" data-id="d28"><span><span class="t">総復習 — できたこと・わからないことを書き出す</span><span class="d" style="display:block;">箇条書きでOK。この記録が次の計画の材料になる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 29</span><input type="checkbox" data-id="d29"><span><span class="t">「稼ぎ方 完全ガイド」を読んで目標ルートを決める</span><span class="d" style="display:block;">正社員・副業・フリーランス。どこを目指すかで次の学習内容が変わる。</span></span></label>
+        <label class="day"><span class="daynum">DAY 30</span><input type="checkbox" data-id="d30"><span><span class="t">次の30日の計画を立てる</span><span class="d" style="display:block;">下の「30日後の3つの選択肢」から選ぶ。ここまで来たら適性は十分ある。</span></span></label>
+      </div>
+    </section>
+
+    <div class="reset-row">
+      <button class="reset-btn" id="reset-btn" type="button">進捗をリセット</button>
+    </div>
+
+    <section class="block" style="margin-top:36px;">
+      <span class="eyebrow">KEEP GOING</span>
+      <h2>続けるコツ</h2>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">時間帯を固定する</div>
+          <div class="desc">「朝のコーヒーの後」「寝る前」など既存の習慣に接続する。意思決定をなくすのが継続のコツ。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">30分で強制終了する</div>
+          <div class="desc">乗ってきても止める。「続きが気になる状態」で終えると翌日の再開が楽になる。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">2日連続で休まない</div>
+          <div class="desc">1日の穴は誤差、2日は断絶。休んだ翌日は5分だけでもいいので触る。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">遅れてもプランを詰めない</div>
+          <div class="desc">DAY表記は目安。40日かかっても完走すれば同じ場所に着く。詰め込みは挫折のもと。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <span class="eyebrow">AFTER 30 DAYS</span>
+      <h2>30日後の3つの選択肢</h2>
+      <div class="role-grid">
+        <div class="role-card" style="border-left: 3px solid var(--accent);">
+          <div class="name">① 時間を増やして本格参入</div>
+          <div class="desc">1日2–3時間に増やして<a href="phase1-basics.html" style="color:var(--accent); font-weight:700;">フェーズ1</a>の残りへ。最短3–6ヶ月で就職・案件獲得ラインに到達する。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid var(--navy2);">
+          <div class="name">② 30分ペースを継続</div>
+          <div class="desc">同じペースでフェーズ1を進める。到達は遅くなる（フェーズ1完了まで6ヶ月〜1年）が、習慣が壊れないのが最大の強み。</div>
+        </div>
+        <div class="role-card" style="border-left: 3px solid #b5432f;">
+          <div class="name">③ 撤退する</div>
+          <div class="desc">「向いていない」と分かるのも立派な成果。失ったのは15時間と約1,500円だけ。ここで得たHTML/CSSの知識は他の仕事でも活きる。</div>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:16px;">判断基準：30日のうち「面白い」と感じた日が半分以上あれば①か②へ。毎回苦痛だったなら③を選んでいい。ただし「難しい」と「向いていない」は別物。難しいのは全員同じ。</div>
+    </section>
+
+    <p class="nav-links">
+      <a href="income-guide.html">稼ぎ方 完全ガイド →</a>
+      <a href="roadmap-checklist.html">ロードマップ進捗チェックリスト →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'engineer-30day-progress';
+
+      function load() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+      function save(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      var state = load();
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('.day input[type="checkbox"]'));
+
+      function render() {
+        boxes.forEach(function (box) {
+          var checked = !!state[box.dataset.id];
+          box.checked = checked;
+          box.closest('.day').classList.toggle('done', checked);
+        });
+
+        var total = boxes.length;
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        document.getElementById('overall-pct').textContent = pct + '%';
+        document.getElementById('overall-fill').style.width = pct + '%';
+
+        document.querySelectorAll('section[data-week]').forEach(function (section) {
+          var weekBoxes = Array.prototype.slice.call(section.querySelectorAll('input[type="checkbox"]'));
+          var weekDone = weekBoxes.filter(function (b) { return b.checked; }).length;
+          section.querySelector('.week-count').textContent = weekDone + '/' + weekBoxes.length;
+        });
+      }
+
+      boxes.forEach(function (box) {
+        box.addEventListener('change', function () {
+          state[box.dataset.id] = box.checked;
+          save(state);
+          render();
+        });
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        if (!confirm('すべてのチェックを外してリセットします。よろしいですか？')) return;
+        state = {};
+        save(state);
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ5: 実務経験とキャリアの分岐点 - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: rgba(30,39,97,0.12); }
+    .tl-item { position: relative; padding-bottom: 24px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ''; position: absolute; left: -24px; top: 7px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+    .tl-item.done::before { background: var(--accent); }
+    .tl-period { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+    .tl-title { font-size: 15px; font-weight: 700; color: var(--navy); margin: 2px 0; }
+    .tl-desc { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* Numbered work cards */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Role grid */
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .role-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid rgba(30,39,97,0.08); }
+    .role-card .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .role-card .desc { font-size: 13px; color: #444; line-height: 1.6; }
+    .role-card .fit { font-size: 12px; font-weight: 700; color: var(--accent); margin-top: 10px; line-height: 1.5; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Footer nav */
+    .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+    .page-nav a { display: inline-block; background: #fff; border: 1px solid rgba(30,39,97,0.15); border-radius: 8px; padding: 10px 18px; font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .page-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ5: 実務経験とキャリアの分岐点</h1>
+  </header>
+  <main>
+    <p class="lead">Month 6–24。就職または案件で稼ぎ始めたあとのフェーズ。最初の半年〜1年は修行期間で、給与は低くても「実務n年」の看板を作ることが最大のリターンになる。実務1年を超えると転職・副業・フリーランスの全選択肢が開く。このページでは、修行期間の過ごし方と、2年目にどの道を選ぶかの判断材料を整理する。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">フェーズ5の完了条件は5つ。チェックリストのフェーズ5の項目と同じなので、終わったものからチェックを付けていく。ここまでのフェーズと違い、期間が長い分「気づいたら1年何も決めずに過ぎていた」が起きやすい。項目で区切って進める。</p>
+
+      <div class="work-list">
+        <div class="work-item"><span class="num">1</span><div class="title">チーム開発のフローを一通り経験する</div><div class="desc">ブランチ運用・プルリクエスト・レビュー・リリース。実務6ヶ月の最重要テーマ</div></div>
+        <div class="work-item"><span class="num">2</span><div class="title">「得意」と言える領域を1つ作る</div><div class="desc">フロント・API・インフラ・テストなど。チーム内で「これは○○さん」と言われる状態</div></div>
+        <div class="work-item"><span class="num">3</span><div class="title">自分の市場価値を測定する</div><div class="desc">転職ドラフト・Findyの年収予測・エージェント面談。現年収とのギャップを把握する</div></div>
+        <div class="work-item"><span class="num">4</span><div class="title">副業の受け入れ態勢を作る</div><div class="desc">就業規則の確認・開業届の検討・副業プラットフォーム登録。実務1年から現実的になる</div></div>
+        <div class="work-item"><span class="num">5</span><div class="title">2年目の進路を意思決定する</div><div class="desc">転職で年収アップ / 副業で複線化 / フリーランス転向。数字を見て自分で決める</div></div>
+      </div>
+
+      <div class="callout">
+        <strong>判断基準はシンプル：</strong>5項目すべてにチェックが付いたら、このシリーズは卒業。あとは選んだ進路のPDCAを回すだけ。「現状維持」も進路の一つだが、それは測定と比較をした上での意思決定であること。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 実務6ヶ月の過ごし方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">FIRST 6 MONTHS</span>
+      <h2>実務6ヶ月の過ごし方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">最初の半年で評価と信頼の土台ができる。焦って成果を出そうとするより、段階ごとにテーマを絞るほうが結果的に速い。</p>
+
+      <div class="timeline">
+        <div class="tl-item done">
+          <div class="tl-period">1–2ヶ月目</div>
+          <div class="tl-title">環境とコードベースの理解・質問の仕方を覚える</div>
+          <div class="tl-desc">開発環境の構築、コードベースの全体像、チームの用語とルールを掴む時期。この段階の評価は「アウトプット量」ではなく「立ち上がりの速さ」。15分調べて分からなければ、試したことを添えて質問する。質問の仕方が上手い新人は例外なく伸びる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">3–4ヶ月目</div>
+          <div class="tl-title">小さいタスクを完遂し、レビュー指摘を減らす</div>
+          <div class="tl-desc">バグ修正や小機能を「自分の担当」として最後までやり切る時期。目標はレビューの指摘数を毎回減らすこと。同じ指摘を二度受けないよう、指摘はメモして自分のチェックリストにする。「任せて大丈夫な人」の評価はここで決まる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-period">5–6ヶ月目</div>
+          <div class="tl-title">見積もりと設計に参加し、得意領域の種を見つける</div>
+          <div class="tl-desc">タスクをこなすだけでなく、工数見積もりや設計の議論に加わる時期。あわせて「これは人より速い・詳しい」と感じる領域を1つ見つける。フロントの実装速度でも、テストの丁寧さでも、SQLでもいい。それがフェーズ5の完了条件2の種になる。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 市場価値の測り方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">MARKET VALUE</span>
+      <h2>市場価値の測り方</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「自分がいくらで評価されるか」は感覚ではなく、実際に市場に出して測る。実務1年前後から数字が返ってくるようになる。</p>
+
+      <table class="data-table">
+        <thead><tr><th>測定手段</th><th>分かること</th><th>使い方</th></tr></thead>
+        <tbody>
+          <tr><td class="money">転職ドラフト</td><td>企業からの提示年収（競争入札）</td><td>職務経歴を登録すると、企業が年収付きで指名する。実際の提示額が見えるため、市場価値の測定手段として最も直接的</td></tr>
+          <tr><td class="money">Findy</td><td>GitHub連携の年収予測</td><td>GitHubのアクティビティからスキル偏差値と年収予測が出る。登録するだけで測れるので最初の一歩に向く</td></tr>
+          <tr><td class="money">エージェント面談</td><td>非公開求人の相場感</td><td>レバテック等のエージェントに経歴を見せると、今の経歴で狙える求人と年収帯を教えてくれる。無料で相場観が手に入る</td></tr>
+          <tr><td class="money">カジュアル面談</td><td>企業側から見た自分の評価</td><td>選考ではない気軽な面談。興味のある企業と話すと、何が足りないか・何が刺さるかが具体的に分かる</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>転職する気がなくても年1回測るのが定石。</strong>市場価値の測定は転職活動ではなく健康診断。現年収とのギャップが分かって初めて、「今の会社に残る」も「動く」も根拠のある判断になる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 2年目の3つの分岐
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">THE FORK</span>
+      <h2>2年目の3つの分岐</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">実務1年を超えたら、次の一手は大きく3つ。どれが正解かは状況次第で、併用もできる（転職してから副業を始める等）。</p>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="name">転職で年収アップ</div>
+          <div class="desc">実務経験を武器に、より条件の良い企業へ移る。同じ会社に居続けるより、2–3年周期の転職で+50–150万円が現実的。SESから自社開発への移動は年収以上にスキル環境の改善が大きい。</div>
+          <div class="fit">向いている人：現職の学びが頭打ちで、市場価値と現年収の差が大きい人。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">副業で複線化</div>
+          <div class="desc">本業の安定収入を維持したまま、週1–2稼働の案件で月+10–40万円を上乗せする。実務1年から現実的になる。収入だけでなく「社外で通用するか」の実地テストにもなる。</div>
+          <div class="fit">向いている人：現職に大きな不満はなく、リスクを抑えて収入と経験の幅を広げたい人。</div>
+        </div>
+        <div class="role-card">
+          <div class="name">フリーランス転向</div>
+          <div class="desc">業務委託で独立する。実務2年以上が推奨ライン。額面は上がるが、社保・税金・経費を引くと手取り差は額面差ほど大きくない。契約切れリスクも自分で持つことになる。</div>
+          <div class="fit">向いている人：貯金に余裕があり、案件・技術・働く場所を自分で選びたい人。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 分岐の判断基準
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">DECISION</span>
+      <h2>分岐の判断基準</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:16px;">「なんとなく独立」「なんとなく現状維持」を避けるために、判断の目安を3つだけ持っておく。</p>
+
+      <div class="warning-box">
+        <strong>貯金が生活費6ヶ月分ないなら、フリーランス転向は待つ。</strong>独立直後は入金サイクルの遅れや契約の空白が普通に起きる。資金の余裕がないと、単価の安い案件を焦って受ける悪循環に入る。
+      </div>
+
+      <div class="callout">
+        <strong>現職で学びが続いているなら、急いで動かない。</strong>レビューで鍛えられ、任される範囲が広がっている間は、その環境自体が報酬の一部。学びが止まった・頭打ちだと感じた時が動くサイン。
+      </div>
+
+      <div class="callout">
+        <strong>市場価値と現年収の差が100万円を超えたら、転職を検討する。</strong>測定の結果ギャップが100万円超なら、市場は今の会社より高く評価している。交渉材料にして現職の昇給を狙うか、実際に動くかを選ぶ。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+
+      <ol class="summary-list">
+        <li>最初の半年〜1年は修行期間。給与の低さより「実務n年」の看板作りを優先する。実務1年で全選択肢が開く。</li>
+        <li>実務6ヶ月は段階で進める：1–2ヶ月目 理解と質問、3–4ヶ月目 タスク完遂とレビュー指摘減、5–6ヶ月目 見積もり・設計参加と得意領域の種。</li>
+        <li>市場価値は転職ドラフト・Findy・エージェント面談で測る。転職する気がなくても年1回が定石。</li>
+        <li>2年目の分岐は3つ：転職（2–3年周期で+50–150万）、副業（週1–2案件で月+10–40万）、フリーランス転向（実務2年推奨、手取り差は額面差より小さい）。</li>
+        <li>判断基準は「貯金6ヶ月分」「現職の学びが続いているか」「市場価値と現年収の差100万円」。数字で決めて、チェックリストの5項目を埋めたら卒業。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="income-guide.html">稼ぎ方 完全ガイドで各ルートの数字を見る →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ5: 実務経験とキャリアの分岐点（Month 6–24）</p>
+  </main>
+</body>
+</html>

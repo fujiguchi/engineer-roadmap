@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フェーズ2: フレームワーク + ポートフォリオ - エンジニア育成シリーズ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 980px; margin: 0 auto; }
+    .lead { color: #6b7aa5; font-size: 15px; margin-bottom: 28px; }
+    section.block { margin-bottom: 40px; }
+    section.block h2 {
+      font-size: 20px; color: var(--navy); font-weight: 800;
+      padding-left: 14px; position: relative; margin-bottom: 16px;
+    }
+    section.block h2::before {
+      content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 5px;
+      background: linear-gradient(180deg, var(--accent), var(--navy)); border-radius: 3px;
+    }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: var(--accent-soft); background: var(--navy); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+
+    /* Callout */
+    .callout { background: rgba(24,197,212,0.06); border: 1px solid rgba(24,197,212,0.25); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: var(--ink); line-height: 1.7; margin: 16px 0; }
+    .callout strong { color: var(--navy); }
+
+    /* Warning box */
+    .warning-box { background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.3); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a4283a; line-height: 1.7; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04); font-size: 13px; }
+    .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 10px 14px; font-weight: 700; font-size: 12px; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(30,39,97,0.08); color: #444; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .money { color: var(--navy); font-weight: 700; }
+
+    /* Numbered work cards */
+    .work-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .work-item { background: #fff; border-radius: 10px; padding: 16px 18px; border: 1px solid rgba(30,39,97,0.08); position: relative; padding-left: 44px; }
+    .work-item .num {
+      position: absolute; left: 14px; top: 16px; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .work-item .title { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+    .work-item .desc { font-size: 13px; color: #444; line-height: 1.6; }
+
+    /* Summary list */
+    .summary-list { counter-reset: s; list-style: none; padding: 0; }
+    .summary-list li { counter-increment: s; background: #fff; border-radius: 10px; padding: 14px 18px 14px 50px; margin-bottom: 10px; position: relative; border: 1px solid rgba(30,39,97,0.08); font-size: 14px; line-height: 1.6; }
+    .summary-list li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+
+    /* Goal checklist */
+    .goal-list { list-style: none; padding: 0; background: #fff; border-radius: 10px; border: 1px solid rgba(30,39,97,0.08); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .goal-list li { padding: 12px 16px 12px 42px; border-bottom: 1px solid rgba(30,39,97,0.08); font-size: 14px; color: #444; line-height: 1.6; position: relative; }
+    .goal-list li:last-child { border-bottom: none; }
+    .goal-list li::before { content: '✓'; position: absolute; left: 14px; top: 12px; width: 18px; height: 18px; border-radius: 4px; background: rgba(24,197,212,0.12); color: var(--accent); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .goal-list li strong { color: var(--navy); }
+
+    /* Footer nav */
+    .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+    .page-nav a {
+      display: inline-block; padding: 12px 22px; border-radius: 8px; font-size: 14px; font-weight: 700;
+      text-decoration: none; border: 1px solid rgba(30,39,97,0.15); color: var(--navy); background: #fff;
+    }
+    .page-nav a.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    @media (max-width: 600px) {
+      main { padding: 20px 16px; }
+      header.page-header { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <span class="badge">DX DIVISION</span>
+    <h1>フェーズ2: フレームワーク + ポートフォリオ</h1>
+  </header>
+  <main>
+    <p class="lead">Month 2–3（毎日2–3時間）。1つのフレームワークを深掘りして「動くものを作って公開する」フェーズ。ここで作る成果物が、フェーズ4の就職活動・案件獲得でそのまま武器になる。基礎学習と違い、アウトプットがすべて。</p>
+
+    <!-- =========================================
+         Section: ゴールと完了条件
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">GOAL</span>
+      <h2>ゴールと完了条件</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">フェーズ2の完了条件は次の7項目。<a href="roadmap-checklist.html" style="color:var(--accent); font-weight:700;">進捗チェックリスト</a>のフェーズ2と同じ内容なので、終わったものからチェックを入れていく。</p>
+      <ul class="goal-list">
+        <li><strong>モダンJavaScript文法（ES6+）を習得する</strong> — アロー関数・分割代入・map/filter・async/await・モジュール。Reactの前提知識。</li>
+        <li><strong>React公式チュートリアルを完走する</strong> — コンポーネント・props・state・イベント処理までを理解する。</li>
+        <li><strong>Todoアプリを自力で作る</strong> — 追加・削除・完了切替・絞り込み。チュートリアルを見ずに書き切るのが条件。</li>
+        <li><strong>外部APIと連携するアプリを1本作る</strong> — 天気・映画・GitHub APIなど。fetch・ローディング・エラー処理を経験する。</li>
+        <li><strong>作ったアプリをデプロイして公開する</strong> — Vercel / Netlify / Cloudflare Pages。URLを人に送れる状態にする。</li>
+        <li><strong>各リポジトリにREADMEを書く</strong> — 概要・スクリーンショット・使用技術・工夫した点。採用担当が最初に見る場所。</li>
+        <li><strong>ポートフォリオサイトを公開する</strong> — 自己紹介 + 制作物2–3点 + 連絡先。これ自体も制作物の一つになる。</li>
+      </ul>
+      <div class="callout">
+        <strong>完了の定義は「URLがあること」：</strong>ローカルで動くだけでは未完了。人に送れるURLとGitHubリポジトリがそろって初めて「完了」と数える。フェーズ4で応募書類に貼るのはこのURL。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: フレームワーク選定
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">STACK</span>
+      <h2>フレームワーク選定 — 迷ったらReact</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">このフェーズで大事なのは「1つに絞って深掘りする」こと。複数に手を出すと2ヶ月で何も完成しない。結論から言うと、特別な理由がなければReactを推奨する。理由は3つ — <strong style="color:var(--navy);">求人数が最多</strong>であること、<strong style="color:var(--navy);">副業・フリーランス案件が見つけやすい</strong>こと、<strong style="color:var(--navy);">日本語の情報量が圧倒的</strong>でつまずいても検索で解決しやすいこと。</p>
+
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>求人数</th><th>学習難易度</th><th>向いている人</th></tr></thead>
+        <tbody>
+          <tr><td class="money">React（+ Next.js）</td><td>非常に多い</td><td>中（JSの理解が前提）</td><td>迷っている人全員。求人・副業案件・情報量のバランスが最良</td></tr>
+          <tr><td class="money">Vue（+ Nuxt）</td><td>多い（国内で根強い）</td><td>低–中（構文が素直で入りやすい）</td><td>Reactの書き方が肌に合わなかった人。国内の中小・受託系に強い</td></tr>
+          <tr><td class="money">Ruby on Rails</td><td>中（スタートアップ中心）</td><td>中（DB・サーバ側の概念も同時に学ぶ）</td><td>バックエンド志向の人。Web全体の仕組みを一気に学びたい人</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>迷ったら React + Next.js：</strong>Reactを学んだあとNext.jsまで触れておくと、デプロイ（Vercel）まで一直線につながる。フレームワーク選びに1週間以上悩むくらいなら、今日Reactで始めるほうがはるかに前進する。選定より完成が価値。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 週ごとの進め方
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">WEEKLY PLAN</span>
+      <h2>週ごとの進め方 — Week 5〜8</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">フェーズ1（Week 1–4）の続きとして、Week 5から数える。毎日2–3時間 × 4週間の想定。遅れても構わないが、順番は守る — 特にWeek 5のモダンJS文法を飛ばすと、Reactのコードが「読めない呪文」になる。</p>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">W5</span>
+          <div class="title">モダンJS文法（ES6+）</div>
+          <div class="desc">アロー関数・テンプレートリテラル・分割代入・スプレッド構文・map/filter/reduce・Promise・async/await・import/export。手を動かして小さいコードを書きながら覚える。ここが固まるとReactの学習速度が倍になる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">W6</span>
+          <div class="title">React基礎（公式チュートリアル）</div>
+          <div class="desc">React公式ドキュメントのチュートリアルを完走する。コンポーネント・props・state・イベント処理・リストのレンダリング。写経で終わらせず、途中で「自分ならこう変える」を1つずつ試す。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">W7</span>
+          <div class="title">Todoアプリ + API連携アプリ</div>
+          <div class="desc">前半でTodoアプリ（追加・削除・完了切替・絞り込み）をチュートリアルを見ずに自力で。後半で外部API連携アプリ（天気・映画・GitHub APIなど）を1本。fetch・ローディング表示・エラー処理まで実装する。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">W8</span>
+          <div class="title">デプロイ + README + ポートフォリオサイト</div>
+          <div class="desc">Vercel / Netlify で2本ともデプロイし、各リポジトリにREADMEを書く。最後に自己紹介・制作物2–3点・連絡先を載せたポートフォリオサイトを作って公開。これでフェーズ2の7項目がすべて埋まる。</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>進みが遅いときの調整：</strong>削っていいのはアプリの機能数であって、公開までのプロセスではない。「小さくても公開まで到達した2本」のほうが「未完成の大作1本」より圧倒的に評価される。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: 成果物の基準
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">DELIVERABLES</span>
+      <h2>成果物の基準 — 「見せられる」の最低ライン</h2>
+      <p style="font-size:14px; color:#555; margin-bottom:14px;">作ったものが就職・案件獲得の武器になるかどうかは、次の3点で決まる。</p>
+
+      <table class="data-table">
+        <thead><tr><th>基準</th><th>具体的には</th><th>なぜ必要か</th></tr></thead>
+        <tbody>
+          <tr><td class="money">動くURLがある</td><td>クリックすれば誰でも触れる状態。デプロイ済みでエラーなく動く</td><td>採用担当はローカル環境を構築してくれない。URLがなければ「存在しない」のと同じ</td></tr>
+          <tr><td class="money">READMEが書けている</td><td>概要・スクリーンショット・使用技術・工夫した点の4点セット</td><td>リポジトリを開いて最初に目に入るのがREADME。ここで読む気になるかが決まる</td></tr>
+          <tr><td class="money">コピーではない要素が1つ以上</td><td>チュートリアルにない機能・デザイン・データを自分で足している</td><td>「写経しただけ」か「自分で考えて作れる」かを見分ける最大のポイント</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>採用担当はコードよりREADMEを先に見る：</strong>1人あたりの書類選考にかけられる時間は数分。コードを1行ずつ読む前に、README（と動くURL）で「概要 → スクショ → 工夫した点」を流し読みして判断する。コードの美しさに凝る前に、READMEに30分かけるほうが選考通過率は上がる。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: つまずきポイント
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">PITFALLS</span>
+      <h2>つまずきポイント — フェーズ2の三大失敗</h2>
+
+      <div class="work-list">
+        <div class="work-item">
+          <span class="num">1</span>
+          <div class="title">チュートリアル地獄</div>
+          <div class="desc">1本終えると不安になり、別の教材・動画を次々こなして「勉強した気」になるパターン。チュートリアルの2周目には入らず、不安なまま自作に移るのが正解。詰まったら、その箇所だけ調べて戻ればいい。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">2</span>
+          <div class="title">企画が壮大すぎて完成しない</div>
+          <div class="desc">「SNSを作る」「ECサイトをフルで作る」は数ヶ月かかり、途中で挫折する典型。2週間で作り切れるサイズまで機能を削る。認証なし・データ数件・画面2枚でいい。完成して公開されたものだけが実績になる。</div>
+        </div>
+        <div class="work-item">
+          <span class="num">3</span>
+          <div class="title">デザインに凝りすぎる</div>
+          <div class="desc">CSSの微調整に何日も溶かすのはこのフェーズでは損。MUI・Chakra UIなどのUIライブラリを使って見た目は「整っている」レベルで止め、浮いた時間を機能・README・公開に回す。デザイン力は評価対象の中心ではない。</div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <strong>共通する罠は「完璧主義」：</strong>3つとも根っこは同じで、「もっと準備してから」「もっと良くしてから」と公開を先延ばしにすること。60点で公開して、フィードバックをもらって直すほうが早く成長する。公開ボタンを押すことまでが学習。
+      </div>
+    </section>
+
+    <!-- =========================================
+         Section: まとめ
+         ========================================= -->
+    <section class="block">
+      <span class="eyebrow">KEY TAKEAWAYS</span>
+      <h2>まとめ</h2>
+      <ol class="summary-list">
+        <li>フェーズ2は「学ぶ」から「作って公開する」への切り替え。成果物（動くURL + GitHub + README）がそのまま就職・案件獲得の武器になる。</li>
+        <li>フレームワークは1つに絞る。迷ったらReact + Next.js。選定に悩む時間より、完成させる時間に投資する。</li>
+        <li>Week 5 モダンJS文法 → Week 6 React基礎 → Week 7 Todo + API連携アプリ → Week 8 デプロイ + README + ポートフォリオ、の順番を守る。</li>
+        <li>採用担当はコードよりREADMEを先に見る。概要・スクショ・使用技術・工夫した点の4点セットを必ず書く。</li>
+        <li>チュートリアルは2周しない、企画は2週間サイズに削る、デザインはUIライブラリに任せる。60点で公開して次に進む。</li>
+      </ol>
+    </section>
+
+    <div class="page-nav">
+      <a class="primary" href="roadmap-checklist.html">進捗はチェックリストで管理 →</a>
+      <a href="index.html">シリーズ目次へ戻る</a>
+    </div>
+
+    <p style="color:#8a92ad; font-size:12px; margin-top:24px; text-align:center;">エンジニア育成シリーズ — フェーズ2: フレームワーク + ポートフォリオ（Month 2–3）</p>
+  </main>
+</body>
+</html>
